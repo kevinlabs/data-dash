@@ -1,7 +1,7 @@
 /* ============================================================================= */
 /* ======================== Start: Main Controller ============================= */
 /* ============================================================================= */
-AA.controller("ctrl", function($scope, service){
+AA.controller("ctrl", function($scope){
 
     $scope.test = "bOYAh\! the app is working";
 
