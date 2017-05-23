@@ -25,13 +25,13 @@ app.use(express.static(__dirname + '/public_dist'));
 // =========Public root web Middleware======== //
 
 // =========Cross Scripting======== //
-// //Cross Scripting allowed site.
-// var corsOptions = {
-// 	origin: 'http://localhost:8080'
-// };
+//Cross Scripting allowed site.
+var corsOptions = {
+	origin: 'http://localhost:8080'
+};
 
-// //This allows the cross scripting to other site.
-// app.use(cors(corsOptions));
+//This allows the cross scripting to other site.
+app.use(cors(corsOptions));
 
 // =========Cross Scripting======== //
 
