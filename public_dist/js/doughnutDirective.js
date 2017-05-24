@@ -3,8 +3,8 @@ AA.directive('doughnutDirective', function () {
 
   return {
     restrict: 'E',
-    templateUrl: './views/doughnut.html',
-    controller: 'mainCtrl'
+    templateUrl: './views/doughnut.html'
+    // controller: 'mainCtrl'
   };
 });
 // End: This is the doughnut chart directive ===================================

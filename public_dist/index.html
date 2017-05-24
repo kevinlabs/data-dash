@@ -12,66 +12,88 @@
     <!-- Materialize CSS - used to style modals -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald:400,600" rel="stylesheet"/>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.css' rel='stylesheet' />
 </head>
 <body ng-controller="mainCtrl">
-  <main id="main-container">
-  <!-- This is a test: {{test}} -->
-  <!-- Start: Dashboard content -->
-    <!-- Header -->
+  <!-- Header -->
+  <section id="header-section">
+    <header-directive></header-directive>
     <!-- Interactive map display -->
+    <map-directive></map-directive>
+  </section>
+  <main id="main-container">
+  <!-- Start: Dashboard content -->
     <!-- Start: Search results data set  -->
     <section class="data-set-cards">
       <!-- 1: Local time -->
-      <div class="data-card">
-        <div style="width: 200px; height:170px; margin: 65px auto 15px auto; background: #DDD;"></div>
+      <div class="data-card dc-bg-time">
+        <div class="data-chart-box">
+          <doughnut-directive></doughnut-directive>
+        </div>
         <p>Current Local Time</p>
       </div>
       <!-- 2: Local weather -->
-      <div class="data-card">
-        <div style="width: 200px; height:170px; margin: 65px auto 15px auto; background: #DDD;"></div>
+      <div class="data-card dc-bg-weather">
+        <div class="data-chart-box">
+          <doughnut-directive></doughnut-directive>
+        </div>
         <p>Current Local Weather</p>
       </div>
       <!-- 3: Home values -->
       <div class="data-card dc-bg-property">
-        <div style="width: 200px; height:170px; margin: 65px auto 15px auto; background: #DDD;"></div>
+        <div class="data-chart-box">
+          <doughnut-directive></doughnut-directive>
+        </div>
         <p>Median Home Values</p>
       </div>
       <!-- 4: Rent prices -->
       <div class="data-card dc-bg-property">
-        <div style="width: 200px; height:170px; margin: 65px auto 15px auto; background: #DDD;"></div>
+        <div class="data-chart-box">
+          <doughnut-directive></doughnut-directive>
+        </div>
         <p>Median Rental Price</p>
       </div>
       <!-- 5: Gas Price -->
-      <div class="data-card dc-bg-gas-price">
-        <div style="width: 200px; height:170px; margin: 65px auto 15px auto; background: #DDD;"></div>
-        <p>Average Gas Price</p>
+      <div class="data-card dc-bg-gas-restaurants">
+        <div class="data-chart-box">
+          <doughnut-directive></doughnut-directive>
+        </div>
+        <p>Local Restaurants</p>
       </div>
       <!-- 6: School rankings  -->
       <div class="data-card dc-bg-gas-education">
-        <div style="width: 200px; height:170px; margin: 65px auto 15px auto; background: #DDD;"></div>
+        <div class="data-chart-box">
+          <doughnut-directive></doughnut-directive>
+        </div>
         <p>Educational Ranking</p>
       </div>
       <!-- 6: Medical centers nearby -->
       <div class="data-card dc-bg-gas-medical">
-        <div style="width: 200px; height:170px; margin: 65px auto 15px auto; background: #DDD;"></div>
+        <div class="data-chart-box">
+          <doughnut-directive></doughnut-directive>
+        </div>
         <p>Medical Centers</p>
       </div>
       <!-- 7: Crime stats -->
       <div class="data-card dc-bg-gas-crime">
-        <div style="width: 200px; height:170px; margin: 65px auto 15px auto; background: #DDD;"></div>
+        <div class="data-chart-box">
+          <doughnut-directive></doughnut-directive>
+        </div>
         <p>Crime Statististics</p>
       </div>
     </section>
     <!-- End: Search results data set  -->
-    <!-- Footer -->
   <!-- End: Dashboard content -->
   </main>
+  <!-- Footer -->
+  <footer-directive></footer-directive>
   <!-- Start: JS CDNs -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.js'></script>
   <script src="bundle.js"></script>
 </body>
 

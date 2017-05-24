@@ -3,7 +3,7 @@
 /* ============================================================================= */
 AA.controller("mainCtrl", function($scope){
 
-    $scope.test = "bOYAh\! the app is working";
+    //$scope.test = "bOYAh\! the app is working";
 
 });
 /* ============================================================================= */
