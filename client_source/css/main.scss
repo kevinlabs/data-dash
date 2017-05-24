@@ -6,13 +6,14 @@
 #main-container {
   max-width: 80%;
   margin: 0 auto;
+  font-family: $bodyText;
+  color: $bodyTextColor;
 }
 
 .data-set-cards {
   display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	// justify-content: flex-start;
   justify-content: center;
 	align-items: stretch;
 	align-content: center;
@@ -25,12 +26,45 @@
   background-color: #F7F7F7;
   border: #E5E5E5 1px solid;
   @include border-radius;
+  @include no-select;
+  cursor: pointer;
   margin: 3px;
 }
 
 .dc-bg-property {
-  background: url('./img/data-icon-property.svg') no-repeat top left;
-  background-size: 57px;
+  background: #F7F7F7 url('../img/data-icon-property.svg') no-repeat top left;
+  background-size: 50px;
+  background-position: 10px 10px;
+}
+
+.dc-bg-gas-price {
+  background: #F7F7F7 url('../img/data-icon-gas-price.svg') no-repeat top left;
+  background-size: 50px;
+  background-position: 10px 10px;
+}
+
+.dc-bg-gas-household-income {
+  background: #F7F7F7 url('../img/data-icon-household-income.svg') no-repeat top left;
+  background-size: 50px;
+  background-position: 10px 10px;
+}
+
+.dc-bg-gas-education {
+  background: #F7F7F7 url('../img/data-icon-education.svg') no-repeat top left;
+  background-size: 50px;
+  background-position: 10px 10px;
+}
+
+.dc-bg-gas-medical {
+  background: #F7F7F7 url('../img/data-icon-medical.svg') no-repeat top left;
+  background-size: 50px;
+  background-position: 10px 10px;
+}
+
+.dc-bg-gas-crime {
+  background: #F7F7F7 url('../img/data-icon-crime.svg') no-repeat top left;
+  background-size: 50px;
+  background-position: 10px 10px;
 }
 
 
