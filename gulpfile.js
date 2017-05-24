@@ -10,7 +10,7 @@ var gulp = require('gulp'),
     print = require('gulp-print'),
     babel = require('gulp-babel'),
     replace = require('gulp-replace'),
-    
+
     //uncomment line below if we are using bower packge manager files.
     //mainBowerFiles = require('main-bower-files'),
 
@@ -106,7 +106,7 @@ gulp.task('index', function () {
 });
 
 //this task copies all your pictures over to the dist folder.
-gulp.task('pictures', function () {
+gulp.task('img', function () {
     gulp.src(inputPaths.picturesSource)
         .pipe(gulp.dest(outputPaths.picturesSource));
 });
@@ -150,7 +150,7 @@ gulp.task('watch', function () {
     gulp.watch(inputPaths.cssPlugin, ['copy:cssPlugin']);
     gulp.watch(inputPaths.indexSource, ['index']);
     gulp.watch(inputPaths.viewsSource, ['views']);
-    gulp.watch(inputPaths.picturesSource, ['pictures']);
+    gulp.watch(inputPaths.picturesSource, ['img']);
     gulp.watch(inputPaths.fontSource, ['copy:fonts']);
 });
 
@@ -160,6 +160,6 @@ gulp.task('watch', function () {
 
 //when you type gulp and run it in the command like this is the default task that runs.
 //this will run all the tasks listed in the array in order. when its done it watches for changes and will recompile if anything changes.
-gulp.task('default', ['js', 'sass', 'index', 'views', 'pictures', 'copy:fonts', 'build-css', 'copy:jsPlugin', 'copy:cssPlugin',
+gulp.task('default', ['js', 'sass', 'index', 'views', 'img', 'copy:fonts', 'build-css', 'copy:jsPlugin', 'copy:cssPlugin',
     'watch'
 ]);

@@ -2,6 +2,40 @@
 /* ======================== Start: Main Styles ================================= */
 /* ============================================================================= */
 /* ============================================================================= */
+/* ======================== Start: Mixins Styles =============================== */
+/* ============================================================================= */
+/* ============================================================================= */
+/* ======================== End: Mixins Styles ================================= */
+/* ============================================================================= */
+#main-container {
+  max-width: 80%;
+  margin: 0 auto; }
+
+.data-set-cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  align-content: center; }
+
+.data-card {
+  width: 280px;
+  height: 280px;
+  text-align: center;
+  background-color: #F7F7F7;
+  border: #E5E5E5 1px solid;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background-clip: padding-box;
+  /* stops bg color from leaking outside the border: */
+  margin: 3px; }
+
+.dc-bg-property {
+  background: url("./img/data-icon-property.svg") no-repeat top left;
+  background-size: 57px; }
+
+/* ============================================================================= */
 /* ======================== End: Main Styles =================================== */
 /* ============================================================================= */
 

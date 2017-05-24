@@ -2,6 +2,11 @@
 /* ======================== Start: Mixins Styles =============================== */
 /* ============================================================================= */
 
+@mixin border-radius {
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background-clip: padding-box;  /* stops bg color from leaking outside the border: */
+}
 
 
 /* ============================================================================= */
