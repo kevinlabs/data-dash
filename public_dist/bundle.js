@@ -12,7 +12,7 @@ var AA = angular.module("data-dash", []);
 /* ============================================================================= */
 /* ======================== Start: Main Controller ============================= */
 /* ============================================================================= */
-AA.controller("ctrl", ["$scope", function ($scope) {
+AA.controller("mainCtrl", ["$scope", function ($scope) {
 
     $scope.test = "bOYAh\! the app is working";
 }]);
