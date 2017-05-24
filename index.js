@@ -20,8 +20,6 @@ const app = module.exports = express();
 
 const port = 8080;
 
-const test = "This should show up in GitHub";
-
 
 // =========Public root web Middleware======== //
 app.use(bodyParser.json());
