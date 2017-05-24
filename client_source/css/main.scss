@@ -1,8 +1,12 @@
 /* ============================================================================= */
-/* ======================== Start: Main Styles ================================= */
-/* ============================================================================= */
-@import "mixins.scss";
 
+
+/* ======================== Start: Main Styles ================================= */
+
+
+/* ============================================================================= */
+
+@import "mixins.scss";
 #main-container {
   max-width: 80%;
   margin: 0 auto;
@@ -12,16 +16,16 @@
 
 .data-set-cards {
   display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
-	align-items: stretch;
-	align-content: center;
+  align-items: stretch;
+  align-content: center;
 }
 
 .data-card {
   width: 280px;
-  height:280px;
+  height: 280px;
   text-align: center;
   background-color: #F7F7F7;
   border: #E5E5E5 1px solid;
@@ -67,7 +71,20 @@
   background-position: 10px 10px;
 }
 
+#map {
+  width: 1200px;
+  height: 600px;
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 60px;
+}
+
 
 /* ============================================================================= */
+
+
 /* ======================== End: Main Styles =================================== */
+
+
 /* ============================================================================= */

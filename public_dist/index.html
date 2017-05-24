@@ -1,26 +1,44 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="data-dash">
+
 <head>
-    <meta charset="UTF-8">
-    <!-- Viewport declaration to control rendering for mobile devices and retina screens -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DATA DASH | Destination Due Diligence Made Easy</title>
-    <!-- Styles CSS is CSS concatinatd  -->
-    <link href="./css/styles.css" rel="stylesheet"/>
-    <!-- Bundle CSS is SCSS concatinatd  -->
-    <link href="./css/bundle.css" rel="stylesheet"/>
-    <!-- Materialize CSS - used to style modals -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald:400,600" rel="stylesheet"/>
+  <meta charset="UTF-8">
+  <!-- Viewport declaration to control rendering for mobile devices and retina screens -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DATA DASH | Destination Due Diligence Made Easy</title>
+  <!-- Styles CSS is CSS concatinatd  -->
+  <link href="./css/styles.css" rel="stylesheet" />
+  <!-- Bundle CSS is SCSS concatinatd  -->
+  <link href="./css/bundle.css" rel="stylesheet" />
+  <!-- Materialize CSS - used to style modals -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald:400,600" rel="stylesheet" />
+
+  <!--Mapbox CSS file-->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.css" rel="stylesheet" />
+  <!--===============-->
+
+
+
+
 </head>
+
 <body ng-controller="mainCtrl">
   <main id="main-container">
-  <!-- This is a test: {{test}} -->
-  <!-- Start: Dashboard content -->
+    <!-- This is a test: {{test}} -->
+    <!-- Start: Dashboard content -->
     <!-- Header -->
     <!-- Interactive map display -->
     <!-- Start: Search results data set  -->
+
+    <!--Mapbox -->
+    <div id="map" ></div>
+
+
     <section class="data-set-cards">
+
+
+
       <!-- 1: Local time -->
       <div class="data-card">
         <div style="width: 200px; height:170px; margin: 65px auto 15px auto; background: #DDD;"></div>
@@ -64,9 +82,27 @@
     </section>
     <!-- End: Search results data set  -->
     <!-- Footer -->
-  <!-- End: Dashboard content -->
+    <!-- End: Dashboard content -->
   </main>
   <!-- Start: JS CDNs -->
+
+
+  <!--Mapbox JS file-->
+  <script src="https://api.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.js"></script>
+  <!--===============-->
+
+
+  <!--Mapbox custom scripts-->
+  <script>
+    mapboxgl.accessToken =
+      'pk.eyJ1IjoiZGF0YS1kYXNoIiwiYSI6ImNqMnhzN3RjeDAwMngyd3F2dm13aGE3YjgifQ.r5AaouMs58KOng9Tj2OkoQ';
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v9'
+    });
+  </script>
+  <!--===================================-->
+
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
