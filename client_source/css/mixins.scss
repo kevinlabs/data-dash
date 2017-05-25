@@ -2,6 +2,33 @@
 /* ======================== Start: Mixins Styles =============================== */
 /* ============================================================================= */
 
+// Fonts .......................................................................
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Oswald:400,600');
+
+$headlineText: 'Oswald', sans-serif;
+$bodyText: 'Open Sans', sans-serif;
+$headlineTextColor: #093056;
+$bodyTextColor: #353B42;
+// .............................................................................
+
+@mixin border-radius {
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background-clip: padding-box;  /* stops bg color from leaking outside the border: */
+}
+
+@mixin no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@mixin block {
+  display: block;
+}
 
 
 /* ============================================================================= */
