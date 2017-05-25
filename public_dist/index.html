@@ -12,9 +12,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
 </head>
 
-<body ng-controller="ctrl">
-  <main class="main">
-    {{test}}
+<body ng-controller="homeValueCtrl">
+  <main class="test">
+
+    <input ng-model="test" placeholder="Search">
+    <div ng-repeat="item in data | filter: test" class="test">
+      {{item.name}}
+      {{item.gender}}
+    </div>
+
   <!-- Start: Dashboard content -->
     <!-- Header -->
     <!-- Interactive map display -->
