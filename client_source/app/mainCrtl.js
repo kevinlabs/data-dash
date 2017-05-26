@@ -1,7 +1,7 @@
 /* ============================================================================= */
 /* ======================== Start: Main Controller ============================= */
 /* ============================================================================= */
-AA.controller("mainCtrl", function($scope, $timeout){
+AA.controller("mainCtrl", function($scope, $interval){
   $scope.baseball = {
     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"],
     datasets: [{
@@ -44,7 +44,7 @@ AA.controller("mainCtrl", function($scope, $timeout){
     }]
   };
 
-  $scope.roundDate = {
+  $scope.round = {
     labels: ["M", "T", "W", "T", "F", "S", "S"],
     datasets: [{
       backgroundColor: [
@@ -66,14 +66,15 @@ AA.controller("mainCtrl", function($scope, $timeout){
   $scope.chart4Type = 'doughnut';
 
 
-  $timeout(() => {
+  $interval(() => {
     $scope.$applyAsync(() => {
       $scope.chart1Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
       $scope.chart2Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
+      console.log($scope.chart1Type, $scope.chart2Type);
       // $scope.chart3Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
       // $scope.chart4Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
-      $scope.baseball.labels = ["Rojo", "Azul", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"];
-    })
+      // $scope.baseball.labels = ["Rojo", "Azul", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"];
+    });
   }, 3000);
 });
 /* ============================================================================= */

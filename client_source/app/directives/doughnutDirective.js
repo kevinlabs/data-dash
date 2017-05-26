@@ -13,13 +13,13 @@ AA.directive('doughnutDirective', function() {
 
       let ctxDir = elem[0].children[1].children[0];
 
-      let myChartDir = getChartGivenData(ctxDir, scope.chartData);
+      let myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type);
 
-      function getChartGivenData(chartElement, dataForChart) {
+      function getChartGivenData(chartElement, dataForChart, type) {
         return new Chart(
           chartElement,
           {
-            type: scope.type,
+            type: type,
             data: dataForChart,
             options: {
               scales: {
@@ -34,10 +34,10 @@ AA.directive('doughnutDirective', function() {
         );
       }
 
-      setInterval(() => {
-        getChartGivenData(ctxDir, scope.chartData);
-        // myChartDir.update();
-      }, 5000);
+      scope.$watch('type', function(newValue, oldValue, scope){
+        getChartGivenData(ctxDir, scope.chartData, newValue);
+      });
+      
     }
   }
 });
