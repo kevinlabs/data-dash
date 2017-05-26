@@ -191,8 +191,7 @@ AA.controller("restaurantCtrl", ["$scope", "restaurantService", function ($scope
 // Start: This is the doughnut chart directive =================================
 AA.directive('doughnutDirective', function () {
   return {
-    restrict: 'E',
-    templateUrl: "./../views/doughnut.html",
+    restrict: 'E', templateUrl: "./../views/doughnut.html",
     // controller: 'dirCtrl',
     scope: {
       chartData: '=',
@@ -210,6 +209,12 @@ AA.directive('doughnutDirective', function () {
           type: type,
           data: dataForChart,
           options: {
+            legend: {
+              display: false,
+              labels: {
+                display: false
+              }
+            },
             scales: {
               yAxes: [{
                 ticks: {
@@ -273,9 +278,9 @@ AA.directive('pieDirective', function () {
       type: "="
     },
     link: function link(scope, elem, attrs, ctrl) {
-      console.log('this is my element\'s second child:', elem[0].children[1].children[0]);
+      console.log('this is my element\'s second child:', elem[0].children[0].children[0]);
 
-      var ctxDir = elem[0].children[1].children[0];
+      var ctxDir = elem[0].children[0].children[0];
 
       var myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type);
 
@@ -284,19 +289,20 @@ AA.directive('pieDirective', function () {
           type: type,
           data: dataForChart,
           options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+              display: false,
+              labels: {
+                display: false
+              }
+            },
             title: {
-              display: true,
+              display: false,
               text: 'Predicted world population (millions) in 2050'
             }
-            // scales: {
-            //   yAxes: [
-            //     {
-            //       ticks: {
-            //         beginAtZero: true
-            //       }
-            //     }
-            //   ]
-            // }
+            // scales: {   yAxes: [     {       ticks: {         beginAtZero: true       }
+            // }   ] }
           }
         });
       }
