@@ -40,11 +40,11 @@ const outputPaths = {
     fontSource: './public_dist/fonts'
 };
 
-//jsPlugin
-gulp.task('copy:jsPlugin', function () {
-    return gulp.src([inputPaths.jsPluginSource])
-        .pipe(gulp.dest(outputPaths.jsPluginSource));
-});
+// //jsPlugin
+// gulp.task('copy:jsPlugin', function () {
+//     return gulp.src([inputPaths.jsPluginSource])
+//         .pipe(gulp.dest(outputPaths.jsPluginSource));
+// });
 
 //cssPlugin
 gulp.task('copy:cssPlugin', function () {
@@ -118,7 +118,6 @@ gulp.task('copy:fonts', function () {
 //This wont watch newly created files while gulp is running, if you make a new file stop gulp with ctrl-c and re-run.
 gulp.task('watch', function () {
     gulp.watch(inputPaths.jsSource, ['js']);
-    // gulp.watch(inputPaths.jsPluginSource, ['copy:jsPlugin']);
     gulp.watch(inputPaths.cssSource, ['build-css']);
     gulp.watch(inputPaths.sassSource, ['sass']);
     gulp.watch(inputPaths.cssPlugin, ['copy:cssPlugin']);
