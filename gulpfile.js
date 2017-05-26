@@ -10,7 +10,7 @@ var gulp = require('gulp'),
     print = require('gulp-print'),
     babel = require('gulp-babel'),
     replace = require('gulp-replace'),
-    
+
     //uncomment line below if we are using bower packge manager files.
     //mainBowerFiles = require('main-bower-files'),
 
@@ -20,7 +20,7 @@ var cachebust = new CacheBuster();
 
 const inputPaths = {
     jsSource: './client_source/app/**/*.js',
-    jsPluginSource: './client_source/js/**/*',
+    //jsPluginSource: './client_source/js/**/*',
     sassSource: './client_source/css/**/*.scss',
     cssSource: './client_source/css/**/*.css',
     cssPlugin: './client_source/css_plugin/**/*.css',
@@ -32,7 +32,7 @@ const inputPaths = {
 
 const outputPaths = {
     jsSource: './public_dist',
-    jsPluginSource: './public_dist/js',
+    //jsPluginSource: './public_dist/js',
     sassSource: './public_dist/css',
     cssSource: './public_dist/css',
     cssPlugin: './public_dist/css/css_plugin',
@@ -43,10 +43,10 @@ const outputPaths = {
 };
 
 //jsPlugin
-gulp.task('copy:jsPlugin', function () {
-    return gulp.src([inputPaths.jsPluginSource])
-        .pipe(gulp.dest(outputPaths.jsPluginSource));
-});
+// gulp.task('copy:jsPlugin', function () {
+//     return gulp.src([inputPaths.jsPluginSource])
+//         .pipe(gulp.dest(outputPaths.jsPluginSource));
+// });
 
 //cssPlugin
 gulp.task('copy:cssPlugin', function () {
@@ -144,7 +144,7 @@ gulp.task('copy:fonts', function () {
 //This wont watch newly created files while gulp is running, if you make a new file stop gulp with ctrl-c and re-run.
 gulp.task('watch', function () {
     gulp.watch(inputPaths.jsSource, ['js']);
-    gulp.watch(inputPaths.jsPluginSource, ['copy:jsPlugin']);
+    //gulp.watch(inputPaths.jsPluginSource, ['copy:jsPlugin']);
     gulp.watch(inputPaths.cssSource, ['build-css']);
     gulp.watch(inputPaths.sassSource, ['sass']);
     gulp.watch(inputPaths.cssPlugin, ['copy:cssPlugin']);
@@ -160,6 +160,6 @@ gulp.task('watch', function () {
 
 //when you type gulp and run it in the command like this is the default task that runs.
 //this will run all the tasks listed in the array in order. when its done it watches for changes and will recompile if anything changes.
-gulp.task('default', ['js', 'sass', 'index', 'views', 'pictures', 'copy:fonts', 'build-css', 'copy:jsPlugin', 'copy:cssPlugin',
+gulp.task('default', ['js', 'sass', 'index', 'views', 'pictures', 'copy:fonts', 'build-css', 'copy:cssPlugin',
     'watch'
 ]);
