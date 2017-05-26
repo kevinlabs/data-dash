@@ -20,7 +20,6 @@ var cachebust = new CacheBuster();
 
 const inputPaths = {
     jsSource: './client_source/app/**/*.js',
-    //jsPluginSource: './client_source/js/**/*',
     sassSource: './client_source/css/**/*.scss',
     cssSource: './client_source/css/**/*.css',
     cssPlugin: './client_source/css_plugin/**/*.css',
@@ -32,7 +31,6 @@ const inputPaths = {
 
 const outputPaths = {
     jsSource: './public_dist',
-    //jsPluginSource: './public_dist/js',
     sassSource: './public_dist/css',
     cssSource: './public_dist/css',
     cssPlugin: './public_dist/css/css_plugin',
@@ -42,7 +40,6 @@ const outputPaths = {
     fontSource: './public_dist/fonts'
 };
 
-//jsPlugin
 // gulp.task('copy:jsPlugin', function () {
 //     return gulp.src([inputPaths.jsPluginSource])
 //         .pipe(gulp.dest(outputPaths.jsPluginSource));
@@ -106,7 +103,7 @@ gulp.task('index', function () {
 });
 
 //this task copies all your pictures over to the dist folder.
-gulp.task('pictures', function () {
+gulp.task('img', function () {
     gulp.src(inputPaths.picturesSource)
         .pipe(gulp.dest(outputPaths.picturesSource));
 });
@@ -116,50 +113,22 @@ gulp.task('copy:fonts', function () {
         .pipe(gulp.dest(outputPaths.fontSource));
 });
 
-// For implementing bower components.
-//
-// gulp.task('copy:bower', function () {
-//     return gulp.src(mainBowerFiles(['**/*.js', '!**/*.min.js']))
-//         .pipe(gulp.dest('./public/app/libs'))
-//         //.pipe(uglify())
-//         .pipe(rename({
-//             suffix: '.min'
-//         }))
-//         .pipe(gulp.dest('./public/app/libs'));
-// });
-
-// gulp.task('replace:bower', function () {
-//     return gulp.src([
-//             './public/**/*.html',
-//             './public/**/*.js',
-//         ], {
-//             base: './'
-//         })
-//         .pipe(replace(/bower_components+.+(\/[a-z0-9][^/]*\.[a-z0-9]+(\'|\"))/ig, 'app/libs$1'))
-//         .pipe(gulp.dest('./'));
-// });
-
-
 //this watches all the files in the specified locations, if any files change it will recompile
 //This wont watch newly created files while gulp is running, if you make a new file stop gulp with ctrl-c and re-run.
 gulp.task('watch', function () {
     gulp.watch(inputPaths.jsSource, ['js']);
-    //gulp.watch(inputPaths.jsPluginSource, ['copy:jsPlugin']);
     gulp.watch(inputPaths.cssSource, ['build-css']);
     gulp.watch(inputPaths.sassSource, ['sass']);
     gulp.watch(inputPaths.cssPlugin, ['copy:cssPlugin']);
     gulp.watch(inputPaths.indexSource, ['index']);
     gulp.watch(inputPaths.viewsSource, ['views']);
-    gulp.watch(inputPaths.picturesSource, ['pictures']);
+    gulp.watch(inputPaths.picturesSource, ['img']);
     gulp.watch(inputPaths.fontSource, ['copy:fonts']);
 });
 
-// gulp.task('watch', function() {
-//     return gulp.watch(['./index.html','./partials/*.html', './styles/*.*css', './js/**/*.js'], ['build']);
-// });
-
 //when you type gulp and run it in the command like this is the default task that runs.
 //this will run all the tasks listed in the array in order. when its done it watches for changes and will recompile if anything changes.
-gulp.task('default', ['js', 'sass', 'index', 'views', 'pictures', 'copy:fonts', 'build-css', 'copy:cssPlugin',
+
+gulp.task('default', ['js', 'sass', 'index', 'views', 'img', 'copy:fonts', 'build-css', 'copy:cssPlugin',
     'watch'
 ]);
