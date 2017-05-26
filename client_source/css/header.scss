@@ -1,0 +1,41 @@
+@import "mixins.scss";
+
+#header-section {
+  width: 100%;
+  height: auto;
+  background: #093056;
+  padding: 20px 0;
+  margin-bottom: 20px;
+}
+
+.header-inner {
+  max-width: 80%;
+  height: 95px;
+  margin: 0 auto;
+  font-family: $headlineText;
+  color: #FFF;
+  text-align: center;
+  border: 1px solid #093056;
+
+  background: url('../img/data-dash-logo.svg')no-repeat center left;
+
+  h1 {
+    font-size: 2rem;
+    margin: 1.85rem 0 1.68rem 0;
+  }
+}
+
+#map-container {
+  width: 100%;
+  height: 300px;
+  margin: 15px 0;
+
+  // Placeholder styles to remove after map is in!
+  background: #DDD;
+  h5 {
+    color: #E5E5E5;
+    text-align: center;
+    font-size: 16px;
+    padding-top: 50px;
+  }
+}
