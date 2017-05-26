@@ -44,7 +44,7 @@ AA.controller("mainCtrl", function($scope, $interval){
     }]
   };
 
-  $scope.round = {
+  $scope.apple = {
     labels: ["M", "T", "W", "T", "F", "S", "S"],
     datasets: [{
       backgroundColor: [
@@ -60,10 +60,28 @@ AA.controller("mainCtrl", function($scope, $interval){
     }]
   };
 
+  $scope.polar = {
+    labels: ["M", "T", "W", "T", "F", "S", "S"],
+    datasets: [{
+      backgroundColor: [
+        "#2ecc71",
+        "#3498db",
+        "#95a5a6",
+        "#9b59b6",
+        "#f1c40f",
+        "#e74c3c",
+        "#34495e"
+      ],
+      data: [12, 19, 3, 17, 28, 24, 7]
+    }]
+  }
+
   $scope.chart1Type = 'line';
   $scope.chart2Type = 'bar';
   $scope.chart3Type = 'pie';
   $scope.chart4Type = 'doughnut';
+  $scope.chart5Type = 'polarArea';
+  $scope.chart6Type = 'radar';
 
 
   $interval(() => {
@@ -71,8 +89,10 @@ AA.controller("mainCtrl", function($scope, $interval){
       $scope.chart1Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
       $scope.chart2Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
       console.log($scope.chart1Type, $scope.chart2Type);
-      // $scope.chart3Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
-      // $scope.chart4Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
+      $scope.chart3Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
+      $scope.chart4Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
+      $scope.chart5Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
+      $scope.chart6Type = $scope.chart6Type === 'polarArea' ? 'radar' : 'polarArea';
       // $scope.baseball.labels = ["Rojo", "Azul", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"];
     });
   }, 3000);
