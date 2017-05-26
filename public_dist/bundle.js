@@ -12,13 +12,6 @@ var AA = angular.module("data-dash", []);
 /* ============================================================================= */
 /* ======================== Start: Main Controller ============================= */
 /* ============================================================================= */
-<<<<<<< HEAD
-AA.controller("ctrl", ["$scope", "homeValueService", function ($scope, homeValueService) {
-
-    $scope.test = "bOYAh\! the app is working";
-
-    $scope.getInfo = function () {};
-=======
 AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
   $scope.baseball = {
     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"],
@@ -67,12 +60,184 @@ AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
       // $scope.baseball.labels = ["Rojo", "Azul", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"];
     });
   }, 3000);
->>>>>>> master
 }]);
 /* ============================================================================= */
 /* ======================== End: Main Controller =============================== */
 /* ============================================================================= */
-<<<<<<< HEAD
+"use strict";
+
+AA.controller("crimeCtrl", ["$scope", "crimeService", function ($scope, crimeService) {
+
+  $scope.data;
+
+  $scope.getInfo = function () {
+    crimeService.getData().then(function (response) {
+      console.log(response);
+      $scope.data = response;
+    });
+  };
+
+  $scope.getInfo();
+
+  //end of controller
+}]);
+"use strict";
+
+AA.controller("homeValueCtrl", ["$scope", "homeValueService", function ($scope, homeValueService) {
+
+  $scope.data;
+
+  $scope.getInfo = function () {
+    homeValueService.getData().then(function (response) {
+      console.log(response);
+      $scope.data = response;
+    });
+  };
+
+  $scope.getInfo();
+
+  //end of controller
+}]);
+"use strict";
+
+AA.controller("hospitalCtrl", ["$scope", "hospitalService", function ($scope, hospitalService) {
+
+  $scope.data;
+
+  $scope.getInfo = function () {
+    hospitalService.getData().then(function (response) {
+      console.log(response);
+      $scope.data = response;
+    });
+  };
+
+  $scope.getInfo();
+}]);
+"use strict";
+
+AA.controller("pollutionCtrl", ["$scope", "pollutionService", function ($scope, pollutionService) {
+
+  $scope.data;
+
+  $scope.getInfo = function () {
+    pollutionService.getData().then(function (response) {
+      console.log(response);
+      $scope.data = response;
+    });
+  };
+
+  $scope.getInfo();
+
+  //end of controller
+}]);
+"use strict";
+
+AA.controller("rentCtrl", ["$scope", "rentService", function ($scope, rentService) {
+
+  $scope.data;
+
+  $scope.getInfo = function () {
+    rentService.getData().then(function (response) {
+      console.log(response);
+      $scope.data = response;
+    });
+  };
+
+  $scope.getInfo();
+
+  //end of controller
+}]);
+"use strict";
+
+AA.controller("restaurantCtrl", ["$scope", "restaurantService", function ($scope, restaurantService) {
+
+  $scope.data;
+
+  $scope.getInfo = function () {
+    restaurantService.getData().then(function (response) {
+      console.log(response);
+      $scope.data = response;
+    });
+  };
+
+  $scope.getInfo();
+}]);
+'use strict';
+
+// Start: This is the doughnut chart directive =================================
+AA.directive('doughnutDirective', function () {
+  return {
+    restrict: 'E',
+    templateUrl: "./../views/doughnut.html",
+    // controller: 'dirCtrl',
+    scope: {
+      chartData: '=',
+      type: "="
+    },
+    link: function link(scope, elem, attrs, ctrl) {
+      console.log('this is my element\'s second child:', elem[0].children[1].children[0]);
+
+      var ctxDir = elem[0].children[1].children[0];
+
+      var myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type);
+
+      function getChartGivenData(chartElement, dataForChart, type) {
+        return new Chart(chartElement, {
+          type: type,
+          data: dataForChart,
+          options: {
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            }
+          }
+        });
+      }
+
+      scope.$watch('type', function (newValue, oldValue, scope) {
+        getChartGivenData(ctxDir, scope.chartData, newValue);
+      });
+    }
+  };
+});
+
+// End: This is the doughnut chart directive ===================================
+'use strict';
+
+// Start: This is the header directive =========================================
+AA.directive('footerDirective', function () {
+
+  return {
+    restrict: 'E',
+    templateUrl: './views/footer.html'
+  };
+});
+// End: This is the header directive ===========================================
+'use strict';
+
+// Start: This is the header directive =========================================
+AA.directive('headerDirective', function () {
+
+  return {
+    restrict: 'E',
+    templateUrl: './views/header.html'
+  };
+});
+// End: This is the header directive ===========================================
+'use strict';
+
+// Start: This is the header directive =========================================
+AA.directive('mapDirective', function () {
+
+  return {
+    restrict: 'E',
+    templateUrl: './views/map.html'
+  };
+});
+// End: This is the header directive ===========================================
 "use strict";
 
 AA.service("crimeService", ["$http", function ($http) {
@@ -182,180 +347,4 @@ AA.service("restaurantService", ["$http", function ($http) {
 
   //end of service
 }]);
-"use strict";
-
-AA.controller("crimeCtrl", ["$scope", "crimeService", function ($scope, crimeService) {
-
-  $scope.data;
-
-  $scope.getInfo = function () {
-    crimeService.getData().then(function (response) {
-      console.log(response);
-      $scope.data = response;
-    });
-  };
-
-  $scope.getInfo();
-
-  //end of controller
-}]);
-"use strict";
-
-AA.controller("homeValueCtrl", ["$scope", "homeValueService", function ($scope, homeValueService) {
-
-  $scope.data;
-
-  $scope.getInfo = function () {
-    homeValueService.getData().then(function (response) {
-      console.log(response);
-      $scope.data = response;
-    });
-  };
-
-  $scope.getInfo();
-
-  //end of controller
-}]);
-"use strict";
-
-AA.controller("hospitalCtrl", ["$scope", "hospitalService", function ($scope, hospitalService) {
-
-  $scope.data;
-
-  $scope.getInfo = function () {
-    hospitalService.getData().then(function (response) {
-      console.log(response);
-      $scope.data = response;
-    });
-  };
-
-  $scope.getInfo();
-}]);
-"use strict";
-
-AA.controller("pollutionCtrl", ["$scope", "pollutionService", function ($scope, pollutionService) {
-
-  $scope.data;
-
-  $scope.getInfo = function () {
-    pollutionService.getData().then(function (response) {
-      console.log(response);
-      $scope.data = response;
-    });
-  };
-
-  $scope.getInfo();
-
-  //end of controller
-}]);
-"use strict";
-
-AA.controller("rentCtrl", ["$scope", "rentService", function ($scope, rentService) {
-
-  $scope.data;
-
-  $scope.getInfo = function () {
-    rentService.getData().then(function (response) {
-      console.log(response);
-      $scope.data = response;
-    });
-  };
-
-  $scope.getInfo();
-
-  //end of controller
-}]);
-"use strict";
-
-AA.controller("restaurantCtrl", ["$scope", "restaurantService", function ($scope, restaurantService) {
-
-  $scope.data;
-
-  $scope.getInfo = function () {
-    restaurantService.getData().then(function (response) {
-      console.log(response);
-      $scope.data = response;
-    });
-  };
-
-  $scope.getInfo();
-}]);
-=======
-'use strict';
-
-// Start: This is the doughnut chart directive =================================
-AA.directive('doughnutDirective', function () {
-  return {
-    restrict: 'E',
-    templateUrl: "./../views/doughnut.html",
-    // controller: 'dirCtrl',
-    scope: {
-      chartData: '=',
-      type: "="
-    },
-    link: function link(scope, elem, attrs, ctrl) {
-      console.log('this is my element\'s second child:', elem[0].children[1].children[0]);
-
-      var ctxDir = elem[0].children[1].children[0];
-
-      var myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type);
-
-      function getChartGivenData(chartElement, dataForChart, type) {
-        return new Chart(chartElement, {
-          type: type,
-          data: dataForChart,
-          options: {
-            scales: {
-              yAxes: [{
-                ticks: {
-                  beginAtZero: true
-                }
-              }]
-            }
-          }
-        });
-      }
-
-      scope.$watch('type', function (newValue, oldValue, scope) {
-        getChartGivenData(ctxDir, scope.chartData, newValue);
-      });
-    }
-  };
-});
-
-// End: This is the doughnut chart directive ===================================
-'use strict';
-
-// Start: This is the header directive =========================================
-AA.directive('footerDirective', function () {
-
-  return {
-    restrict: 'E',
-    templateUrl: './views/footer.html'
-  };
-});
-// End: This is the header directive ===========================================
-'use strict';
-
-// Start: This is the header directive =========================================
-AA.directive('headerDirective', function () {
-
-  return {
-    restrict: 'E',
-    templateUrl: './views/header.html'
-  };
-});
-// End: This is the header directive ===========================================
-'use strict';
-
-// Start: This is the header directive =========================================
-AA.directive('mapDirective', function () {
-
-  return {
-    restrict: 'E',
-    templateUrl: './views/map.html'
-  };
-});
-// End: This is the header directive ===========================================
->>>>>>> master
 //# sourceMappingURL=bundle.js.map
