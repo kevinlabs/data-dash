@@ -11,7 +11,7 @@ let config = {
 }
 
 module.exports = {
-  getCrime: (req, res) => {
+  getOnBoard: (req, res) => {
     return axios('https://search.onboard-apis.com/communityapi/v2.0.0/Area/Full/?AreaId=ZI84121', config).then((response) => {
         res.status(200).send(jsonParser.toJson(response.data));
     });

@@ -11,7 +11,7 @@ const session = require('express-session');
 const restaurants = require('./server/restaurantsCtrl.js');
 const hospitals = require('./server/hospitalsCtrl.js');
 const pollution = require('./server/pollutionCtrl.js');
-const crime = require('./server/crimeCtrl.js');
+const onBoard = require('./server/onBoardCtrl.js');
 
 //secrete session code file.
 //const config = require('./config.js');
@@ -131,7 +131,7 @@ app.get('/api/restaurants', restaurants.getRestaurants);
 
 app.get('/api/pollution', pollution.getPollution);
 
-app.get('/api/crime', crime.getCrime);
+app.get('/api/onBoard', onBoard.getOnBoard);
 
 //===PORT====================================
 app.listen(port, () => {
