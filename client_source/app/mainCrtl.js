@@ -2,6 +2,9 @@
 /* ======================== Start: Main Controller ============================= */
 /* ============================================================================= */
 AA.controller("mainCtrl", function($scope, $interval){
+  
+  $scope.testing = "it works";
+  
   $scope.baseball = {
     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"],
     datasets: [{
@@ -60,6 +63,15 @@ AA.controller("mainCtrl", function($scope, $interval){
     }]
   };
 
+  $scope.orange = {
+      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+      datasets: [{
+        label: "Population (millions)",
+        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+        data: [2478,5267,734,784,433]
+      }]
+    };
+
   $scope.polar = {
     labels: ["M", "T", "W", "T", "F", "S", "S"],
     datasets: [{
@@ -95,7 +107,7 @@ AA.controller("mainCtrl", function($scope, $interval){
       $scope.chart6Type = $scope.chart6Type === 'polarArea' ? 'radar' : 'polarArea';
       // $scope.baseball.labels = ["Rojo", "Azul", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"];
     });
-  }, 3000);
+  }, 10000);
 });
 /* ============================================================================= */
 /* ======================== End: Main Controller =============================== */

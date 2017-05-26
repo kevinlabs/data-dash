@@ -13,6 +13,9 @@ var AA = angular.module("data-dash", []);
 /* ======================== Start: Main Controller ============================= */
 /* ============================================================================= */
 AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
+
+  $scope.testing = "it works";
+
   $scope.baseball = {
     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"],
     datasets: [{
@@ -45,6 +48,15 @@ AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
     }]
   };
 
+  $scope.orange = {
+    labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+    datasets: [{
+      label: "Population (millions)",
+      backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+      data: [2478, 5267, 734, 784, 433]
+    }]
+  };
+
   $scope.polar = {
     labels: ["M", "T", "W", "T", "F", "S", "S"],
     datasets: [{
@@ -71,7 +83,7 @@ AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
       $scope.chart6Type = $scope.chart6Type === 'polarArea' ? 'radar' : 'polarArea';
       // $scope.baseball.labels = ["Rojo", "Azul", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"];
     });
-  }, 3000);
+  }, 10000);
 }]);
 /* ============================================================================= */
 /* ======================== End: Main Controller =============================== */
@@ -152,4 +164,49 @@ AA.directive('mapDirective', function () {
   };
 });
 // End: This is the header directive ===========================================
+'use strict';
+
+AA.directive('pieDirective', function () {
+  return {
+    restrict: 'E', templateUrl: "./../views/pie.html",
+    // controller: 'dirCtrl',
+    scope: {
+      chartData: '=',
+      type: "="
+    },
+    link: function link(scope, elem, attrs, ctrl) {
+      console.log('this is my element\'s second child:', elem[0].children[1].children[0]);
+
+      var ctxDir = elem[0].children[1].children[0];
+
+      var myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type);
+
+      function getChartGivenData(chartElement, dataForChart, type) {
+        return new Chart(chartElement, {
+          type: type,
+          data: dataForChart,
+          options: {
+            title: {
+              display: true,
+              text: 'Predicted world population (millions) in 2050'
+            }
+            // scales: {
+            //   yAxes: [
+            //     {
+            //       ticks: {
+            //         beginAtZero: true
+            //       }
+            //     }
+            //   ]
+            // }
+          }
+        });
+      }
+
+      scope.$watch('type', function (newValue, oldValue, scope) {
+        getChartGivenData(ctxDir, scope.chartData, newValue);
+      });
+    }
+  };
+});
 //# sourceMappingURL=bundle.js.map
