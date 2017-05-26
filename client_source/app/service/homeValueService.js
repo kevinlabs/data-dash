@@ -1,6 +1,7 @@
 AA.service("homeValueService", function($http){
 
-  var baseUrl = "http://swapi.co/api/people"
+  const baseUrl = "http://swapi.co/api/people"
+  //hitting Starwars Api for testing. Can delete when back end point is ready.
 
   this.getData = () => {
     return $http({
