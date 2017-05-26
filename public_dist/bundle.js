@@ -13,6 +13,9 @@ var AA = angular.module("data-dash", []);
 /* ======================== Start: Main Controller ============================= */
 /* ============================================================================= */
 AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
+
+  $scope.testing = "it works";
+
   $scope.baseball = {
     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"],
     datasets: [{
@@ -37,7 +40,24 @@ AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
     }]
   };
 
-  $scope.round = {
+  $scope.apple = {
+    labels: ["M", "T", "W", "T", "F", "S", "S"],
+    datasets: [{
+      backgroundColor: ["#2ecc71", "#3498db", "#95a5a6", "#9b59b6", "#f1c40f", "#e74c3c", "#34495e"],
+      data: [12, 19, 3, 17, 28, 24, 7]
+    }]
+  };
+
+  $scope.orange = {
+    labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+    datasets: [{
+      label: "Population (millions)",
+      backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+      data: [2478, 5267, 734, 784, 433]
+    }]
+  };
+
+  $scope.polar = {
     labels: ["M", "T", "W", "T", "F", "S", "S"],
     datasets: [{
       backgroundColor: ["#2ecc71", "#3498db", "#95a5a6", "#9b59b6", "#f1c40f", "#e74c3c", "#34495e"],
@@ -49,17 +69,21 @@ AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
   $scope.chart2Type = 'bar';
   $scope.chart3Type = 'pie';
   $scope.chart4Type = 'doughnut';
+  $scope.chart5Type = 'polarArea';
+  $scope.chart6Type = 'radar';
 
   $interval(function () {
     $scope.$applyAsync(function () {
       $scope.chart1Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
       $scope.chart2Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
       console.log($scope.chart1Type, $scope.chart2Type);
-      // $scope.chart3Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
-      // $scope.chart4Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
+      $scope.chart3Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
+      $scope.chart4Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
+      $scope.chart5Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
+      $scope.chart6Type = $scope.chart6Type === 'polarArea' ? 'radar' : 'polarArea';
       // $scope.baseball.labels = ["Rojo", "Azul", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"];
     });
-  }, 3000);
+  }, 10000);
 }]);
 /* ============================================================================= */
 /* ======================== End: Main Controller =============================== */
@@ -175,9 +199,9 @@ AA.directive('doughnutDirective', function () {
       type: "="
     },
     link: function link(scope, elem, attrs, ctrl) {
-      console.log('this is my element\'s second child:', elem[0].children[1].children[0]);
+      console.log('this is my element\'s second child:', elem[0].children[0].children[0]);
 
-      var ctxDir = elem[0].children[1].children[0];
+      var ctxDir = elem[0].children[0].children[0];
 
       var myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type);
 
@@ -238,6 +262,51 @@ AA.directive('mapDirective', function () {
   };
 });
 // End: This is the header directive ===========================================
+'use strict';
+
+AA.directive('pieDirective', function () {
+  return {
+    restrict: 'E', templateUrl: "./../views/pie.html",
+    // controller: 'dirCtrl',
+    scope: {
+      chartData: '=',
+      type: "="
+    },
+    link: function link(scope, elem, attrs, ctrl) {
+      console.log('this is my element\'s second child:', elem[0].children[1].children[0]);
+
+      var ctxDir = elem[0].children[1].children[0];
+
+      var myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type);
+
+      function getChartGivenData(chartElement, dataForChart, type) {
+        return new Chart(chartElement, {
+          type: type,
+          data: dataForChart,
+          options: {
+            title: {
+              display: true,
+              text: 'Predicted world population (millions) in 2050'
+            }
+            // scales: {
+            //   yAxes: [
+            //     {
+            //       ticks: {
+            //         beginAtZero: true
+            //       }
+            //     }
+            //   ]
+            // }
+          }
+        });
+      }
+
+      scope.$watch('type', function (newValue, oldValue, scope) {
+        getChartGivenData(ctxDir, scope.chartData, newValue);
+      });
+    }
+  };
+});
 "use strict";
 
 AA.service("crimeService", ["$http", function ($http) {

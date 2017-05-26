@@ -130,6 +130,11 @@
   margin: 65px auto 15px auto;
   border: 1px solid black; }
 
+.doughnut-directive-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
 /* ============================================================================= */
 /* ======================== End: Main Styles =================================== */
 /* ============================================================================= */
