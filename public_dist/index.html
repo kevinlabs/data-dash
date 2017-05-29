@@ -2,132 +2,49 @@
 <html lang="en" ng-app="data-dash">
 
 <head>
-    <meta charset="UTF-8">
-    <!-- Viewport declaration to control rendering for mobile devices and retina screens -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DATA DASH | Destination Due Diligence Made Easy</title>
+    <title>Place Autocomplete Address Form</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+
     <!-- Styles CSS is CSS concatinatd  -->
-    <link href="./css/styles.css" rel="stylesheet"/>
+    <link href="./css/styles.css" rel="stylesheet" />
     <!-- Bundle CSS is SCSS concatinatd  -->
-    <link href="./css/bundle.css" rel="stylesheet"/>
-    <!-- Materialize CSS - used to style modals -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald:400,600" rel="stylesheet"/>
+    <link href="./css/bundle.css" rel="stylesheet" />
 
-    <!--Google Map Font.-->
+
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
-
-    <!--Mapbox css is not used.-->
-    <!--<link href="https://api.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.css" rel='stylesheet' />-->
 </head>
 
-<body ng-controller="mainCtrl">
-  <!-- Header -->
-  <section id="header-section">
-    <header-directive></header-directive>
-    <!-- Interactive map display -->
-    <map-directive></map-directive>
-  </section>
-  <main id="main-container">
-  <!-- Start: Dashboard content -->
-    <!-- Start: Search results data set  -->
-
-    <!--Mapbox -->
-    <div id="map" ></div>
-
-
-    <section class="data-set-cards">
+<body ng-controller="mainCtrl as vm">
+    Auto Complete Type:
+    <select ng-model="vm.types">
+    <option value="['geocode']">Geodode</option>
+    <option value="['establishment']">Establishment</option>
+    <option value="['address']">Address</option>
+  </select><br/> Enter an address: <br/>
+    <input places-auto-complete size=80 ng-model="vm.address" component-restrictions="{country:'us'}" types="{{types}}" on-place-changed="vm.placeChanged()"
+    /> <br/>
+    <div ng-show="vm.place">
+        Address = {{vm.place.formatted_address}} <br/> Location: {{vm.place.geometry.location}}<br/>
+    </div>
+    address : {{vm.address}}
+    <ng-map></ng-map>
 
 
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
 
-      <!-- 1: Local time -->
-      <div class="data-card dc-bg-time">
-        <div class="data-chart-box">
-          <doughnut-directive></doughnut-directive>
-        </div>
-        <p>Current Local Time</p>
-      </div>
-      <!-- 2: Local weather -->
-      <div class="data-card dc-bg-weather">
-        <div class="data-chart-box">
-          <doughnut-directive></doughnut-directive>
-        </div>
-        <p>Current Local Weather</p>
-      </div>
-      <!-- 3: Home values -->
-      <div class="data-card dc-bg-property">
-        <div class="data-chart-box">
-          <doughnut-directive></doughnut-directive>
-        </div>
-        <p>Median Home Values</p>
-      </div>
-      <!-- 4: Rent prices -->
-      <div class="data-card dc-bg-property">
-        <div class="data-chart-box">
-          <doughnut-directive></doughnut-directive>
-        </div>
-        <p>Median Rental Price</p>
-      </div>
-      <!-- 5: Gas Price -->
-      <div class="data-card dc-bg-gas-restaurants">
-        <div class="data-chart-box">
-          <doughnut-directive></doughnut-directive>
-        </div>
-        <p>Local Restaurants</p>
-      </div>
-      <!-- 6: School rankings  -->
-      <div class="data-card dc-bg-gas-education">
-        <div class="data-chart-box">
-          <doughnut-directive></doughnut-directive>
-        </div>
-        <p>Educational Ranking</p>
-      </div>
-      <!-- 6: Medical centers nearby -->
-      <div class="data-card dc-bg-gas-medical">
-        <div class="data-chart-box">
-          <doughnut-directive></doughnut-directive>
-        </div>
-        <p>Medical Centers</p>
-      </div>
-      <!-- 7: Crime stats -->
-      <div class="data-card dc-bg-gas-crime">
-        <div class="data-chart-box">
-          <doughnut-directive></doughnut-directive>
-        </div>
-        <p>Crime Statististics</p>
-      </div>
-    </section>
-    <!-- End: Search results data set  -->
-  <!-- End: Dashboard content -->
-  </main>
-  <!-- Footer -->
-  <footer-directive></footer-directive>
-  <!-- Start: JS CDNs -->
+    <!--Google Map API process-->
+    <script src="http://maps.google.com/maps/api/js?key=AIzaSyAScVx0giSjmYhutsH4_or4hlzl6B4lpdo"></script>
+
+    <!--NG MAP-->
+    <!--<script src="./js_plugin/ng-map.min.js"></script>-->
+
+    <script src="bundle.js"></script>
+
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAScVx0giSjmYhutsH4_or4hlzl6B4lpdo
+&libraries=places&callback=initAutocomplete" async defer></script>-->
 
 
-  <!--Mapbox JS file-->
-  <script src="https://api.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.js"></script>
-  <!--===============-->
-
-
-  <!--Mapbox custom scripts-->
-  <script>
-    mapboxgl.accessToken =
-      'pk.eyJ1IjoiZGF0YS1kYXNoIiwiYSI6ImNqMnhzN3RjeDAwMngyd3F2dm13aGE3YjgifQ.r5AaouMs58KOng9Tj2OkoQ';
-    var map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v9'
-    });
-  </script>
-  <!--===================================-->
-
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
-  <script src="https://api.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.js"></script>
-  <script src="bundle.js"></script>
 </body>
 
 </html>

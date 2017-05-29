@@ -3,35 +3,27 @@
 /* ============================================================================= */
 /* ======================== Start: App JS ====================================== */
 /* ============================================================================= */
-var AA = angular.module("data-dash", []);
+var AA = angular.module("data-dash", ['ngMap']);
+
 /* ============================================================================= */
 /* ======================== End: App JS ======================================== */
 /* ============================================================================= */
-"use strict";
-
-/* ============================================================================= */
-/* ======================== Start: Main Controller ============================= */
-/* ============================================================================= */
-AA.controller("mainCtrl", ["$scope", function ($scope) {
-
-    //$scope.test = "bOYAh\! the app is working";
-
-}]);
-/* ============================================================================= */
-/* ======================== End: Main Controller =============================== */
-/* ============================================================================= */
 'use strict';
 
-// Start: This is the doughnut chart directive =================================
-AA.directive('doughnutDirective', function () {
+AA.controller('mainCtrl', ["NgMap", function (NgMap) {
+    var vm = this;
+    vm.types = "['establishment']";
 
-  return {
-    restrict: 'E',
-    templateUrl: './views/doughnut.html',
-    controller: 'mainCtrl'
-  };
-});
-// End: This is the doughnut chart directive ===================================
+    vm.placeChanged = function () {
+        vm.place = this.getPlace();
+        console.log('location', vm.place.geometry.location);
+        vm.map.setCenter(vm.place.geometry.location);
+    };
+
+    NgMap.getMap().then(function (map) {
+        vm.map = map;
+    });
+}]);
 'use strict';
 
 // Start: This is the header directive =========================================

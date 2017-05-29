@@ -1,155 +1,56 @@
-/* ============================================================================= */
-/* ======================== Start: Mixins Styles =============================== */
-/* ============================================================================= */
-@import url("https://fonts.googleapis.com/css?family=Open+Sans|Oswald:400,600");
-/* ============================================================================= */
-/* ======================== End: Mixins Styles ================================= */
-/* ============================================================================= */
-#header-section {
-  width: 100%;
-  height: auto;
-  background: #093056;
-  padding: 20px 0;
-  margin-bottom: 20px; }
 
-.header-inner {
-  max-width: 80%;
-  height: 95px;
-  margin: 0 auto;
-  font-family: "Oswald", sans-serif;
-  color: #FFF;
-  text-align: center;
-  border: 1px solid #093056;
-  background: url("../img/data-dash-logo.svg") no-repeat center left; }
-  .header-inner h1 {
-    font-size: 2rem;
-    margin: 1.85rem 0 1.68rem 0; }
 
-#map-container {
-  width: 100%;
-  height: 300px;
-  margin: 15px 0;
-  background: #DDD; }
-  #map-container h5 {
-    color: #E5E5E5;
-    text-align: center;
-    font-size: 16px;
-    padding-top: 50px; }
-
-/* ============================================================================= */
-/* ======================== Start: Main Styles ================================= */
-/* ============================================================================= */
-/* ============================================================================= */
-/* ======================== Start: Mixins Styles =============================== */
-/* ============================================================================= */
-@import url("https://fonts.googleapis.com/css?family=Open+Sans|Oswald:400,600");
-/* ============================================================================= */
-/* ======================== End: Mixins Styles ================================= */
-/* ============================================================================= */
-#main-container {
-  max-width: 80%;
-  margin: 0 auto;
-  font-family: "Open Sans", sans-serif;
-  color: #353B42; }
-
-.data-set-cards {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: stretch;
-  align-content: center; }
-
-.data-card {
-  width: 280px;
-  height: 280px;
-  text-align: center;
-  background-color: #F7F7F7;
-  border: #E5E5E5 1px solid;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  background-clip: padding-box;
-  /* stops bg color from leaking outside the border: */
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  cursor: pointer;
-  margin: 3px; }
-
-.dc-bg-time {
-  background: #F7F7F7 url("../img/data-icon-time.svg") no-repeat;
-  background-size: 50px;
-  background-position: 10px 10px; }
-
-.dc-bg-weather {
-  background: #F7F7F7 url("../img/data-icon-weather.svg") no-repeat;
-  background-size: 50px;
-  background-position: 10px 10px; }
-
-.dc-bg-property {
-  background: #F7F7F7 url("../img/data-icon-property.svg") no-repeat;
-  background-size: 50px;
-  background-position: 10px 10px; }
-
-.dc-bg-gas-price {
-  background: #F7F7F7 url("../img/data-icon-gas-price.svg") no-repeat;
-  background-size: 50px;
-  background-position: 10px 10px; }
-
-.dc-bg-gas-household-income {
-  background: #F7F7F7 url("../img/data-icon-household-income.svg") no-repeat;
-  background-size: 50px;
-  background-position: 10px 10px; }
-
-.dc-bg-gas-education {
-  background: #F7F7F7 url("../img/data-icon-education.svg") no-repeat;
-  background-size: 50px;
-  background-position: 10px 10px; }
-
-.dc-bg-gas-medical {
-  background: #F7F7F7 url("../img/data-icon-medical.svg") no-repeat;
-  background-size: 50px;
-  background-position: 10px 10px; }
-
-.dc-bg-gas-crime {
-  background: #F7F7F7 url("../img/data-icon-crime.svg") no-repeat;
-  background-size: 50px;
-  background-position: 10px 10px; }
-
-<<<<<<< HEAD
+/* CSS for the MAP */
+/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
 #map {
-  width: 1200px;
-  height: 600px;
-  float: none;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 60px; }
-=======
-.dc-bg-gas-restaurants {
-  background: #F7F7F7 url("../img/data-icon-restaurants.svg") no-repeat;
-  background-size: 50px;
-  background-position: 10px 10px; }
+  height: 100%; }
 
-.data-chart-box {
-  width: 200px;
-  height: 170px;
-  margin: 65px auto 15px auto;
-  border: 1px solid black; }
->>>>>>> master
+/* Optional: Makes the sample page fill the window. */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0; }
 
-/* ============================================================================= */
-/* ======================== End: Main Styles =================================== */
-/* ============================================================================= */
+#locationField,
+#controls {
+  position: relative;
+  width: 480px; }
 
-/* ============================================================================= */
-/* ======================== Start: Mixins Styles =============================== */
-/* ============================================================================= */
-@import url("https://fonts.googleapis.com/css?family=Open+Sans|Oswald:400,600");
-/* ============================================================================= */
-/* ======================== End: Mixins Styles ================================= */
-/* ============================================================================= */
+#autocomplete {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 99%; }
+
+.label {
+  text-align: right;
+  font-weight: bold;
+  width: 100px;
+  color: #303030; }
+
+#address {
+  border: 1px solid #000090;
+  background-color: #f0f0ff;
+  width: 480px;
+  padding-right: 2px; }
+
+#address td {
+  font-size: 10pt; }
+
+.field {
+  width: 99%; }
+
+.slimField {
+  width: 80px; }
+
+.wideField {
+  width: 200px; }
+
+#locationField {
+  height: 20px;
+  margin-bottom: 2px; }
+
 
 /*# sourceMappingURL=maps/bundle.css.map */

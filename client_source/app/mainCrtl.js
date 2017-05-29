@@ -1,11 +1,14 @@
-/* ============================================================================= */
-/* ======================== Start: Main Controller ============================= */
-/* ============================================================================= */
-AA.controller("mainCtrl", function($scope){
+AA.controller('mainCtrl', function (NgMap) {
+    var vm = this;
+    vm.types = "['establishment']";
+    
+    vm.placeChanged = function () {
+        vm.place = this.getPlace();
+        console.log('location', vm.place.geometry.location);
+        vm.map.setCenter(vm.place.geometry.location);
+    };
 
-    //$scope.test = "bOYAh\! the app is working";
-
+    NgMap.getMap().then(function (map) {
+        vm.map = map;
+    });
 });
-/* ============================================================================= */
-/* ======================== End: Main Controller =============================== */
-/* ============================================================================= */
