@@ -40,11 +40,10 @@ const outputPaths = {
     fontSource: './public_dist/fonts'
 };
 
-//jsPlugin
-gulp.task('copy:jsPlugin', function () {
-    return gulp.src([inputPaths.jsPluginSource])
-        .pipe(gulp.dest(outputPaths.jsPluginSource));
-});
+// gulp.task('copy:jsPlugin', function () {
+//     return gulp.src([inputPaths.jsPluginSource])
+//         .pipe(gulp.dest(outputPaths.jsPluginSource));
+// });
 
 //cssPlugin
 gulp.task('copy:cssPlugin', function () {
@@ -118,7 +117,6 @@ gulp.task('copy:fonts', function () {
 //This wont watch newly created files while gulp is running, if you make a new file stop gulp with ctrl-c and re-run.
 gulp.task('watch', function () {
     gulp.watch(inputPaths.jsSource, ['js']);
-    // gulp.watch(inputPaths.jsPluginSource, ['copy:jsPlugin']);
     gulp.watch(inputPaths.cssSource, ['build-css']);
     gulp.watch(inputPaths.sassSource, ['sass']);
     gulp.watch(inputPaths.cssPlugin, ['copy:cssPlugin']);
@@ -130,6 +128,7 @@ gulp.task('watch', function () {
 
 //when you type gulp and run it in the command like this is the default task that runs.
 //this will run all the tasks listed in the array in order. when its done it watches for changes and will recompile if anything changes.
+
 gulp.task('default', ['js', 'sass', 'index', 'views', 'img', 'copy:fonts', 'build-css', 'copy:cssPlugin',
     'watch'
 ]);

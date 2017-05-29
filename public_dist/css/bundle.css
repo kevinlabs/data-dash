@@ -129,6 +129,11 @@
   height: 170px;
   margin: 65px auto 15px auto; }
 
+.doughnut-directive-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
 .chart .lable {
   display: none; }
 
