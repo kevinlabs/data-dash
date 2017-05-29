@@ -75,7 +75,7 @@ AA.controller("mainCtrl", function($scope, $interval){
       // $scope.chart4Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
       // $scope.baseball.labels = ["Rojo", "Azul", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"];
     });
-  }, 3000);
+  }, 8000);
 });
 /* ============================================================================= */
 /* ======================== End: Main Controller =============================== */

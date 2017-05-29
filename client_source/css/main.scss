@@ -98,10 +98,12 @@
   width: 200px;
   height:170px;
   margin: 65px auto 15px auto;
-
-  border: 1px solid black;
 }
 // End: Data card chart box ....................................................
+
+.chart{
+  .lable { display: none; }
+} 
 
 
 /* ============================================================================= */

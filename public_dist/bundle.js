@@ -59,7 +59,7 @@ AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
       // $scope.chart4Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
       // $scope.baseball.labels = ["Rojo", "Azul", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"];
     });
-  }, 3000);
+  }, 8000);
 }]);
 /* ============================================================================= */
 /* ======================== End: Main Controller =============================== */
@@ -77,9 +77,9 @@ AA.directive('doughnutDirective', function () {
       type: "="
     },
     link: function link(scope, elem, attrs, ctrl) {
-      console.log('this is my element\'s second child:', elem[0].children[1].children[0]);
+      console.log('this is my element\'s second child:', elem[0].children[0].children[0]);
 
-      var ctxDir = elem[0].children[1].children[0];
+      var ctxDir = elem[0].children[0].children[0];
 
       var myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type);
 

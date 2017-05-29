@@ -9,9 +9,9 @@ AA.directive('doughnutDirective', function() {
       type: "="
     },
     link: function(scope, elem, attrs, ctrl) {
-      console.log('this is my element\'s second child:', elem[0].children[1].children[0]);
+      console.log('this is my element\'s second child:', elem[0].children[0].children[0]);
 
-      let ctxDir = elem[0].children[1].children[0];
+      let ctxDir = elem[0].children[0].children[0];
 
       let myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type);
 
@@ -37,7 +37,7 @@ AA.directive('doughnutDirective', function() {
       scope.$watch('type', function(newValue, oldValue, scope){
         getChartGivenData(ctxDir, scope.chartData, newValue);
       });
-      
+
     }
   }
 });
