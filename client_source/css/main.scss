@@ -37,6 +37,15 @@
   @include no-select;
   cursor: pointer;
   margin: 3px;
+
+  position: relative;
+
+  p {
+    text-align: left;
+    position: absolute;
+    top: 20px;
+    left: 80px;
+  }
 }
 
 // Start: Data card icons ......................................................
@@ -109,7 +118,7 @@
 
 .chart{
   .lable { display: none; }
-} 
+}
 
 
 /* ============================================================================= */

@@ -22,6 +22,12 @@ AA.directive('doughnutDirective', function() {
             type: type,
             data: dataForChart,
             options: {
+              legend: {
+                display:false,
+                lables: {
+                  display: false
+                }
+              },
               scales: {
                 yAxes: [{
                   ticks: {

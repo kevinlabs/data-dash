@@ -77,7 +77,13 @@
   -ms-user-select: none;
   user-select: none;
   cursor: pointer;
-  margin: 3px; }
+  margin: 3px;
+  position: relative; }
+  .data-card p {
+    text-align: left;
+    position: absolute;
+    top: 20px;
+    left: 80px; }
 
 .dc-bg-time {
   background: #F7F7F7 url("../img/data-icon-time.svg") no-repeat;
