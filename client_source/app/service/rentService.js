@@ -1,6 +1,6 @@
 AA.service("rentService", function($http){
 
-const baseUrl = "http://swapi.co/api/planets";
+const baseUrl = "/api/onBoard";
 
 
 this.getData = () => {
@@ -8,8 +8,8 @@ this.getData = () => {
     method: "GET",
     url: baseUrl
   }).then( (response) => {
-    console.log(response.data.results);
-    return response.data.results
+    console.log(response.data.response.result.package.item);
+    return response.data.response.result.package.item
   })
 }
 

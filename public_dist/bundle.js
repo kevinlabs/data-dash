@@ -14,8 +14,6 @@ var AA = angular.module("data-dash", []);
 /* ============================================================================= */
 AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
 
-  $scope.testing = "it works";
-
   $scope.baseball = {
     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"],
     datasets: [{
@@ -65,6 +63,45 @@ AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
     }]
   };
 
+  //  $scope.stackedBarData = {
+  //     labels: [
+  //       'S', '1BR', '2BR', '3BR', '4BR'
+  //     ],
+  //     datasets: [
+  //       {
+  //         label: 'apartments',
+  //         data: [
+  //           // $scope.onBoardDataStudio, $scope.onBoardDataOne, $scope.onBoardDataTwo, $scope.onBoardDataThree, $scope.onBoardDataFour
+  //          5, 10, -3, 7, -6
+  //         ],
+  //         backgroundColor: "rgba(153,255,51,0.4)"
+  //       }
+  //     ]
+  //   };
+
+  //   $scope.optionsObj = {
+  //     legend: {
+  //       display: false,
+  //       labels: {
+  //         display: false
+  //       }
+  //     },
+  //     scales: {
+  //       yAxes: [
+  //         {
+  //           ticks: {
+  //             // beginAtZero: true,
+  //             stepSize: 50
+  //           },
+  //           stacked: false
+  //         }
+  //       ],
+  //       xAxes: [{
+  //         stacked: false
+  //       }]
+  //     }
+  //   };
+
   $scope.chart1Type = 'line';
   $scope.chart2Type = 'bar';
   $scope.chart3Type = 'pie';
@@ -80,7 +117,7 @@ AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
       $scope.chart3Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
       $scope.chart4Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
       $scope.chart5Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
-      $scope.chart6Type = $scope.chart6Type === 'polarArea' ? 'radar' : 'polarArea';
+      $scope.chart6Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
       // $scope.baseball.labels = ["Rojo", "Azul", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"];
     });
   }, 10000);
@@ -90,101 +127,112 @@ AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
 /* ============================================================================= */
 "use strict";
 
-AA.controller("crimeCtrl", ["$scope", "crimeService", function ($scope, crimeService) {
+AA.service("crimeService", ["$http", function ($http) {
 
-  $scope.data;
+  var baseUrl = "http://swapi.co/api/species";
 
-  $scope.getInfo = function () {
-    crimeService.getData().then(function (response) {
-      console.log(response);
-      $scope.data = response;
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      console.log(response.data.results);
+      return response.data.results;
     });
   };
 
-  $scope.getInfo();
-
-  //end of controller
+  //end of service
 }]);
 "use strict";
 
-AA.controller("homeValueCtrl", ["$scope", "homeValueService", function ($scope, homeValueService) {
+AA.service("homeValueService", ["$http", function ($http) {
 
-  $scope.data;
+  var baseUrl = "http://swapi.co/api/people";
+  //hitting Starwars Api for testing. Can delete when back end point is ready.
 
-  $scope.getInfo = function () {
-    homeValueService.getData().then(function (response) {
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
       console.log(response);
-      $scope.data = response;
+      return response.data.results;
     });
   };
 
-  $scope.getInfo();
-
-  //end of controller
+  //end of service
 }]);
 "use strict";
 
-AA.controller("hospitalCtrl", ["$scope", "hospitalService", function ($scope, hospitalService) {
+AA.service("hospitalService", ["$http", function ($http) {
 
-  $scope.data;
+  var baseUrl = "http://swapi.co/api/vehicles";
 
-  $scope.getInfo = function () {
-    hospitalService.getData().then(function (response) {
-      console.log(response);
-      $scope.data = response;
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      console.log(response.data.results);
+      return response.data.results;
     });
   };
 
-  $scope.getInfo();
+  //end of service
 }]);
 "use strict";
 
-AA.controller("pollutionCtrl", ["$scope", "pollutionService", function ($scope, pollutionService) {
+AA.service("pollutionService", ["$http", function ($http) {
 
-  $scope.data;
+  var baseUrl = "http://swapi.co/api/films";
 
-  $scope.getInfo = function () {
-    pollutionService.getData().then(function (response) {
-      console.log(response);
-      $scope.data = response;
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      console.log(response.data.results);
+      return response.data.results;
     });
   };
 
-  $scope.getInfo();
-
-  //end of controller
+  //end of service
 }]);
 "use strict";
 
-AA.controller("rentCtrl", ["$scope", "rentService", function ($scope, rentService) {
+AA.service("rentService", ["$http", function ($http) {
 
-  $scope.data;
+  var baseUrl = "/api/onBoard";
 
-  $scope.getInfo = function () {
-    rentService.getData().then(function (response) {
-      console.log(response);
-      $scope.data = response;
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      console.log(response.data.response.result.package.item);
+      return response.data.response.result.package.item;
     });
   };
 
-  $scope.getInfo();
-
-  //end of controller
+  // end of service
 }]);
 "use strict";
 
-AA.controller("restaurantCtrl", ["$scope", "restaurantService", function ($scope, restaurantService) {
+AA.service("restaurantService", ["$http", function ($http) {
 
-  $scope.data;
+  var baseUrl = "http://swapi.co/api/starships";
 
-  $scope.getInfo = function () {
-    restaurantService.getData().then(function (response) {
-      console.log(response);
-      $scope.data = response;
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      console.log(response.data.results);
+      return response.data.results;
     });
   };
 
-  $scope.getInfo();
+  //end of service
 }]);
 'use strict';
 
@@ -202,27 +250,30 @@ AA.directive('doughnutDirective', function () {
 
       var ctxDir = elem[0].children[0].children[0];
 
-      var myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type);
+      var myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type, scope.options);
 
-      function getChartGivenData(chartElement, dataForChart, type) {
+      function getChartGivenData(chartElement, dataForChart, type, options) {
         return new Chart(chartElement, {
           type: type,
           data: dataForChart,
-          options: {
-            legend: {
-              display: false,
-              labels: {
-                display: false
-              }
-            },
-            scales: {
-              yAxes: [{
-                ticks: {
-                  beginAtZero: true
-                }
-              }]
-            }
-          }
+          options: options
+          // {
+          //   legend: {
+          //     display: false,
+          //     labels: {
+          //       display: false
+          //     }
+          //   },
+          //   scales: {
+          //     yAxes: [
+          //       {
+          //         ticks: {
+          //           beginAtZero: true
+          //         }
+          //       }
+          //     ]
+          //   }
+          // }
         });
       }
 
@@ -315,111 +366,144 @@ AA.directive('pieDirective', function () {
 });
 "use strict";
 
-AA.service("crimeService", ["$http", function ($http) {
+AA.controller("crimeCtrl", ["$scope", "crimeService", function ($scope, crimeService) {
 
-  var baseUrl = "http://swapi.co/api/species";
+  $scope.data;
 
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
-      console.log(response.data.results);
-      return response.data.results;
-    });
-  };
-
-  //end of service
-}]);
-"use strict";
-
-AA.service("homeValueService", ["$http", function ($http) {
-
-  var baseUrl = "http://swapi.co/api/people";
-  //hitting Starwars Api for testing. Can delete when back end point is ready.
-
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
+  $scope.getInfo = function () {
+    crimeService.getData().then(function (response) {
       console.log(response);
-      return response.data.results;
+      $scope.data = response;
     });
   };
 
-  //end of service
+  $scope.getInfo();
+
+  //end of controller
 }]);
 "use strict";
 
-AA.service("hospitalService", ["$http", function ($http) {
+AA.controller("homeValueCtrl", ["$scope", "homeValueService", function ($scope, homeValueService) {
 
-  var baseUrl = "http://swapi.co/api/vehicles";
+  $scope.data;
 
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
-      console.log(response.data.results);
-      return response.data.results;
+  $scope.getInfo = function () {
+    homeValueService.getData().then(function (response) {
+      console.log(response);
+      $scope.data = response;
     });
   };
 
-  //end of service
+  $scope.getInfo();
+
+  //end of controller
 }]);
 "use strict";
 
-AA.service("pollutionService", ["$http", function ($http) {
+AA.controller("hospitalCtrl", ["$scope", "hospitalService", function ($scope, hospitalService) {
 
-  var baseUrl = "http://swapi.co/api/films";
+  $scope.data;
 
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
-      console.log(response.data.results);
-      return response.data.results;
+  $scope.getInfo = function () {
+    hospitalService.getData().then(function (response) {
+      console.log(response);
+      $scope.data = response;
     });
   };
 
-  //end of service
+  $scope.getInfo();
 }]);
 "use strict";
 
-AA.service("rentService", ["$http", function ($http) {
+AA.controller("pollutionCtrl", ["$scope", "pollutionService", function ($scope, pollutionService) {
 
-  var baseUrl = "http://swapi.co/api/planets";
+  $scope.data;
 
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
-      console.log(response.data.results);
-      return response.data.results;
+  $scope.getInfo = function () {
+    pollutionService.getData().then(function (response) {
+      console.log(response);
+      $scope.data = response;
     });
   };
 
-  // end of service
+  $scope.getInfo();
+
+  //end of controller
+}]);
+'use strict';
+
+AA.controller("rentCtrl", ["$scope", "rentService", function ($scope, rentService) {
+
+  $scope.onBoardDataStudio;
+  $scope.onBoardDataOne;
+  $scope.onBoardDataTwo;
+  $scope.onBoardDataThree;
+  $scope.onBoardDataFour;
+
+  $scope.getInfo = function () {
+    rentService.getData().then(function (response) {
+      console.log(response);
+      $scope.onBoardDataStudio = response.studio_county;
+      $scope.onBoardDataOne = response.one_bed_county;
+      $scope.onBoardDataTwo = response.two_bed_county;
+      $scope.onBoardDataThree = response.three_bed_county;
+      $scope.onBoardDataFour = response.four_bed_county;
+      $scope.assignData();
+    });
+  };
+
+  $scope.getInfo();
+
+  $scope.assignData = function () {
+    $scope.stackedBarData = {
+      labels: ['S', '1BR', '2BR', '3BR', '4BR'],
+      datasets: [{
+        label: 'apartments',
+        data: [$scope.onBoardDataStudio, $scope.onBoardDataOne, $scope.onBoardDataTwo, $scope.onBoardDataThree, $scope.onBoardDataFour
+        // 5, 10, -3, 7, -6
+        ],
+        backgroundColor: "rgba(153,255,51,0.4)"
+      }]
+    };
+    console.log($scope.stackedBarData);
+  };
+
+  $scope.optionsObj = {
+    legend: {
+      display: false,
+      labels: {
+        display: false
+      }
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          // beginAtZero: true,
+          stepSize: 50
+        },
+        stacked: false
+      }],
+      xAxes: [{
+        stacked: false
+      }]
+    }
+  };
+
+  //end of controller
 }]);
 "use strict";
 
-AA.service("restaurantService", ["$http", function ($http) {
+AA.controller("restaurantCtrl", ["$scope", "restaurantService", function ($scope, restaurantService) {
 
-  var baseUrl = "http://swapi.co/api/starships";
+  $scope.data;
 
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
-      console.log(response.data.results);
-      return response.data.results;
+  $scope.getInfo = function () {
+    restaurantService.getData().then(function (response) {
+      console.log(response);
+      $scope.data = response;
     });
   };
 
-  //end of service
+  $scope.getInfo();
 }]);
 //# sourceMappingURL=bundle.js.map

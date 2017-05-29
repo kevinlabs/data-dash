@@ -29,50 +29,50 @@
     <section class="data-set-cards">
       <!-- 1: Local time -->
       <div class="data-card dc-bg-time">
-        <div class="data-chart-box">
-          <doughnut-directive chart-data="lineData" type="chart1Type"></doughnut-directive>
+        <div class="data-chart-box" ng-controller="rentCtrl">
+          <doughnut-directive chart-data="stackedBarData" type="chart2Type" options="optionsObj"></doughnut-directive>
         </div>
         <p>Current Local Time</p>
       </div>
       <!-- 2: Local weather -->
       <div class="data-card dc-bg-weather">
         <div class="data-chart-box">
-          <doughnut-directive chart-data="round" type="chart2Type"></doughnut-directive>
+          <!--<doughnut-directive chart-data="round" type="chart2Type"></doughnut-directive>-->
         </div>
         <p>Current Local Weather</p>
       </div>
       <!-- 3: Home values -->
       <div class="data-card dc-bg-property">
         <div class="data-chart-box">
-          <pie-directive chart-data="orange" type="chart3Type"></pie-directive>
+          <!--<pie-directive chart-data="orange" type="chart3Type"></pie-directive>-->
         </div>
         <p>Median Home Values</p>
       </div>
       <!-- 4: Rent prices -->
       <div class="data-card dc-bg-property">
         <div class="data-chart-box">
-          <pie-directive chart-data="orange" type="chart4Type"></pie-directive>
+          <!--<pie-directive chart-data="orange" type="chart4Type"></pie-directive>-->
         </div>
         <p>Median Rental Price</p>
       </div>
       <!-- 5: Gas Price -->
       <div class="data-card dc-bg-gas-restaurants">
         <div class="data-chart-box">
-          <doughnut-directive chart-data="baseball" type="chart1Type"></doughnut-directive>
+          <!--<doughnut-directive chart-data="baseball" type="chart1Type"></doughnut-directive>-->
         </div>
         <p>Local Restaurants</p>
       </div>
       <!-- 6: School rankings  -->
       <div class="data-card dc-bg-gas-education">
         <div class="data-chart-box">
-          <doughnut-directive chart-data="baseball" type="chart2Type"></doughnut-directive>
+          <!--<doughnut-directive chart-data="baseball" type="chart2Type"></doughnut-directive>-->
         </div>
         <p>Educational Ranking</p>
       </div>
       <!-- 6: Medical centers nearby -->
       <div class="data-card dc-bg-gas-medical">
         <div class="data-chart-box">
-          <doughnut-directive chart-data="polar" type="chart5Type"></doughnut-directive>
+          <!--<doughnut-directive chart-data="polar" type="chart5Type"></doughnut-directive>-->
         </div>
         <p>Medical Centers</p>
       </div>

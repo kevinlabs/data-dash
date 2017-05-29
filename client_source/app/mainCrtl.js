@@ -2,9 +2,7 @@
 /* ======================== Start: Main Controller ============================= */
 /* ============================================================================= */
 AA.controller("mainCtrl", function($scope, $interval){
-  
-  $scope.testing = "it works";
-  
+    
   $scope.baseball = {
     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"],
     datasets: [{
@@ -86,7 +84,46 @@ AA.controller("mainCtrl", function($scope, $interval){
       ],
       data: [12, 19, 3, 17, 28, 24, 7]
     }]
-  }
+  };
+
+  //  $scope.stackedBarData = {
+  //     labels: [
+  //       'S', '1BR', '2BR', '3BR', '4BR'
+  //     ],
+  //     datasets: [
+  //       {
+  //         label: 'apartments',
+  //         data: [
+  //           // $scope.onBoardDataStudio, $scope.onBoardDataOne, $scope.onBoardDataTwo, $scope.onBoardDataThree, $scope.onBoardDataFour
+  //          5, 10, -3, 7, -6
+  //         ],
+  //         backgroundColor: "rgba(153,255,51,0.4)"
+  //       }
+  //     ]
+  //   };
+
+  //   $scope.optionsObj = {
+  //     legend: {
+  //       display: false,
+  //       labels: {
+  //         display: false
+  //       }
+  //     },
+  //     scales: {
+  //       yAxes: [
+  //         {
+  //           ticks: {
+  //             // beginAtZero: true,
+  //             stepSize: 50
+  //           },
+  //           stacked: false
+  //         }
+  //       ],
+  //       xAxes: [{
+  //         stacked: false
+  //       }]
+  //     }
+  //   };
 
   $scope.chart1Type = 'line';
   $scope.chart2Type = 'bar';
@@ -104,7 +141,7 @@ AA.controller("mainCtrl", function($scope, $interval){
       $scope.chart3Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
       $scope.chart4Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
       $scope.chart5Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
-      $scope.chart6Type = $scope.chart6Type === 'polarArea' ? 'radar' : 'polarArea';
+      $scope.chart6Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
       // $scope.baseball.labels = ["Rojo", "Azul", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"];
     });
   }, 10000);
