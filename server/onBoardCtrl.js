@@ -1,14 +1,14 @@
-// const keys = require('../config.js');
+const keys = require('../config.js');
 const axios = require('axios');
 const jsonParser = require('xml2json');
 
-// let config = {
-//   method: 'get',
-//   headers: {
-//   'Accept': 'applicaton/json',
-//   'APIKey': keys.onBoardKey
-//   }
-// }
+let config = {
+  method: 'get',
+  headers: {
+  'Accept': 'applicaton/json',
+  'APIKey': keys.onBoardKey
+  }
+}
 
 module.exports = {
   getOnBoard: (req, res) => {
