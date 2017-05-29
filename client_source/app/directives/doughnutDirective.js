@@ -22,6 +22,12 @@ AA.directive('doughnutDirective', function() {
             type: type,
             data: dataForChart,
             options: {
+              legend: {
+                display:false,
+                lables: {
+                  display: false
+                }
+              },
               scales: {
                 yAxes: [{
                   ticks: {
@@ -37,7 +43,7 @@ AA.directive('doughnutDirective', function() {
       scope.$watch('type', function(newValue, oldValue, scope){
         getChartGivenData(ctxDir, scope.chartData, newValue);
       });
-      
+
     }
   }
 });
