@@ -6,7 +6,7 @@ AA.controller("mainCtrl", function($scope, $interval){
   $scope.testing = "it works";
 
   $scope.baseball = {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"],
+    labels: ["Pre", "Kinder", "Elemen", "Middle", "High", "Degree", "Masters", "PHD"],
     datasets: [{
       label: '# of Votes',
       data: [1290, 2283, 3092, 1532, 2111, 1003, 1487, 2645],
@@ -37,12 +37,12 @@ AA.controller("mainCtrl", function($scope, $interval){
   $scope.lineData = {
     labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
     datasets: [{
-      label: 'apples',
-      data: [12, 19, 3, 17, 6, 3, 7],
+      label: 'High',
+      data: [12, 29, 7, 17, 6, 8, 10],
       backgroundColor: "rgba(33, 125, 216, 0.4)"
     }, {
-      label: 'oranges',
-      data: [2, 29, 5, 5, 2, 3, 10],
+      label: 'Low',
+      data: [2, 19, 3, 10, 2, 3, 7],
       backgroundColor: "rgba(14, 58, 102, 0.4)"
     }]
   };
@@ -64,7 +64,7 @@ AA.controller("mainCtrl", function($scope, $interval){
   };
 
   $scope.orange = {
-      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+      labels: ["4 BR Apt", "3 BR Apt", "2 BR Apt", "1 BR Apt", "Studio Apt"],
       datasets: [{
         label: "Population (millions)",
         backgroundColor: [
@@ -76,7 +76,7 @@ AA.controller("mainCtrl", function($scope, $interval){
           'rgba(72, 72, 72, 0.8)',
           'rgba(72, 72, 72, 0.8)'
         ],
-        data: [2478,5267,734,784,433, 923, 74]
+        data: [978,1267,734,784,433]
       }]
     };
 
@@ -104,18 +104,18 @@ AA.controller("mainCtrl", function($scope, $interval){
   $scope.chart6Type = 'radar';
 
 
-  $interval(() => {
-    $scope.$applyAsync(() => {
-      $scope.chart1Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
-      $scope.chart2Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
-      console.log($scope.chart1Type, $scope.chart2Type);
-      $scope.chart3Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
-      $scope.chart4Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
-      $scope.chart5Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
-      $scope.chart6Type = $scope.chart6Type === 'polarArea' ? 'radar' : 'polarArea';
-      // $scope.baseball.labels = ["Rojo", "Azul", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"];
-    });
-  }, 8000);
+  // $interval(() => {
+  //   $scope.$applyAsync(() => {
+  //     $scope.chart1Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
+  //     $scope.chart2Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
+  //     console.log($scope.chart1Type, $scope.chart2Type);
+  //     $scope.chart3Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
+  //     $scope.chart4Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
+  //     $scope.chart5Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
+  //     $scope.chart6Type = $scope.chart6Type === 'polarArea' ? 'radar' : 'polarArea';
+  //     // $scope.baseball.labels = ["Rojo", "Azul", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"];
+  //   });
+  // }, 8000);
 });
 /* ============================================================================= */
 /* ======================== End: Main Controller =============================== */

@@ -16,13 +16,13 @@
 </head>
 
 <body ng-controller="mainCtrl">
-  <!-- Header -->
+  <!-- Start: Header -->
   <section id="header-section">
     <header-directive></header-directive>
-
     <!-- Interactive map display -->
     <map-directive></map-directive>
   </section>
+  <!-- End: Header -->
   <main id="main-container">
   <!-- Start: Dashboard content -->
     <!-- Start: Search results data set  -->
@@ -38,14 +38,14 @@
       <div class="data-card dc-bg-weather">
         <p>Current Local Weather</p>
         <div class="data-chart-box">
-          <doughnut-directive chart-data="round" type="chart2Type"></doughnut-directive>
+          <doughnut-directive chart-data="lineData" type="chart1Type"></doughnut-directive>
         </div>
       </div>
       <!-- 3: Home values -->
       <div class="data-card dc-bg-property">
         <p>Median Home Values</p>
         <div class="data-chart-box">
-          <pie-directive chart-data="orange" type="chart3Type"></pie-directive>
+          <pie-directive chart-data="orange" type="chart4Type"></pie-directive>
         </div>
       </div>
       <!-- 4: Rent prices -->

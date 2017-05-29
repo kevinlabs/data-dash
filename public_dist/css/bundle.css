@@ -1,7 +1,32 @@
 /* ============================================================================= */
 /* ======================== Start: Mixins Styles =============================== */
 /* ============================================================================= */
-@import url("https://fonts.googleapis.com/css?family=Open+Sans|Oswald:400,600");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600|Oswald:200,400,600");
+/* ============================================================================= */
+/* ======================== End: Mixins Styles ================================= */
+/* ============================================================================= */
+#footer-section {
+  width: 100%;
+  height: auto;
+  background: #484848;
+  padding: 20px 0;
+  margin-top: 20px; }
+
+.footer-inner {
+  max-width: 80%;
+  margin: 0 auto;
+  font-family: "Oswald", sans-serif;
+  color: #FFF;
+  text-align: center; }
+  .footer-inner h5 {
+    font-size: 1rem;
+    letter-spacing: 1px;
+    margin: 1.85rem 0 1.68rem 0; }
+
+/* ============================================================================= */
+/* ======================== Start: Mixins Styles =============================== */
+/* ============================================================================= */
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600|Oswald:200,400,600");
 /* ============================================================================= */
 /* ======================== End: Mixins Styles ================================= */
 /* ============================================================================= */
@@ -23,7 +48,10 @@
   background: url("../img/data-dash-logo.svg") no-repeat center left; }
   .header-inner h1 {
     font-size: 2rem;
+    letter-spacing: 1px;
     margin: 1.85rem 0 1.68rem 0; }
+    .header-inner h1 .tagline {
+      font-weight: 200; }
 
 #map-container {
   width: 100%;
@@ -42,7 +70,7 @@
 /* ============================================================================= */
 /* ======================== Start: Mixins Styles =============================== */
 /* ============================================================================= */
-@import url("https://fonts.googleapis.com/css?family=Open+Sans|Oswald:400,600");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600|Oswald:200,400,600");
 /* ============================================================================= */
 /* ======================== End: Mixins Styles ================================= */
 /* ============================================================================= */
@@ -82,53 +110,54 @@
   .data-card p {
     text-align: left;
     position: absolute;
-    top: 20px;
-    left: 80px; }
+    top: 25px;
+    left: 80px;
+    font-weight: 600; }
 
 .dc-bg-time {
   background: #F7F7F7 url("../img/data-icon-time.svg") no-repeat;
   background-size: 50px;
-  background-position: 10px 10px; }
+  background-position: 14px 10px; }
 
 .dc-bg-weather {
   background: #F7F7F7 url("../img/data-icon-weather.svg") no-repeat;
   background-size: 50px;
-  background-position: 10px 10px; }
+  background-position: 14px 10px; }
 
 .dc-bg-property {
   background: #F7F7F7 url("../img/data-icon-property.svg") no-repeat;
   background-size: 50px;
-  background-position: 10px 10px; }
+  background-position: 14px 10px; }
 
 .dc-bg-gas-price {
   background: #F7F7F7 url("../img/data-icon-gas-price.svg") no-repeat;
   background-size: 50px;
-  background-position: 10px 10px; }
+  background-position: 14px 10px; }
 
 .dc-bg-gas-household-income {
   background: #F7F7F7 url("../img/data-icon-household-income.svg") no-repeat;
   background-size: 50px;
-  background-position: 10px 10px; }
+  background-position: 14px 10px; }
 
 .dc-bg-gas-education {
   background: #F7F7F7 url("../img/data-icon-education.svg") no-repeat;
   background-size: 50px;
-  background-position: 10px 10px; }
+  background-position: 14px 10px; }
 
 .dc-bg-gas-medical {
   background: #F7F7F7 url("../img/data-icon-medical.svg") no-repeat;
   background-size: 50px;
-  background-position: 10px 10px; }
+  background-position: 14px 10px; }
 
 .dc-bg-gas-crime {
   background: #F7F7F7 url("../img/data-icon-crime.svg") no-repeat;
   background-size: 50px;
-  background-position: 10px 10px; }
+  background-position: 14px 10px; }
 
 .dc-bg-gas-restaurants {
   background: #F7F7F7 url("../img/data-icon-restaurants.svg") no-repeat;
   background-size: 50px;
-  background-position: 10px 10px; }
+  background-position: 14px 10px; }
 
 .data-chart-box {
   width: 200px;
@@ -150,7 +179,7 @@
 /* ============================================================================= */
 /* ======================== Start: Mixins Styles =============================== */
 /* ============================================================================= */
-@import url("https://fonts.googleapis.com/css?family=Open+Sans|Oswald:400,600");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600|Oswald:200,400,600");
 /* ============================================================================= */
 /* ======================== End: Mixins Styles ================================= */
 /* ============================================================================= */
