@@ -12,10 +12,10 @@ var AA = angular.module("data-dash", []);
 /* ============================================================================= */
 /* ======================== Start: Main Controller ============================= */
 /* ============================================================================= */
+
 AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
 
   $scope.testing = "it works";
-  console.log("/'Sup");
 
   $scope.baseball = {
     labels: ["Pre", "Kinder", "Elemen", "Middle", "High", "Degree", "Masters", "PHD"],
