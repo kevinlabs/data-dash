@@ -1,24 +1,75 @@
-AA.controller("rentCtrl", function($scope, rentService){
+AA
+  .controller("rentCtrl", function ($scope, rentService) {
 
-$scope.onBoardDataStudio;
-$scope.onBoardDataOne;
-$scope.onBoardDataTwo;
-$scope.onBoardDataThree;
-$scope.onBoardDataFour;
+    $scope.onBoardDataStudio;
+    $scope.onBoardDataOne;
+    $scope.onBoardDataTwo;
+    $scope.onBoardDataThree;
+    $scope.onBoardDataFour;
 
 
-$scope.getInfo = () => {
-  rentService.getData().then( (response) => {
-    console.log(response);
-      $scope.onBoardDataStudio = response.STUDIOINDEX;
-      $scope.onBoardDataOne = response.ONE_BEDINDEX;
-      $scope.onBoardDataTwo = response.TWO_BEDINDEX;
-      $scope.onBoardDataThree = response.THREE_BEDINDEX;
-      $scope.onBoardDataFour = respone.FOUR_BEDINDEX;
-  })
-}
+    $scope.getInfo = () => {
+      rentService
+        .getData()
+        .then((response) => {
+          console.log(response);
+          $scope.onBoardDataStudio = response.studio_county;
+          $scope.onBoardDataOne = response.one_bed_county;
+          $scope.onBoardDataTwo = response.two_bed_county;
+          $scope.onBoardDataThree = response.three_bed_county;
+          $scope.onBoardDataFour = response.four_bed_county;
+          $scope.assignData();
+        })
+    };
 
-$scope.getInfo();
+    $scope.getInfo();
 
-//end of controller
-});
+
+    $scope.assignData = function () {
+      $scope.medianRentData = {
+        labels: [
+          'S', '1BR', '2BR', '3BR', '4BR'
+        ],
+        datasets: [
+          {
+            label: 'apartments',
+            data: [
+              $scope.onBoardDataStudio, $scope.onBoardDataOne, $scope.onBoardDataTwo, $scope.onBoardDataThree, $scope.onBoardDataFour
+              // 5, 10, -3, 7, -6
+            ],
+            backgroundColor: "rgba(153,255,51,0.4)"
+          }
+        ]
+      };
+         console.log($scope.medianRentData);
+    }
+
+ 
+
+    $scope.optionsObj = {
+      legend: {
+        display: false,
+        labels: {
+          display: false
+        }
+      },
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              // beginAtZero: true,
+              stepSize: 50
+            },
+            stacked: false
+          }
+        ],
+        xAxes: [
+          {
+            stacked: false
+          }
+        ]
+      }
+    };
+
+    //end of controller
+  });

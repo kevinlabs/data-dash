@@ -8,8 +8,9 @@ this.getData = () => {
     method: "GET",
     url: baseUrl
   }).then( (response) => {
-    console.log(response);
-    return response;
+    console.log(response.data.response.result.package.item);
+    return response.data.response.result.package.item
+
   })
 }
 

@@ -12,14 +12,15 @@ AA
 
         let ctxDir = elem[0].children[0].children[0];
 
+        let myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type, scope.options);
 
-        let myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type);
 
-        function getChartGivenData(chartElement, dataForChart, type) {
+        function getChartGivenData(chartElement, dataForChart, type, options) {
           return new Chart(chartElement, {
             type: type,
             data: dataForChart,
-            options: {
+            options:
+            {
               responsive: true,
               maintainAspectRatio: false,
               legend: {

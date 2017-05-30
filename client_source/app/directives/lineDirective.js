@@ -1,8 +1,8 @@
 // Start: This is the doughnut chart directive =================================
 AA
-  .directive('doughnutDirective', function () {
+  .directive('lineDirective', function () {
     return {
-      restrict: 'E', templateUrl: "./../views/doughnut.html",
+      restrict: 'E', templateUrl: "./../views/lineChart.html",
       // controller: 'dirCtrl',
       scope: {
         chartData: '=',
@@ -13,9 +13,9 @@ AA
 
         let ctxDir = elem[0].children[0].children[0];
 
-        let myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type);
+        let myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type, scope.options);
 
-        function getChartGivenData(chartElement, dataForChart, type) {
+        function getChartGivenData(chartElement, dataForChart, type, options) {
           return new Chart(chartElement, {
             type: type,
             data: dataForChart,
