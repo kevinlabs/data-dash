@@ -1,6 +1,7 @@
 /* ============================================================================= */
 /* ======================== Start: Main Controller ============================= */
 /* ============================================================================= */
+
 AA.controller("mainCtrl", function ($scope, $interval) {
 
   $scope.testing = "it works";
@@ -116,7 +117,7 @@ AA.controller("mainCtrl", function ($scope, $interval) {
   //     zoom: 8
   //   });
   // }
-  
+
   // //Initializing the map.
   // initMap();
 
