@@ -23,6 +23,7 @@ AA
               legend: {
                 display: false,
                 labels: {
+
                   display: false
                 }
               },
@@ -45,6 +46,7 @@ AA
           });
 
       }
+
     }
   });
 

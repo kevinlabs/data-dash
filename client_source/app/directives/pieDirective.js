@@ -12,6 +12,7 @@ AA
 
         let ctxDir = elem[0].children[0].children[0];
 
+
         let myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type);
 
         function getChartGivenData(chartElement, dataForChart, type) {
@@ -24,12 +25,15 @@ AA
               legend: {
                 display: false,
                 labels: {
+
                   display: false
                 }
               },
               title: {
+
                 display: false,
                 text: 'Predicted world population (millions) in 2050'
+
               }
               // scales: {   yAxes: [     {       ticks: {         beginAtZero: true       }
               // }   ] }
