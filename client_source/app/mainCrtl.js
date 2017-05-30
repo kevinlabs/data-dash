@@ -2,9 +2,10 @@
 /* ======================== Start: Main Controller ============================= */
 /* ============================================================================= */
 AA.controller("mainCtrl", function($scope, $interval){
-  
+
   $scope.testing = "it works";
-  
+  console.log("/'Sup");
+
   $scope.baseball = {
     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"],
     datasets: [{

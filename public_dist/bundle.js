@@ -15,6 +15,7 @@ var AA = angular.module("data-dash", []);
 AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
 
   $scope.testing = "it works";
+  console.log("/'Sup");
 
   $scope.baseball = {
     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"],
@@ -158,12 +159,20 @@ AA.controller("pollutionCtrl", ["$scope", "pollutionService", function ($scope, 
 
 AA.controller("rentCtrl", ["$scope", "rentService", function ($scope, rentService) {
 
-  $scope.data;
+  $scope.onBoardDataStudio;
+  $scope.onBoardDataOne;
+  $scope.onBoardDataTwo;
+  $scope.onBoardDataThree;
+  $scope.onBoardDataFour;
 
   $scope.getInfo = function () {
     rentService.getData().then(function (response) {
       console.log(response);
-      $scope.data = response;
+      $scope.onBoardDataStudio = response.STUDIOINDEX;
+      $scope.onBoardDataOne = response.ONE_BEDINDEX;
+      $scope.onBoardDataTwo = response.TWO_BEDINDEX;
+      $scope.onBoardDataThree = response.THREE_BEDINDEX;
+      $scope.onBoardDataFour = respone.FOUR_BEDINDEX;
     });
   };
 
@@ -384,15 +393,15 @@ AA.service("pollutionService", ["$http", function ($http) {
 
 AA.service("rentService", ["$http", function ($http) {
 
-  var baseUrl = "http://swapi.co/api/planets";
+  var baseUrl = "/api/onBoard";
 
   this.getData = function () {
     return $http({
       method: "GET",
       url: baseUrl
     }).then(function (response) {
-      console.log(response.data.results);
-      return response.data.results;
+      console.log(response);
+      return response;
     });
   };
 
