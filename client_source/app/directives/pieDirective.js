@@ -8,9 +8,10 @@ AA
         type: "="
       },
       link: function (scope, elem, attrs, ctrl) {
-      console.log('this is my element\'s second child:', elem[0].children[0].children[0]);
+        console.log('this is my element\'s second child:', elem[0].children[0].children[0]);
 
-      let ctxDir = elem[0].children[0].children[0];
+        let ctxDir = elem[0].children[0].children[0];
+
 
         let myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type);
 
@@ -19,25 +20,23 @@ AA
             type: type,
             data: dataForChart,
             options: {
+              responsive: true,
+              maintainAspectRatio: false,
               legend: {
-                display:false,
-                lables: {
+                display: false,
+                labels: {
+
                   display: false
                 }
               },
               title: {
-                display: true,
-                text: 'Values displayed by property type.'
+
+                display: false,
+                text: 'Predicted world population (millions) in 2050'
+
               }
-              // scales: {
-              //   yAxes: [
-              //     {
-              //       ticks: {
-              //         beginAtZero: true
-              //       }
-              //     }
-              //   ]
-              // }
+              // scales: {   yAxes: [     {       ticks: {         beginAtZero: true       }
+              // }   ] }
             }
           });
         }
