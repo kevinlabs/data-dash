@@ -144,15 +144,15 @@ AA.controller("crimeCtrl", ["$scope", "crimeService", function ($scope, crimeSer
   $scope.getInfo = function () {
     crimeService.getData().then(function (response) {
       console.log(response);
-      $scope.assault = response.crcmyasst;
-      $scope.burglary = response.crcmyburg;
-      $scope.larceny = response.crcmylarc;
-      $scope.murder = response.crcmymurd;
-      $scope.motorVehicleTheft = response.crcmymveh;
-      $scope.personalCrime = response.crcmyperc;
-      $scope.property = response.crcmyproc;
-      $scope.rape = response.crcmyrape;
-      $scope.robbery = response.crcmyrobb;
+      $scope.assault = response.crmcyasst;
+      $scope.burglary = response.crmcyburg;
+      $scope.larceny = response.crmcylarc;
+      $scope.murder = response.crmcymurd;
+      $scope.motorVehicleTheft = response.crmcymveh;
+      $scope.personalCrime = response.crmcyperc;
+      $scope.property = response.crmcyproc;
+      $scope.rape = response.crmcyrape;
+      $scope.robbery = response.crmcyrobb;
       $scope.assignData();
     });
   };
@@ -169,15 +169,16 @@ AA.controller("crimeCtrl", ["$scope", "crimeService", function ($scope, crimeSer
       }]
     };
     console.log($scope.crimeData);
+    console.log($scope.assault, $scope.burglary, $scope.larceny, $scope.murder, $scope.motorVehicleTheft, $scope.personalCrime, $scope.property, $scope.rape, $scope.robbery);
   };
 
   $scope.doughnutOptions = {
     responsive: true,
     maintainAspectRatio: false,
     legend: {
-      display: true,
+      display: false,
       labels: {
-        display: true
+        display: false
       }
     },
     title: {
@@ -187,7 +188,7 @@ AA.controller("crimeCtrl", ["$scope", "crimeService", function ($scope, crimeSer
     // scales: {   yAxes: [     {       ticks: {         beginAtZero: true       }
     // }   ] }
   };
-  //end of controller
+  // end of controller
 }]);
 "use strict";
 
@@ -263,7 +264,7 @@ AA.controller("rentCtrl", ["$scope", "rentService", function ($scope, rentServic
   $scope.getInfo();
 
   $scope.assignData = function () {
-    $scope.stackedBarData = {
+    $scope.medianRentData = {
       labels: ['S', '1BR', '2BR', '3BR', '4BR'],
       datasets: [{
         label: 'apartments',
@@ -273,7 +274,7 @@ AA.controller("rentCtrl", ["$scope", "rentService", function ($scope, rentServic
         backgroundColor: "rgba(153,255,51,0.4)"
       }]
     };
-    console.log($scope.stackedBarData);
+    console.log($scope.medianRentData);
   };
 
   $scope.optionsObj = {
@@ -316,10 +317,32 @@ AA.controller("restaurantCtrl", ["$scope", "restaurantService", function ($scope
 }]);
 'use strict';
 
-// Start: This is the doughnut chart directive =================================
-AA.directive('doughnutDirective', function () {
+// Start: This is the header directive =========================================
+AA.directive('footerDirective', function () {
+
   return {
-    restrict: 'E', templateUrl: "./../views/doughnut.html",
+    restrict: 'E',
+    templateUrl: './views/footer.html'
+  };
+});
+// End: This is the header directive ===========================================
+'use strict';
+
+// Start: This is the header directive =========================================
+AA.directive('headerDirective', function () {
+
+  return {
+    restrict: 'E',
+    templateUrl: './views/header.html'
+  };
+});
+// End: This is the header directive ===========================================
+'use strict';
+
+// Start: This is the doughnut chart directive =================================
+AA.directive('lineDirective', function () {
+  return {
+    restrict: 'E', templateUrl: "./../views/lineChart.html",
     // controller: 'dirCtrl',
     scope: {
       chartData: '=',
@@ -368,28 +391,6 @@ AA.directive('doughnutDirective', function () {
 'use strict';
 
 // Start: This is the header directive =========================================
-AA.directive('footerDirective', function () {
-
-  return {
-    restrict: 'E',
-    templateUrl: './views/footer.html'
-  };
-});
-// End: This is the header directive ===========================================
-'use strict';
-
-// Start: This is the header directive =========================================
-AA.directive('headerDirective', function () {
-
-  return {
-    restrict: 'E',
-    templateUrl: './views/header.html'
-  };
-});
-// End: This is the header directive ===========================================
-'use strict';
-
-// Start: This is the header directive =========================================
 AA.directive('mapDirective', function () {
 
   return {
@@ -413,9 +414,9 @@ AA.directive('pieDirective', function () {
 
       var ctxDir = elem[0].children[0].children[0];
 
-      var myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type);
+      var myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type, scope.options);
 
-      function getChartGivenData(chartElement, dataForChart, type) {
+      function getChartGivenData(chartElement, dataForChart, type, options) {
         return new Chart(chartElement, {
           type: type,
           data: dataForChart,
@@ -455,7 +456,7 @@ AA.service("crimeService", ["$http", function ($http) {
       method: "GET",
       url: baseUrl
     }).then(function (response) {
-      console.log(response.data.response.result.package.item);
+      console.log(response);
       return response.data.response.result.package.item;
     });
   };

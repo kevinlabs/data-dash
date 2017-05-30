@@ -1,8 +1,8 @@
 // Start: This is the doughnut chart directive =================================
 AA
-  .directive('doughnutDirective', function () {
+  .directive('lineDirective', function () {
     return {
-      restrict: 'E', templateUrl: "./../views/doughnut.html",
+      restrict: 'E', templateUrl: "./../views/lineChart.html",
       // controller: 'dirCtrl',
       scope: {
         chartData: '=',

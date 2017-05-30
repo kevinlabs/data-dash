@@ -16,15 +16,15 @@ AA
         .getData()
         .then((response) => {
           console.log(response);
-          $scope.assault = response.crcmyasst;
-          $scope.burglary = response.crcmyburg;
-          $scope.larceny = response.crcmylarc;
-          $scope.murder = response.crcmymurd;
-          $scope.motorVehicleTheft = response.crcmymveh;
-          $scope.personalCrime = response.crcmyperc;
-          $scope.property = response.crcmyproc;
-          $scope.rape = response.crcmyrape;
-          $scope.robbery = response.crcmyrobb;
+          $scope.assault = response.crmcyasst;
+          $scope.burglary = response.crmcyburg;
+          $scope.larceny = response.crmcylarc;
+          $scope.murder = response.crmcymurd;
+          $scope.motorVehicleTheft = response.crmcymveh;
+          $scope.personalCrime = response.crmcyperc;
+          $scope.property = response.crmcyproc;
+          $scope.rape = response.crmcyrape;
+          $scope.robbery = response.crmcyrobb;
           $scope.assignData();
 
         })
@@ -51,15 +51,16 @@ AA
     }]
   };
          console.log($scope.crimeData);
-    }
+         console.log($scope.assault, $scope.burglary, $scope.larceny, $scope.murder, $scope.motorVehicleTheft, $scope.personalCrime, $scope.property, $scope.rape, $scope.robbery);
+    };
 
     $scope.doughnutOptions = {
               responsive: true,
               maintainAspectRatio: false,
               legend: {
-                display: true,
+                display: false,
                 labels: {
-                  display: true
+                  display: false
                 }
               },
               title: {
@@ -68,6 +69,6 @@ AA
               }
               // scales: {   yAxes: [     {       ticks: {         beginAtZero: true       }
               // }   ] }
-            }
-    //end of controller
+            };
+    // end of controller
   });

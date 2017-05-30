@@ -24,7 +24,7 @@ AA
     $scope.getInfo();
 
     $scope.assignData = function () {
-      $scope.stackedBarData = {
+      $scope.medianRentData = {
         labels: [
           'S', '1BR', '2BR', '3BR', '4BR'
         ],
@@ -39,7 +39,7 @@ AA
           }
         ]
       };
-         console.log($scope.stackedBarData);
+         console.log($scope.medianRentData);
     }
 
  
