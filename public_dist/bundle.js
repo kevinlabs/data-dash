@@ -327,8 +327,7 @@ AA.controller("restaurantCtrl", ["$scope", "restaurantService", function ($scope
 // Start: This is the doughnut chart directive =================================
 AA.directive('doughnutDirective', function () {
   return {
-    restrict: 'E',
-    templateUrl: "./../views/doughnut.html",
+    restrict: 'E', templateUrl: "./../views/doughnut.html",
     // controller: 'dirCtrl',
     scope: {
       chartData: '=',
@@ -348,7 +347,8 @@ AA.directive('doughnutDirective', function () {
           options: {
             legend: {
               display: false,
-              lables: {
+              labels: {
+
                 display: false
               }
             },
@@ -426,25 +426,22 @@ AA.directive('pieDirective', function () {
           type: type,
           data: dataForChart,
           options: {
+            responsive: true,
+            maintainAspectRatio: false,
             legend: {
               display: false,
-              lables: {
+              labels: {
+
                 display: false
               }
             },
             title: {
-              display: true,
-              text: 'Values displayed by property type.'
+              display: false,
+              text: 'Predicted world population (millions) in 2050'
+
             }
-            // scales: {
-            //   yAxes: [
-            //     {
-            //       ticks: {
-            //         beginAtZero: true
-            //       }
-            //     }
-            //   ]
-            // }
+            // scales: {   yAxes: [     {       ticks: {         beginAtZero: true       }
+            // }   ] }
           }
         });
       }
