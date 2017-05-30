@@ -8,9 +8,9 @@ AA
         type: "="
       },
       link: function (scope, elem, attrs, ctrl) {
-        console.log('this is my element\'s second child:', elem[0].children[1].children[0]);
+      console.log('this is my element\'s second child:', elem[0].children[0].children[0]);
 
-        let ctxDir = elem[0].children[1].children[0];
+      let ctxDir = elem[0].children[0].children[0];
 
         let myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type);
 
@@ -19,9 +19,15 @@ AA
             type: type,
             data: dataForChart,
             options: {
+              legend: {
+                display:false,
+                lables: {
+                  display: false
+                }
+              },
               title: {
                 display: true,
-                text: 'Predicted world population (millions) in 2050'
+                text: 'Values displayed by property type.'
               }
               // scales: {
               //   yAxes: [
