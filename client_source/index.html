@@ -30,14 +30,14 @@
       <!-- 1: Local time -->
       <div class="data-card dc-bg-time">
         <div class="data-chart-box" ng-controller="rentCtrl">
-          <doughnut-directive chart-data="stackedBarData" type="chart2Type" options="optionsObj"></doughnut-directive>
+          <doughnut-directive chart-data="stackedBarData" type="chart1Type" options="optionsObj"></doughnut-directive>
         </div>
         <p>Current Local Time</p>
       </div>
       <!-- 2: Local weather -->
       <div class="data-card dc-bg-weather">
-        <div class="data-chart-box">
-          <!--<doughnut-directive chart-data="round" type="chart2Type"></doughnut-directive>-->
+        <div class="data-chart-box" ng-controller="crimeCtrl">
+          <doughnut-directive chart-data="crimeData" type="chart4Type" options="doughnutOptions"></doughnut-directive>
         </div>
         <p>Current Local Weather</p>
       </div>

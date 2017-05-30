@@ -135,6 +135,8 @@ AA.controller("mainCtrl", function($scope, $interval){
 
   $interval(() => {
     $scope.$applyAsync(() => {
+      //  $scope.chart1Type = $scope.chart1Type;
+      // $scope.chart2Type = $scope.chart2Type;
       $scope.chart1Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
       $scope.chart2Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
       console.log($scope.chart1Type, $scope.chart2Type);

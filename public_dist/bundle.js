@@ -111,6 +111,8 @@ AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
 
   $interval(function () {
     $scope.$applyAsync(function () {
+      //  $scope.chart1Type = $scope.chart1Type;
+      // $scope.chart2Type = $scope.chart2Type;
       $scope.chart1Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
       $scope.chart2Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
       console.log($scope.chart1Type, $scope.chart2Type);
@@ -127,112 +129,190 @@ AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
 /* ============================================================================= */
 "use strict";
 
-AA.service("crimeService", ["$http", function ($http) {
+AA.controller("crimeCtrl", ["$scope", "crimeService", function ($scope, crimeService) {
 
-  var baseUrl = "http://swapi.co/api/species";
+  $scope.assault;
+  $scope.burglary;
+  $scope.larceny;
+  $scope.murder;
+  $scope.motorVehicleTheft;
+  $scope.personalCrime;
+  $scope.property;
+  $scope.rape;
+  $scope.robbery;
 
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
-      console.log(response.data.results);
-      return response.data.results;
-    });
-  };
-
-  //end of service
-}]);
-"use strict";
-
-AA.service("homeValueService", ["$http", function ($http) {
-
-  var baseUrl = "http://swapi.co/api/people";
-  //hitting Starwars Api for testing. Can delete when back end point is ready.
-
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
+  $scope.getInfo = function () {
+    crimeService.getData().then(function (response) {
       console.log(response);
-      return response.data.results;
+      $scope.assault = response.crcmyasst;
+      $scope.burglary = response.crcmyburg;
+      $scope.larceny = response.crcmylarc;
+      $scope.murder = response.crcmymurd;
+      $scope.motorVehicleTheft = response.crcmymveh;
+      $scope.personalCrime = response.crcmyperc;
+      $scope.property = response.crcmyproc;
+      $scope.rape = response.crcmyrape;
+      $scope.robbery = response.crcmyrobb;
+      $scope.assignData();
     });
   };
 
-  //end of service
+  $scope.getInfo();
+
+  $scope.assignData = function () {
+    $scope.crimeData = {
+      labels: ["assault", "burglary", "larceny", "murder", "auto theft", "personal", "property", "rape", "robbery"],
+      datasets: [{
+        backgroundColor: ["#2ecc71", "#3498db", "#95a5a6", "#9b59b6", "#f1c40f", "#e74c3c", "#34495e"],
+        data: [$scope.assault, $scope.burglary, $scope.larceny, $scope.murder, $scope.motorVehicleTheft, $scope.personalCrime, $scope.property, $scope.rape, $scope.robbery]
+        // ["10", "90", "23", "42", "67", "49", "14", "39", "70"]
+      }]
+    };
+    console.log($scope.crimeData);
+  };
+
+  $scope.doughnutOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    legend: {
+      display: true,
+      labels: {
+        display: true
+      }
+    },
+    title: {
+      display: true,
+      text: 'Crime Rates'
+    }
+    // scales: {   yAxes: [     {       ticks: {         beginAtZero: true       }
+    // }   ] }
+  };
+  //end of controller
 }]);
 "use strict";
 
-AA.service("hospitalService", ["$http", function ($http) {
+AA.controller("homeValueCtrl", ["$scope", "homeValueService", function ($scope, homeValueService) {
 
-  var baseUrl = "http://swapi.co/api/vehicles";
+  $scope.data;
 
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
-      console.log(response.data.results);
-      return response.data.results;
+  $scope.getInfo = function () {
+    homeValueService.getData().then(function (response) {
+      console.log(response);
+      $scope.data = response;
     });
   };
 
-  //end of service
+  $scope.getInfo();
+
+  //end of controller
 }]);
 "use strict";
 
-AA.service("pollutionService", ["$http", function ($http) {
+AA.controller("hospitalCtrl", ["$scope", "hospitalService", function ($scope, hospitalService) {
 
-  var baseUrl = "http://swapi.co/api/films";
+  $scope.data;
 
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
-      console.log(response.data.results);
-      return response.data.results;
+  $scope.getInfo = function () {
+    hospitalService.getData().then(function (response) {
+      console.log(response);
+      $scope.data = response;
     });
   };
 
-  //end of service
+  $scope.getInfo();
 }]);
 "use strict";
 
-AA.service("rentService", ["$http", function ($http) {
+AA.controller("pollutionCtrl", ["$scope", "pollutionService", function ($scope, pollutionService) {
 
-  var baseUrl = "/api/onBoard";
+  $scope.data;
 
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
-      console.log(response.data.response.result.package.item);
-      return response.data.response.result.package.item;
+  $scope.getInfo = function () {
+    pollutionService.getData().then(function (response) {
+      console.log(response);
+      $scope.data = response;
     });
   };
 
-  // end of service
+  $scope.getInfo();
+
+  //end of controller
+}]);
+'use strict';
+
+AA.controller("rentCtrl", ["$scope", "rentService", function ($scope, rentService) {
+
+  $scope.onBoardDataStudio;
+  $scope.onBoardDataOne;
+  $scope.onBoardDataTwo;
+  $scope.onBoardDataThree;
+  $scope.onBoardDataFour;
+
+  $scope.getInfo = function () {
+    rentService.getData().then(function (response) {
+      console.log(response);
+      $scope.onBoardDataStudio = response.studio_county;
+      $scope.onBoardDataOne = response.one_bed_county;
+      $scope.onBoardDataTwo = response.two_bed_county;
+      $scope.onBoardDataThree = response.three_bed_county;
+      $scope.onBoardDataFour = response.four_bed_county;
+      $scope.assignData();
+    });
+  };
+
+  $scope.getInfo();
+
+  $scope.assignData = function () {
+    $scope.stackedBarData = {
+      labels: ['S', '1BR', '2BR', '3BR', '4BR'],
+      datasets: [{
+        label: 'apartments',
+        data: [$scope.onBoardDataStudio, $scope.onBoardDataOne, $scope.onBoardDataTwo, $scope.onBoardDataThree, $scope.onBoardDataFour
+        // 5, 10, -3, 7, -6
+        ],
+        backgroundColor: "rgba(153,255,51,0.4)"
+      }]
+    };
+    console.log($scope.stackedBarData);
+  };
+
+  $scope.optionsObj = {
+    legend: {
+      display: false,
+      labels: {
+        display: false
+      }
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          // beginAtZero: true,
+          stepSize: 50
+        },
+        stacked: false
+      }],
+      xAxes: [{
+        stacked: false
+      }]
+    }
+  };
+
+  //end of controller
 }]);
 "use strict";
 
-AA.service("restaurantService", ["$http", function ($http) {
+AA.controller("restaurantCtrl", ["$scope", "restaurantService", function ($scope, restaurantService) {
 
-  var baseUrl = "http://swapi.co/api/starships";
+  $scope.data;
 
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
-      console.log(response.data.results);
-      return response.data.results;
+  $scope.getInfo = function () {
+    restaurantService.getData().then(function (response) {
+      console.log(response);
+      $scope.data = response;
     });
   };
 
-  //end of service
+  $scope.getInfo();
 }]);
 'use strict';
 
@@ -366,144 +446,111 @@ AA.directive('pieDirective', function () {
 });
 "use strict";
 
-AA.controller("crimeCtrl", ["$scope", "crimeService", function ($scope, crimeService) {
+AA.service("crimeService", ["$http", function ($http) {
 
-  $scope.data;
+  var baseUrl = "/api/onBoard";
 
-  $scope.getInfo = function () {
-    crimeService.getData().then(function (response) {
-      console.log(response);
-      $scope.data = response;
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      console.log(response.data.response.result.package.item);
+      return response.data.response.result.package.item;
     });
   };
 
-  $scope.getInfo();
-
-  //end of controller
+  //end of service
 }]);
 "use strict";
 
-AA.controller("homeValueCtrl", ["$scope", "homeValueService", function ($scope, homeValueService) {
+AA.service("homeValueService", ["$http", function ($http) {
 
-  $scope.data;
+  var baseUrl = "http://swapi.co/api/people";
+  //hitting Starwars Api for testing. Can delete when back end point is ready.
 
-  $scope.getInfo = function () {
-    homeValueService.getData().then(function (response) {
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
       console.log(response);
-      $scope.data = response;
+      return response.data.results;
     });
   };
 
-  $scope.getInfo();
-
-  //end of controller
+  //end of service
 }]);
 "use strict";
 
-AA.controller("hospitalCtrl", ["$scope", "hospitalService", function ($scope, hospitalService) {
+AA.service("hospitalService", ["$http", function ($http) {
 
-  $scope.data;
+  var baseUrl = "http://swapi.co/api/vehicles";
 
-  $scope.getInfo = function () {
-    hospitalService.getData().then(function (response) {
-      console.log(response);
-      $scope.data = response;
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      console.log(response.data.results);
+      return response.data.results;
     });
   };
 
-  $scope.getInfo();
+  //end of service
 }]);
 "use strict";
 
-AA.controller("pollutionCtrl", ["$scope", "pollutionService", function ($scope, pollutionService) {
+AA.service("pollutionService", ["$http", function ($http) {
 
-  $scope.data;
+  var baseUrl = "http://swapi.co/api/films";
 
-  $scope.getInfo = function () {
-    pollutionService.getData().then(function (response) {
-      console.log(response);
-      $scope.data = response;
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      console.log(response.data.results);
+      return response.data.results;
     });
   };
 
-  $scope.getInfo();
-
-  //end of controller
-}]);
-'use strict';
-
-AA.controller("rentCtrl", ["$scope", "rentService", function ($scope, rentService) {
-
-  $scope.onBoardDataStudio;
-  $scope.onBoardDataOne;
-  $scope.onBoardDataTwo;
-  $scope.onBoardDataThree;
-  $scope.onBoardDataFour;
-
-  $scope.getInfo = function () {
-    rentService.getData().then(function (response) {
-      console.log(response);
-      $scope.onBoardDataStudio = response.studio_county;
-      $scope.onBoardDataOne = response.one_bed_county;
-      $scope.onBoardDataTwo = response.two_bed_county;
-      $scope.onBoardDataThree = response.three_bed_county;
-      $scope.onBoardDataFour = response.four_bed_county;
-      $scope.assignData();
-    });
-  };
-
-  $scope.getInfo();
-
-  $scope.assignData = function () {
-    $scope.stackedBarData = {
-      labels: ['S', '1BR', '2BR', '3BR', '4BR'],
-      datasets: [{
-        label: 'apartments',
-        data: [$scope.onBoardDataStudio, $scope.onBoardDataOne, $scope.onBoardDataTwo, $scope.onBoardDataThree, $scope.onBoardDataFour
-        // 5, 10, -3, 7, -6
-        ],
-        backgroundColor: "rgba(153,255,51,0.4)"
-      }]
-    };
-    console.log($scope.stackedBarData);
-  };
-
-  $scope.optionsObj = {
-    legend: {
-      display: false,
-      labels: {
-        display: false
-      }
-    },
-    scales: {
-      yAxes: [{
-        ticks: {
-          // beginAtZero: true,
-          stepSize: 50
-        },
-        stacked: false
-      }],
-      xAxes: [{
-        stacked: false
-      }]
-    }
-  };
-
-  //end of controller
+  //end of service
 }]);
 "use strict";
 
-AA.controller("restaurantCtrl", ["$scope", "restaurantService", function ($scope, restaurantService) {
+AA.service("rentService", ["$http", function ($http) {
 
-  $scope.data;
+  var baseUrl = "/api/onBoard";
 
-  $scope.getInfo = function () {
-    restaurantService.getData().then(function (response) {
-      console.log(response);
-      $scope.data = response;
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      console.log(response.data.response.result.package.item);
+      return response.data.response.result.package.item;
     });
   };
 
-  $scope.getInfo();
+  // end of service
+}]);
+"use strict";
+
+AA.service("restaurantService", ["$http", function ($http) {
+
+  var baseUrl = "http://swapi.co/api/starships";
+
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      console.log(response.data.results);
+      return response.data.results;
+    });
+  };
+
+  //end of service
 }]);
 //# sourceMappingURL=bundle.js.map
