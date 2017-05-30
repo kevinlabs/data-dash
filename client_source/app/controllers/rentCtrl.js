@@ -7,6 +7,7 @@ AA
     $scope.onBoardDataThree;
     $scope.onBoardDataFour;
 
+
     $scope.getInfo = () => {
       rentService
         .getData()
@@ -19,9 +20,10 @@ AA
           $scope.onBoardDataFour = response.four_bed_county;
           $scope.assignData();
         })
-    }
+    };
 
     $scope.getInfo();
+
 
     $scope.assignData = function () {
       $scope.medianRentData = {

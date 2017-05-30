@@ -19,25 +19,24 @@ AA
           return new Chart(chartElement, {
             type: type,
             data: dataForChart,
-            options: 
-            options
-            // {
-            //   legend: {
-            //     display: false,
-            //     labels: {
-            //       display: false
-            //     }
-            //   },
-            //   scales: {
-            //     yAxes: [
-            //       {
-            //         ticks: {
-            //           beginAtZero: true
-            //         }
-            //       }
-            //     ]
-            //   }
-            // }
+            options: {
+              legend: {
+                display: false,
+                labels: {
+
+                  display: false
+                }
+              },
+              scales: {
+                yAxes: [
+                  {
+                    ticks: {
+                      beginAtZero: true
+                    }
+                  }
+                ]
+              }
+            }
           });
         }
 
@@ -47,6 +46,7 @@ AA
           });
 
       }
+
     }
   });
 

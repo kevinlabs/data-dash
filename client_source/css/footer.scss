@@ -1,0 +1,26 @@
+@import "mixins.scss";
+
+#footer-section {
+  width: 100%;
+  height: auto;
+  // background: #093056;
+  background: #484848;
+  padding: 20px 0;
+  margin-top: 20px;
+}
+
+.footer-inner {
+  max-width: 80%;
+  margin: 0 auto;
+  font-family: $headlineText;
+  color: #FFF;
+  text-align: center;
+
+  // background: url('../img/data-dash-logo.svg')no-repeat center left;
+
+  h5 {
+    font-size: 1rem;
+    letter-spacing: 1px;
+    margin: 1.85rem 0 1.68rem 0;
+  }
+}
