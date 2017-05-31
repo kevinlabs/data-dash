@@ -1,17 +1,24 @@
 AA.controller("homeValueCtrl", function($scope, homeValueService){
 
-$scope.data;
+  $scope.avgsaleprice;
 
-$scope.getInfo = () => {
-  homeValueService.getData().then( (response) => {
-   console.log(response)
-    $scope.data = response;
- })
-}
+  $scope.data;
 
-$scope.getInfo();
+  $scope.getInfo = () => {
+    homeValueService
+      .getData()
+      .then((response) => {
+        console.log(response);
+        $scope.avgsaleprice = response.avgsaleprice;
+        $scope.assignData();
+      })
+  }
 
+  $scope.getInfo();
 
+  $scope.assignData = function() {
+    $scope.propertySalePrice = $scope.avgsaleprice;
+  }
 
 //end of controller
 });

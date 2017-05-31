@@ -94,46 +94,6 @@ AA.controller("mainCtrl", function($scope, $interval){
     }]
   };
 
-  //  $scope.stackedBarData = {
-  //     labels: [
-  //       'S', '1BR', '2BR', '3BR', '4BR'
-  //     ],
-  //     datasets: [
-  //       {
-  //         label: 'apartments',
-  //         data: [
-  //           // $scope.onBoardDataStudio, $scope.onBoardDataOne, $scope.onBoardDataTwo, $scope.onBoardDataThree, $scope.onBoardDataFour
-  //          5, 10, -3, 7, -6
-  //         ],
-  //         backgroundColor: "rgba(153,255,51,0.4)"
-  //       }
-  //     ]
-  //   };
-
-  //   $scope.optionsObj = {
-  //     legend: {
-  //       display: false,
-  //       labels: {
-  //         display: false
-  //       }
-  //     },
-  //     scales: {
-  //       yAxes: [
-  //         {
-  //           ticks: {
-  //             // beginAtZero: true,
-  //             stepSize: 50
-  //           },
-  //           stacked: false
-  //         }
-  //       ],
-  //       xAxes: [{
-  //         stacked: false
-  //       }]
-  //     }
-  //   };
-
-
   $scope.chart1Type = 'line';
   $scope.chart2Type = 'bar';
   $scope.chart3Type = 'pie';
@@ -141,22 +101,21 @@ AA.controller("mainCtrl", function($scope, $interval){
   $scope.chart5Type = 'polarArea';
   $scope.chart6Type = 'radar';
 
-
-
+  // START: THIS NEEDS RIPPING OUT !! -- !! ------------------------------------
   $interval(() => {
     $scope.$applyAsync(() => {
       //  $scope.chart1Type = $scope.chart1Type;
       // $scope.chart2Type = $scope.chart2Type;
-      $scope.chart1Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
-      $scope.chart2Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
+      $scope.chart1Type = $scope.chart1Type === 'bar' ? 'bar' : 'bar';
+      $scope.chart2Type = $scope.chart1Type === 'bar' ? 'bar' : 'bar';
       console.log($scope.chart1Type, $scope.chart2Type);
       $scope.chart3Type = $scope.chart3Type === 'doughnut' ? 'doughnut' : 'doughnut';
       $scope.chart4Type = $scope.chart3Type === 'doughnut' ? 'doughnut' : 'doughnut';
       $scope.chart5Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
       $scope.chart6Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
-      // $scope.baseball.labels = ["Rojo", "Azul", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"];
     });
   }, 10000);
+  // END: THIS NEEDS RIPPING OUT !! -- !! --------------------------------------
 
   //Google Scripts for Google Map. =====================================
   // var map;
@@ -175,7 +134,6 @@ AA.controller("mainCtrl", function($scope, $interval){
   // initMap();
 
   //Google Scripts for Google Map. =====================================
-
 
   // Google Scripts for Auto Complete.=====================================
   //variables
@@ -233,7 +191,6 @@ AA.controller("mainCtrl", function($scope, $interval){
     $scope.tempPlace = place;
     console.log('Testing the live change object: ', $scope.tempPlace.address_components[0].long_name);
 
-
     // Get each component of the address from the place details
     // and fill the corresponding field on the form.
     for (var i = 0; i < place.address_components.length; i++) {
@@ -288,12 +245,9 @@ AA.controller("mainCtrl", function($scope, $interval){
     console.info('Showing Zipcode info: ', $scope.zipcode);
   };
 
-
-
   //Initiating Pre Render
   geolocate();
   initAutocomplete();
-
 
   // // Google Scripts=====================================
 
