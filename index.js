@@ -133,7 +133,9 @@ app.get('/api/restaurants', restaurants.getRestaurants);
 
 app.get('/api/pollution', pollution.getPollution);
 
-//app.post('/api/onBoard', onBoard.getOnBoard);
+// app.get('/api/onBoard', onBoard.getOnBoard);
+
+app.post('/api/onBoard', onBoard.getOnBoard);
 
 app.get('/api/weather', weather.getWeather);
 

@@ -1,12 +1,12 @@
 AA
   .controller("rentCtrl", function ($scope, rentService, zipConversionService) {
     $scope.data = zipConversionService.findData();
+
     $scope.onBoardDataStudio;
     $scope.onBoardDataOne;
     $scope.onBoardDataTwo;
     $scope.onBoardDataThree;
     $scope.onBoardDataFour;
-
 
     // $scope.getInfo = () => {
     //   rentService
@@ -24,28 +24,43 @@ AA
     //
     // $scope.getInfo();
 
-
     $scope.assignData = function () {
       $scope.medianRentData = {
         labels: [
-          'S', '1BR', '2BR', '3BR', '4BR'
+          'Stu', '1BR', '2BR', '3BR', '4BR'
         ],
         datasets: [
           {
-            label: 'apartments',
+            label: 'Rent P/M $',
             data: [
               $scope.onBoardDataStudio, $scope.onBoardDataOne, $scope.onBoardDataTwo, $scope.onBoardDataThree, $scope.onBoardDataFour
-              // 5, 10, -3, 7, -6
             ],
-            backgroundColor: "rgba(153,255,51,0.4)"
+            backgroundColor: [
+              'rgba(33, 125, 216, 0.5)',
+              'rgba(165, 171, 175, 0.5)',
+              'rgba(4, 82, 160, 0.5)',
+              'rgba(14, 58, 102, 0.5)',
+              'rgba(128, 172, 216, 0.5)',
+              'rgba(72, 72, 72, 0.5)',
+              'rgba(72, 72, 72, 0.5)',
+              'rgba(72, 72, 72, 0.5)'
+            ],
+            borderColor: [
+              'rgba(33, 125, 216, 1)',
+              'rgba(165, 171, 175, 1)',
+              'rgba(4, 82, 160, 1)',
+              'rgba(14, 58, 102, 1)',
+              'rgba(128, 172, 216, 1)',
+              'rgba(72, 72, 72, 1)',
+              'rgba(72, 72, 72, 1)',
+              'rgba(72, 72, 72, 1)'
+            ],
+            borderWidth: 1
           }
         ]
       };
-         console.log($scope.medianRentData);
+      //  console.log($scope.medianRentData);
     }
-
-
-
     $scope.optionsObj = {
       legend: {
         display: false,
@@ -57,7 +72,6 @@ AA
         yAxes: [
           {
             ticks: {
-              // beginAtZero: true,
               stepSize: 50
             },
             stacked: false
@@ -70,6 +84,5 @@ AA
         ]
       }
     };
-
     //end of controller
   });

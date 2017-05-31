@@ -1,95 +1,57 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="data-dash">
-
-<head>
-  <meta charset="UTF-8">
-  <!-- Viewport declaration to control rendering for mobile devices and retina screens -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DATA DASH | Destination Due Diligence Made Easy</title>
-  <!-- Styles CSS is CSS concatinatd  -->
-  <link href="./css/styles.css" rel="stylesheet" />
-  <!-- Bundle CSS is SCSS concatinatd  -->
-  <link href="./css/bundle.css" rel="stylesheet" />
-  <!-- Materialize CSS - used to style modals -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald:400,600" rel="stylesheet" />
-
-</head>
-
-<body ng-controller="mainCtrl">
-  <!-- Start: Header -->
-  <section id="header-section">
-    <header-directive></header-directive>
-    <!-- Interactive map display -->
-    <div id="map"></div>
-    <!--<map-directive></map-directive>-->
-  </section>
-  <!-- End: Header -->
-  <main id="main-container">
-
+  <head>
+    <meta charset="UTF-8">
+    <!-- Viewport declaration to control rendering for mobile devices and retina screens -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DATA DASH | Destination Due Diligence Made Easy</title>
+    <!-- Styles CSS is CSS concatinatd  -->
+    <link href="./css/styles.css" rel="stylesheet" />
+    <!-- Bundle CSS is SCSS concatinatd  -->
+    <link href="./css/bundle.css" rel="stylesheet" />
+    <!-- Materialize CSS - used to style modals -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald:400,600" rel="stylesheet" />
+  </head>
+  <body ng-controller="mainCtrl">
+    <!-- Start: Header -->
+    <section id="header-section">
+      <header-directive></header-directive>
+      <!-- Interactive map display -->
+      <div id="map"></div>
+      <!--<map-directive></map-directive>-->
+    </section>
+    <!-- End: Header -->
+    <main id="main-container">
     <!--google Map Testing Input Field-->
-    <div id="googleMapField">
-      <div id="locationField">
-        <input id="autocomplete" placeholder="Enter your address" type="text">
+      <div id="googleMapField">
+        <div id="locationField">
+          <input id="autocomplete" placeholder="Enter your address" type="text" onchange="clearData()">
+        </div>
       </div>
-
-      <table id="address">
-        <tr>
-          <td class="label">Street address</td>
-          <td class="slimField"><input class="field" id="street_number" disabled="true"></input>
-          </td>
-          <td class="wideField" colspan="2"><input class="field" id="route" disabled="true"></input>
-          </td>
-        </tr>
-        <tr>
-          <td class="label">City</td>
-          <!-- Note: Selection of address components in this example is typical.
-             You may need to adjust it for the locations relevant to your app. See
-             https://developers.google.com/maps/documentation/javascript/examples/places-autocomplete-addressform
-        -->
-          <td class="wideField" colspan="3"><input class="field" id="locality" disabled="true"></input>
-          </td>
-        </tr>
-        <tr>
-          <td class="label">State</td>
-          <td class="slimField"><input class="field" id="administrative_area_level_1" disabled="true"></input>
-          </td>
-          <td class="label">Zip code</td>
-          <td class="wideField"><input class="field" id="postal_code" disabled="true"></input>
-          </td>
-        </tr>
-        <tr>
-          <td class="label">Country</td>
-          <td class="wideField" colspan="3"><input class="field" id="country" disabled="true"></input>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <!--google Map Testing Input Field-->
-
-    <!-- Start: Dashboard content -->
-    <!-- Start: Search results data set  -->
-    <section class="data-set-cards">
+      <!--google Map Testing Input Field-->
+      <!-- Start: Dashboard content -->
+      <!-- Start: Search results data set  -->
+      <section class="data-set-cards">
       <!-- 1: Local time -->
       <div class="data-card dc-bg-time">
+        <p>Current Local Time</p>
         <div class="data-chart-box">
-          <!--<line-directive></line-directive>-->
-          <p>Current Local Time</p>
-
+         <!-- CHART HERE -->
         </div>
       </div>
       <!-- 2: Local weather -->
       <div class="data-card dc-bg-weather">
+        <p>Current Local Weather</p>
         <div class="data-chart-box">
-          <!--<pie-directive></pie-directive>-->
-          <p>Current Local Weather</p>
+         <!-- CHART HERE -->
         </div>
       </div>
       <!-- 3: Home values -->
       <div class="data-card dc-bg-property">
         <p>Median Home Values</p>
-        <div class="data-chart-box">
-          <pie-directive chart-data="orange" type="chart4Type"></pie-directive>
+        <div class="data-chart-box" ng-controller="homeValueCtrl">
+          <h2>{{propertySalePrice}}</h2>
         </div>
       </div>
       <!-- 4: Rent prices -->
@@ -103,55 +65,53 @@
       <div class="data-card dc-bg-gas-restaurants">
         <p>Local Restaurants</p>
         <div class="data-chart-box">
-          <!--<line-directive chart-data="baseball" type="chart1Type"></line-directive>-->
+          <!-- CHART HERE -->
         </div>
       </div>
       <!-- 6: School rankings  -->
       <div class="data-card dc-bg-gas-education">
         <p>Educational Ranking</p>
         <div class="data-chart-box">
-          <!--<line-directive chart-data="baseball" type="chart2Type"></line-directive>-->
+          <!-- CHART HERE -->
         </div>
       </div>
       <!-- 6: Medical centers nearby -->
       <div class="data-card dc-bg-gas-medical">
         <p>Medical Centers</p>
         <div class="data-chart-box">
-          <!--<line-directive chart-data="polar" type="chart5Type"></line-directive>-->
+          <!-- CHAR HERE -->
         </div>
       </div>
       <!-- 7: Crime stats -->
       <div class="data-card dc-bg-gas-crime">
         <p>Crime Statististics</p>
         <div class="data-chart-box"  ng-controller="crimeCtrl">
-          <pie-directive chart-data="crimeData" type="chart4Type" options="doughnutOptions"></pie-directive>
+          <pie-directive chart-data="crimeData" type="chart4Type" options="crimeOptions"></pie-directive>
+        </div>
+      </div>
+      <!-- 8: Air quality -->
+      <div class="data-card dc-bg-property">
+        <p>Air Pollution Index</p>
+        <div class="data-chart-box" ng-controller="pollutionCtrl">
+          <h2>{{airPollutionIndex}}</h2>
         </div>
       </div>
     </section>
     <!-- End: Search results data set  -->
     <!-- End: Dashboard content -->
-
-
-
-  </main>
-  <!-- Footer -->
-  <footer-directive></footer-directive>
-  <!-- Start: JS CDNs -->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
-
-  <!--Google Map AutoComplete-->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAScVx0giSjmYhutsH4_or4hlzl6B4lpdo&libraries=places"></script>
-
-  <!--Google Map-->
-  <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAScVx0giSjmYhutsH4_or4hlzl6B4lpdo"></script>-->
-
-
-
-  <script src="bundle.js"></script>
-</body>
-
+    </main>
+    <!-- Footer -->
+    <footer-directive></footer-directive>
+    <!-- Start: JS CDNs -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
+    <!--Google Map AutoComplete-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAScVx0giSjmYhutsH4_or4hlzl6B4lpdo&libraries=places"></script>
+    <!--Google Map-->
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAScVx0giSjmYhutsH4_or4hlzl6B4lpdo"></script>-->
+    <script src="bundle.js"></script>
+  </body>
 </html>
