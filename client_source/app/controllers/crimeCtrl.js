@@ -29,8 +29,8 @@ AA.controller("crimeCtrl", function ($scope, crimeService) {
     }
 
     $scope.getInfo();
-
     $scope.assignData = function() {
+
       $scope.crimeData = {
         labels: ["Assault", "Burglary", "Larceny", "Murder", "Auto Theft", "Personal Crime", "Property", "Rape", "robbery"],
         datasets: [{

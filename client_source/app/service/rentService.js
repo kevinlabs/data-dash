@@ -5,7 +5,7 @@ const baseUrl = "/api/onBoard";
 
 this.getData = () => {
   return $http({
-    method: "GET",
+    method: "POST",
     url: baseUrl
   }).then( (response) => {
     console.log(response.data.response.result.package.item);
