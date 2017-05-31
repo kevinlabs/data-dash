@@ -10,6 +10,7 @@ this.getData = (obj) => {
     data: obj
   }).then( (response) => {
     console.log(response.data.response.result.package.item);
+
     return response.data.response.result.package.item;
   })
 }
