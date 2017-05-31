@@ -18,6 +18,7 @@ AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", functi
     $scope.city = '';
     $scope.zipcode = '';
     $scope.state = '';
+    console.log("it works!");
   };
 
   $scope.testing = "it works";
@@ -244,8 +245,6 @@ AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", functi
   }
 
   var inputValidation = function inputValidation() {
-    console.log('Bob');
-
     for (var index = 0; index < $scope.tempPlace.address_components.length; index++) {
       if ($scope.tempPlace.address_components[index].types[0] === 'locality') {
         $scope.city = $scope.tempPlace.address_components[index].long_name;
@@ -264,9 +263,11 @@ AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", functi
       }
     }
 
-    if (!$scope.zipcode && $scope.city && $scope.state) {
-      zipConversionService.getData({ city: $scope.city, state: $scope.state });
-      console.log("calling zipConversionService");
+    if ($scope.city && $scope.state) {
+      zipConversionService.getData({ city: $scope.city, state: $scope.state }).then(function (response) {
+        $scope.foundData = zipConversionService.findData();
+        console.log($scope.foundData);
+      });
     }
 
     console.info('Showing City info: ', $scope.city);
@@ -296,23 +297,26 @@ AA.controller("crimeCtrl", ["$scope", "crimeService", function ($scope, crimeSer
   $scope.rape;
   $scope.robbery;
 
-  $scope.getInfo = function () {
-    crimeService.getData().then(function (response) {
-      console.log(response);
-      $scope.assault = response.crmcyasst;
-      $scope.burglary = response.crmcyburg;
-      $scope.larceny = response.crmcylarc;
-      $scope.murder = response.crmcymurd;
-      $scope.motorVehicleTheft = response.crmcymveh;
-      $scope.personalCrime = response.crmcyperc;
-      $scope.property = response.crmcyproc;
-      $scope.rape = response.crmcyrape;
-      $scope.robbery = response.crmcyrobb;
-      $scope.assignData();
-    });
-  };
-
-  $scope.getInfo();
+  // $scope.getInfo = () => {
+  //   crimeService
+  //     .getData()
+  //     .then((response) => {
+  //       console.log(response);
+  //       $scope.assault = response.crmcyasst;
+  //       $scope.burglary = response.crmcyburg;
+  //       $scope.larceny = response.crmcylarc;
+  //       $scope.murder = response.crmcymurd;
+  //       $scope.motorVehicleTheft = response.crmcymveh;
+  //       $scope.personalCrime = response.crmcyperc;
+  //       $scope.property = response.crmcyproc;
+  //       $scope.rape = response.crmcyrape;
+  //       $scope.robbery = response.crmcyrobb;
+  //       $scope.assignData();
+  //
+  //     })
+  // }
+  //
+  // $scope.getInfo();
 
   $scope.assignData = function () {
     $scope.crimeData = {
@@ -396,27 +400,30 @@ AA.controller("pollutionCtrl", ["$scope", "pollutionService", function ($scope, 
 }]);
 'use strict';
 
-AA.controller("rentCtrl", ["$scope", "rentService", function ($scope, rentService) {
-
+AA.controller("rentCtrl", ["$scope", "rentService", "zipConversionService", function ($scope, rentService, zipConversionService) {
+  $scope.data = zipConversionService.findData();
   $scope.onBoardDataStudio;
   $scope.onBoardDataOne;
   $scope.onBoardDataTwo;
   $scope.onBoardDataThree;
   $scope.onBoardDataFour;
 
-  $scope.getInfo = function () {
-    rentService.getData().then(function (response) {
-      console.log(response);
-      $scope.onBoardDataStudio = response.studio_county;
-      $scope.onBoardDataOne = response.one_bed_county;
-      $scope.onBoardDataTwo = response.two_bed_county;
-      $scope.onBoardDataThree = response.three_bed_county;
-      $scope.onBoardDataFour = response.four_bed_county;
-      $scope.assignData();
-    });
-  };
+  // $scope.getInfo = () => {
+  //   rentService
+  //     .getData()
+  //     .then((response) => {
+  //       console.log(response);
+  //       $scope.onBoardDataStudio = response.studio_county;
+  //       $scope.onBoardDataOne = response.one_bed_county;
+  //       $scope.onBoardDataTwo = response.two_bed_county;
+  //       $scope.onBoardDataThree = response.three_bed_county;
+  //       $scope.onBoardDataFour = response.four_bed_county;
+  //       $scope.assignData();
+  //     })
+  // };
+  //
+  // $scope.getInfo();
 
-  $scope.getInfo();
 
   $scope.assignData = function () {
     $scope.medianRentData = {
@@ -469,137 +476,6 @@ AA.controller("restaurantCtrl", ["$scope", "restaurantService", function ($scope
   };
 
   $scope.getInfo();
-}]);
-"use strict";
-
-AA.service("crimeService", ["$http", function ($http) {
-
-  var baseUrl = "/api/onBoard";
-
-  this.getData = function (obj) {
-    return $http({
-      method: "POST",
-      url: baseUrl,
-      data: obj
-    }).then(function (response) {
-      console.log(response.data.response.result.package.item);
-
-      return response.data.response.result.package.item;
-    });
-  };
-
-  //end of service
-}]);
-"use strict";
-
-AA.service("homeValueService", ["$http", function ($http) {
-
-  var baseUrl = "http://swapi.co/api/people";
-  //hitting Starwars Api for testing. Can delete when back end point is ready.
-
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
-      console.log(response);
-      return response.data.results;
-    });
-  };
-
-  //end of service
-}]);
-"use strict";
-
-AA.service("hospitalService", ["$http", function ($http) {
-
-  var baseUrl = "http://swapi.co/api/vehicles";
-
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
-      console.log(response.data.results);
-      return response.data.results;
-    });
-  };
-
-  //end of service
-}]);
-"use strict";
-
-AA.service("pollutionService", ["$http", function ($http) {
-
-  var baseUrl = "http://swapi.co/api/films";
-
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
-      console.log(response.data.results);
-      return response.data.results;
-    });
-  };
-
-  //end of service
-}]);
-"use strict";
-
-AA.service("rentService", ["$http", function ($http) {
-
-  var baseUrl = "/api/onBoard";
-
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
-      console.log(response.data.response.result.package.item);
-      return response.data.response.result.package.item;
-    });
-  };
-
-  // end of service
-}]);
-"use strict";
-
-AA.service("restaurantService", ["$http", function ($http) {
-
-  var baseUrl = "http://swapi.co/api/starships";
-
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
-      console.log(response.data.results);
-      return response.data.results;
-    });
-  };
-
-  //end of service
-}]);
-"use strict";
-
-AA.service("zipConversionService", ["$http", function ($http) {
-
-  var baseUrl = "/api/zipConversion";
-
-  this.getData = function (obj) {
-    console.log(obj);
-    return $http({
-      method: "POST",
-      url: baseUrl,
-      data: obj
-    }).then(function (response) {
-      console.log(response.data);
-      return response.data;
-    });
-  };
-
-  //end of service
 }]);
 'use strict';
 
@@ -733,4 +609,137 @@ AA.directive('pieDirective', function () {
     }
   };
 });
+"use strict";
+
+AA.service("crimeService", ["$http", function ($http) {
+
+  var baseUrl = "/api/onBoard";
+
+  this.getData = function (obj) {
+    return $http({
+      method: "POST",
+      url: baseUrl,
+      data: obj
+    }).then(function (response) {
+      console.log(response.data.response.result.package.item);
+
+      return response.data.response.result.package.item;
+    });
+  };
+
+  //end of service
+}]);
+"use strict";
+
+AA.service("homeValueService", ["$http", function ($http) {
+
+  var baseUrl = "http://swapi.co/api/people";
+  //hitting Starwars Api for testing. Can delete when back end point is ready.
+
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      console.log(response);
+      return response.data.results;
+    });
+  };
+
+  //end of service
+}]);
+"use strict";
+
+AA.service("hospitalService", ["$http", function ($http) {
+
+  var baseUrl = "http://swapi.co/api/vehicles";
+
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      console.log(response.data.results);
+      return response.data.results;
+    });
+  };
+
+  //end of service
+}]);
+"use strict";
+
+AA.service("pollutionService", ["$http", function ($http) {
+
+  var baseUrl = "http://swapi.co/api/films";
+
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      console.log(response.data.results);
+      return response.data.results;
+    });
+  };
+
+  //end of service
+}]);
+"use strict";
+
+AA.service("rentService", ["$http", function ($http) {
+
+  var baseUrl = "/api/onBoard";
+
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      console.log(response.data.response.result.package.item);
+      return response.data.response.result.package.item;
+    });
+  };
+
+  // end of service
+}]);
+"use strict";
+
+AA.service("restaurantService", ["$http", function ($http) {
+
+  var baseUrl = "http://swapi.co/api/starships";
+
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      console.log(response.data.results);
+      return response.data.results;
+    });
+  };
+
+  //end of service
+}]);
+"use strict";
+
+AA.service("zipConversionService", ["$http", function ($http) {
+  var _this = this;
+
+  var baseUrl = "/api/zipConversion";
+
+  this.getData = function (obj) {
+    return $http({
+      method: "POST",
+      url: baseUrl,
+      data: obj
+    }).then(function (response) {
+      _this.data = response.data.response.result.package.item;
+      return response.data.response.result.package.item;
+    });
+  };
+  this.findData = function () {
+    return _this.data;
+  };
+  //end of service
+}]);
 //# sourceMappingURL=bundle.js.map

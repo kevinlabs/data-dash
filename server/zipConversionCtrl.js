@@ -5,11 +5,12 @@ const onBoard = require('./onBoardCtrl')
 
 module.exports = {
   getZip: function(req, res) {
-    console.log(req.body);
+
     return axios.get('https://www.zipcodeapi.com/rest/' + keys.zipKey + '/city-zips.json/' + req.body.city + '/' + req.body.state).then((response) => {
-      console.log('Response = ' + response.data.zip_codes);
-      onBoard.getOnBoard(response.data.zip_codes[0]);
-      //res.status(200).send(response.data.zip_codes[0]);
+      let bigData = onBoard.getOnBoard(response.data.zip_codes[0]);
+      bigData.then(response2 => {
+        res.status(200).send(response2);
+      })
     });
   }
 }

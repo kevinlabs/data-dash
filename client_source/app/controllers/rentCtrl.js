@@ -1,6 +1,6 @@
 AA
-  .controller("rentCtrl", function ($scope, rentService) {
-
+  .controller("rentCtrl", function ($scope, rentService, zipConversionService) {
+    $scope.data = zipConversionService.findData();
     $scope.onBoardDataStudio;
     $scope.onBoardDataOne;
     $scope.onBoardDataTwo;
@@ -8,21 +8,21 @@ AA
     $scope.onBoardDataFour;
 
 
-    $scope.getInfo = () => {
-      rentService
-        .getData()
-        .then((response) => {
-          console.log(response);
-          $scope.onBoardDataStudio = response.studio_county;
-          $scope.onBoardDataOne = response.one_bed_county;
-          $scope.onBoardDataTwo = response.two_bed_county;
-          $scope.onBoardDataThree = response.three_bed_county;
-          $scope.onBoardDataFour = response.four_bed_county;
-          $scope.assignData();
-        })
-    };
-
-    $scope.getInfo();
+    // $scope.getInfo = () => {
+    //   rentService
+    //     .getData()
+    //     .then((response) => {
+    //       console.log(response);
+    //       $scope.onBoardDataStudio = response.studio_county;
+    //       $scope.onBoardDataOne = response.one_bed_county;
+    //       $scope.onBoardDataTwo = response.two_bed_county;
+    //       $scope.onBoardDataThree = response.three_bed_county;
+    //       $scope.onBoardDataFour = response.four_bed_county;
+    //       $scope.assignData();
+    //     })
+    // };
+    //
+    // $scope.getInfo();
 
 
     $scope.assignData = function () {
@@ -44,7 +44,7 @@ AA
          console.log($scope.medianRentData);
     }
 
- 
+
 
     $scope.optionsObj = {
       legend: {
