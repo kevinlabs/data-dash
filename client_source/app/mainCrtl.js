@@ -1,7 +1,13 @@
 /* ============================================================================= */
 /* ======================== Start: Main Controller ============================= */
 /* ============================================================================= */
-AA.controller("mainCtrl", function ($scope, $interval) {
+
+AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
+  $scope.clearData = function() {
+    $scope.city = '';
+    $scope.zipcode = '';
+    $scope.state = '';
+  }
 
   $scope.testing = "it works";
 
@@ -96,6 +102,46 @@ AA.controller("mainCtrl", function ($scope, $interval) {
     }]
   };
 
+  //  $scope.stackedBarData = {
+  //     labels: [
+  //       'S', '1BR', '2BR', '3BR', '4BR'
+  //     ],
+  //     datasets: [
+  //       {
+  //         label: 'apartments',
+  //         data: [
+  //           // $scope.onBoardDataStudio, $scope.onBoardDataOne, $scope.onBoardDataTwo, $scope.onBoardDataThree, $scope.onBoardDataFour
+  //          5, 10, -3, 7, -6
+  //         ],
+  //         backgroundColor: "rgba(153,255,51,0.4)"
+  //       }
+  //     ]
+  //   };
+
+  //   $scope.optionsObj = {
+  //     legend: {
+  //       display: false,
+  //       labels: {
+  //         display: false
+  //       }
+  //     },
+  //     scales: {
+  //       yAxes: [
+  //         {
+  //           ticks: {
+  //             // beginAtZero: true,
+  //             stepSize: 50
+  //           },
+  //           stacked: false
+  //         }
+  //       ],
+  //       xAxes: [{
+  //         stacked: false
+  //       }]
+  //     }
+  //   };
+
+
   $scope.chart1Type = 'line';
   $scope.chart2Type = 'bar';
   $scope.chart3Type = 'pie';
@@ -104,21 +150,37 @@ AA.controller("mainCtrl", function ($scope, $interval) {
   $scope.chart6Type = 'radar';
 
 
-  //Google Scripts for Google Map. =====================================
-  //var map;
 
-  function initMap() {
-    $scope.map = new google.maps.Map(document.getElementById('googleMap'), {
-      center: {
-        lat: -34.397,
-        lng: 150.644
-      },
-      zoom: 8
+  $interval(() => {
+    $scope.$applyAsync(() => {
+      //  $scope.chart1Type = $scope.chart1Type;
+      // $scope.chart2Type = $scope.chart2Type;
+      $scope.chart1Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
+      $scope.chart2Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
+      console.log($scope.chart1Type, $scope.chart2Type);
+      $scope.chart3Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
+      $scope.chart4Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
+      $scope.chart5Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
+      $scope.chart6Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
+      // $scope.baseball.labels = ["Rojo", "Azul", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"];
     });
-  }
-  
-  //Initializing the map.
-  initMap();
+  }, 10000);
+
+  //Google Scripts for Google Map. =====================================
+  // var map;
+
+  // function initMap() {
+  //   map = new google.maps.Map(document.getElementById('map'), {
+  //     center: {
+  //       lat: -34.397,
+  //       lng: 150.644
+  //     },
+  //     zoom: 8
+  //   });
+  // }
+
+  // //Initializing the map.
+  // initMap();
 
   //Google Scripts for Google Map. =====================================
 
@@ -148,9 +210,16 @@ AA.controller("mainCtrl", function ($scope, $interval) {
 
   // function initAutocomplete() {
 
+<<<<<<< HEAD
   //   //Clearing out previous variable.
   //   $scope.city = '';
   //   $scope.zipcode = '';
+=======
+    //Clearing out previous variable.
+    $scope.city = '';
+    $scope.zipcode = '';
+    $scope.state = '';
+>>>>>>> master
 
 
   //   // Create the autocomplete object, restricting the search to geographical
@@ -215,16 +284,27 @@ AA.controller("mainCtrl", function ($scope, $interval) {
   //   }
   // }
 
+<<<<<<< HEAD
   // const inputValidation = () => {
   //   for (var index = 0; index < $scope.tempPlace.address_components.length; index++) {
   //     if ($scope.tempPlace.address_components[index].types[0] === 'locality') {
   //       $scope.city = $scope.tempPlace.address_components[index].long_name;
   //     }
+=======
+  const inputValidation = () => {
+    console.log('Bob');
+
+    for (var index = 0; index < $scope.tempPlace.address_components.length; index++) {
+      if ($scope.tempPlace.address_components[index].types[0] === 'locality') {
+        $scope.city = $scope.tempPlace.address_components[index].long_name;
+      }
+>>>>>>> master
 
   //     if ($scope.tempPlace.address_components[index].types[0] === 'postal_code') {
   //       $scope.zipcode = $scope.tempPlace.address_components[index].long_name;
   //     }
 
+<<<<<<< HEAD
   //     if ($scope.city === undefined && $scope.zipcode === undefined) {
   //       alert('City or Zipcode is needed. Plase try again.');
   //     }
@@ -233,6 +313,27 @@ AA.controller("mainCtrl", function ($scope, $interval) {
   //   console.info('Showing City info: ', $scope.city);
   //   console.info('Showing Zipcode info: ', $scope.zipcode);
   // };
+=======
+      if ($scope.tempPlace.address_components[index].types[0] === 'administrative_area_level_1') {
+        $scope.state = $scope.tempPlace.address_components[index].short_name;
+      }
+
+      if ($scope.city === undefined && $scope.zipcode === undefined) {
+        alert('City or Zipcode is needed. Please try again.');
+      }
+    }
+
+    if (!$scope.zipcode && $scope.city && $scope.state) {
+      zipConversionService.getData({city: $scope.city, state: $scope.state});
+      console.log("calling zipConversionService")
+    }
+
+    console.info('Showing City info: ', $scope.city);
+    console.info('Showing Zipcode info: ', $scope.zipcode);
+    console.info('Showing State info: ', $scope.state);
+
+  };
+>>>>>>> master
 
 
 
@@ -242,23 +343,6 @@ AA.controller("mainCtrl", function ($scope, $interval) {
 
 
   // // Google Scripts=====================================
-
-
-
-
-  // $interval(() => {
-  //   $scope.$applyAsync(() => {
-  //     $scope.chart1Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
-  //     $scope.chart2Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
-  //     console.log($scope.chart1Type, $scope.chart2Type);
-  //     $scope.chart3Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
-  //     $scope.chart4Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
-  //     $scope.chart5Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
-  //     $scope.chart6Type = $scope.chart6Type === 'polarArea' ? 'radar' : 'polarArea';
-  //     // $scope.baseball.labels = ["Rojo", "Azul", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"];
-  //   });
-  // }, 8000);
-
 
 });
 /* ============================================================================= */

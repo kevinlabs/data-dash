@@ -1,7 +1,8 @@
+// Start: This is the doughnut chart directive =================================
 AA
-  .directive('pieDirective', function () {
+  .directive('lineDirective', function () {
     return {
-      restrict: 'E', templateUrl: "./../views/pie.html",
+      restrict: 'E', templateUrl: "./../views/lineChart.html",
       // controller: 'dirCtrl',
       scope: {
         chartData: '=',
@@ -14,15 +15,11 @@ AA
 
         let myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type, scope.options);
 
-
         function getChartGivenData(chartElement, dataForChart, type, options) {
           return new Chart(chartElement, {
             type: type,
             data: dataForChart,
-            options:
-            {
-              responsive: true,
-              maintainAspectRatio: false,
+            options: {
               legend: {
                 display: false,
                 labels: {
@@ -30,14 +27,15 @@ AA
                   display: false
                 }
               },
-              title: {
-
-                display: false,
-                text: 'Predicted world population (millions) in 2050'
-
+              scales: {
+                yAxes: [
+                  {
+                    ticks: {
+                      beginAtZero: true
+                    }
+                  }
+                ]
               }
-              // scales: {   yAxes: [     {       ticks: {         beginAtZero: true       }
-              // }   ] }
             }
           });
         }
@@ -48,5 +46,8 @@ AA
           });
 
       }
+
     }
   });
+
+// End: This is the doughnut chart directive ===================================

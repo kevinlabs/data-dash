@@ -30,7 +30,7 @@
     <!--google Map Testing Input Field-->
     <div id="googleMapField">
       <div id="locationField">
-        <input id="autocomplete" placeholder="Enter your address" type="text">
+        <input id="autocomplete" placeholder="Enter your address" type="text" onchange="clearData()">
       </div>
 
       <table id="address">
@@ -72,16 +72,17 @@
     <section class="data-set-cards">
       <!-- 1: Local time -->
       <div class="data-card dc-bg-time">
-        <p>Current Local Time</p>
         <div class="data-chart-box">
-          <doughnut-directive chart-data="lineData" type="chart1Type"></doughnut-directive>
+          <!--<line-directive></line-directive>-->
+          <p>Current Local Time</p>
+
         </div>
       </div>
       <!-- 2: Local weather -->
       <div class="data-card dc-bg-weather">
-        <p>Current Local Weather</p>
         <div class="data-chart-box">
-          <doughnut-directive chart-data="lineData" type="chart1Type"></doughnut-directive>
+          <!--<pie-directive></pie-directive>-->
+          <p>Current Local Weather</p>
         </div>
       </div>
       <!-- 3: Home values -->
@@ -94,36 +95,36 @@
       <!-- 4: Rent prices -->
       <div class="data-card dc-bg-property">
         <p>Median Rental Price</p>
-        <div class="data-chart-box">
-          <pie-directive chart-data="orange" type="chart4Type"></pie-directive>
+        <div class="data-chart-box"  ng-controller="rentCtrl">
+          <line-directive chart-data="medianRentData" type="chart1Type" options="optionsObj"></line-directive>
         </div>
       </div>
       <!-- 5: Gas Price -->
       <div class="data-card dc-bg-gas-restaurants">
         <p>Local Restaurants</p>
         <div class="data-chart-box">
-          <doughnut-directive chart-data="baseball" type="chart1Type"></doughnut-directive>
+          <!--<line-directive chart-data="baseball" type="chart1Type"></line-directive>-->
         </div>
       </div>
       <!-- 6: School rankings  -->
       <div class="data-card dc-bg-gas-education">
         <p>Educational Ranking</p>
         <div class="data-chart-box">
-          <doughnut-directive chart-data="baseball" type="chart2Type"></doughnut-directive>
+          <!--<line-directive chart-data="baseball" type="chart2Type"></line-directive>-->
         </div>
       </div>
       <!-- 6: Medical centers nearby -->
       <div class="data-card dc-bg-gas-medical">
         <p>Medical Centers</p>
         <div class="data-chart-box">
-          <doughnut-directive chart-data="polar" type="chart5Type"></doughnut-directive>
+          <!--<line-directive chart-data="polar" type="chart5Type"></line-directive>-->
         </div>
       </div>
       <!-- 7: Crime stats -->
       <div class="data-card dc-bg-gas-crime">
         <p>Crime Statististics</p>
-        <div class="data-chart-box">
-          <doughnut-directive chart-data="polar" type="chart6Type"></doughnut-directive>
+        <div class="data-chart-box"  ng-controller="crimeCtrl">
+          <pie-directive chart-data="crimeData" type="chart4Type" options="doughnutOptions"></pie-directive>
         </div>
       </div>
     </section>

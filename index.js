@@ -12,6 +12,8 @@ const restaurants = require('./server/restaurantsCtrl.js');
 const hospitals = require('./server/hospitalsCtrl.js');
 const pollution = require('./server/pollutionCtrl.js');
 const onBoard = require('./server/onBoardCtrl.js');
+const weather = require('./server/weatherCtrl.js');
+const zip = require('./server/zipConversionCtrl.js')
 
 //secrete session code file.
 //const config = require('./config.js');
@@ -131,7 +133,11 @@ app.get('/api/restaurants', restaurants.getRestaurants);
 
 app.get('/api/pollution', pollution.getPollution);
 
-app.get('/api/onBoard', onBoard.getOnBoard);
+//app.post('/api/onBoard', onBoard.getOnBoard);
+
+app.get('/api/weather', weather.getWeather);
+
+app.post('/api/zipConversion', zip.getZip);
 
 //===PORT====================================
 app.listen(port, () => {
