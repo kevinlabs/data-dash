@@ -7,19 +7,21 @@ var AA = angular.module("data-dash", []);
 /* ============================================================================= */
 /* ======================== End: App JS ======================================== */
 /* ============================================================================= */
-"use strict";
+'use strict';
 
 /* ============================================================================= */
 /* ======================== Start: Main Controller ============================= */
 /* ============================================================================= */
 
-AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
+AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", function ($scope, $interval, zipConversionService) {
+  $scope.clearData = function () {
+    $scope.city = '';
+    $scope.zipcode = '';
+    $scope.state = '';
+  };
 
-<<<<<<< HEAD
   $scope.testing = "it works";
 
-=======
->>>>>>> e8d3ec8e73265f267185ff9b2774f2e50a984752
   $scope.baseball = {
     labels: ["Pre", "Kinder", "Elemen", "Middle", "High", "Degree", "Masters", "PHD"],
     datasets: [{
@@ -69,67 +71,12 @@ AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
     }]
   };
 
-  //  $scope.stackedBarData = {
-  //     labels: [
-  //       'S', '1BR', '2BR', '3BR', '4BR'
-  //     ],
-  //     datasets: [
-  //       {
-  //         label: 'apartments',
-  //         data: [
-  //           // $scope.onBoardDataStudio, $scope.onBoardDataOne, $scope.onBoardDataTwo, $scope.onBoardDataThree, $scope.onBoardDataFour
-  //          5, 10, -3, 7, -6
-  //         ],
-  //         backgroundColor: "rgba(153,255,51,0.4)"
-  //       }
-  //     ]
-  //   };
-
-  //   $scope.optionsObj = {
-  //     legend: {
-  //       display: false,
-  //       labels: {
-  //         display: false
-  //       }
-  //     },
-  //     scales: {
-  //       yAxes: [
-  //         {
-  //           ticks: {
-  //             // beginAtZero: true,
-  //             stepSize: 50
-  //           },
-  //           stacked: false
-  //         }
-  //       ],
-  //       xAxes: [{
-  //         stacked: false
-  //       }]
-  //     }
-  //   };
-
-
   $scope.chart1Type = 'line';
   $scope.chart2Type = 'bar';
   $scope.chart3Type = 'pie';
   $scope.chart4Type = 'doughnut';
   $scope.chart5Type = 'polarArea';
   $scope.chart6Type = 'radar';
-
-  $interval(function () {
-    $scope.$applyAsync(function () {
-      //  $scope.chart1Type = $scope.chart1Type;
-      // $scope.chart2Type = $scope.chart2Type;
-      $scope.chart1Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
-      $scope.chart2Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
-      console.log($scope.chart1Type, $scope.chart2Type);
-      $scope.chart3Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
-      $scope.chart4Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
-      $scope.chart5Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
-      $scope.chart6Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
-      // $scope.baseball.labels = ["Rojo", "Azul", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"];
-    });
-  }, 10000);
 
   //Google Scripts for Google Map. =====================================
   // var map;
@@ -178,6 +125,7 @@ AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
     //Clearing out previous variable.
     $scope.city = '';
     $scope.zipcode = '';
+    $scope.state = '';
 
     // Create the autocomplete object, restricting the search to geographical
     // location types.
@@ -241,6 +189,8 @@ AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
   }
 
   var inputValidation = function inputValidation() {
+    console.log('Bob');
+
     for (var index = 0; index < $scope.tempPlace.address_components.length; index++) {
       if ($scope.tempPlace.address_components[index].types[0] === 'locality') {
         $scope.city = $scope.tempPlace.address_components[index].long_name;
@@ -250,13 +200,23 @@ AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
         $scope.zipcode = $scope.tempPlace.address_components[index].long_name;
       }
 
-      if ($scope.city === undefined && $scope.zipcode === undefined) {
-        alert('City or Zipcode is needed. Plase try again.');
+      if ($scope.tempPlace.address_components[index].types[0] === 'administrative_area_level_1') {
+        $scope.state = $scope.tempPlace.address_components[index].short_name;
       }
+
+      if ($scope.city === undefined && $scope.zipcode === undefined) {
+        alert('City or Zipcode is needed. Please try again.');
+      }
+    }
+
+    if (!$scope.zipcode && $scope.city && $scope.state) {
+      zipConversionService.getData({ city: $scope.city, state: $scope.state });
+      console.log("calling zipConversionService");
     }
 
     console.info('Showing City info: ', $scope.city);
     console.info('Showing Zipcode info: ', $scope.zipcode);
+    console.info('Showing State info: ', $scope.state);
   };
 
   //Initiating Pre Render
@@ -264,6 +224,21 @@ AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
   initAutocomplete();
 
   // // Google Scripts=====================================
+
+
+  // $interval(() => {
+  //   $scope.$applyAsync(() => {
+  //     $scope.chart1Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
+  //     $scope.chart2Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
+  //     console.log($scope.chart1Type, $scope.chart2Type);
+  //     $scope.chart3Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
+  //     $scope.chart4Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
+  //     $scope.chart5Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
+  //     $scope.chart6Type = $scope.chart6Type === 'polarArea' ? 'radar' : 'polarArea';
+  //     // $scope.baseball.labels = ["Rojo", "Azul", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"];
+  //   });
+  // }, 8000);
+
 }]);
 /* ============================================================================= */
 /* ======================== End: Main Controller =============================== */
@@ -271,7 +246,6 @@ AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
 "use strict";
 
 AA.controller("crimeCtrl", ["$scope", "crimeService", function ($scope, crimeService) {
-
   $scope.assault;
   $scope.burglary;
   $scope.larceny;
@@ -523,15 +497,6 @@ AA.directive('lineDirective', function () {
         getChartGivenData(ctxDir, scope.chartData, newValue);
       });
     }
-<<<<<<< HEAD
-
-  };
-});
-
-// End: This is the doughnut chart directive ===================================
-'use strict';
-=======
->>>>>>> e8d3ec8e73265f267185ff9b2774f2e50a984752
 
   };
 });
@@ -603,12 +568,14 @@ AA.service("crimeService", ["$http", function ($http) {
 
   var baseUrl = "/api/onBoard";
 
-  this.getData = function () {
+  this.getData = function (obj) {
     return $http({
-      method: "GET",
-      url: baseUrl
+      method: "POST",
+      url: baseUrl,
+      data: obj
     }).then(function (response) {
-      console.log(response);
+      console.log(response.data.response.result.package.item);
+
       return response.data.response.result.package.item;
     });
   };
@@ -701,6 +668,26 @@ AA.service("restaurantService", ["$http", function ($http) {
     }).then(function (response) {
       console.log(response.data.results);
       return response.data.results;
+    });
+  };
+
+  //end of service
+}]);
+"use strict";
+
+AA.service("zipConversionService", ["$http", function ($http) {
+
+  var baseUrl = "/api/zipConversion";
+
+  this.getData = function (obj) {
+    console.log(obj);
+    return $http({
+      method: "POST",
+      url: baseUrl,
+      data: obj
+    }).then(function (response) {
+      console.log(response.data);
+      return response.data;
     });
   };
 

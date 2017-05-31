@@ -16,8 +16,10 @@
 
 </head>
 
+
 <body ng-controller="mainCtrl">
   <!-- Start: Header -->
+
   <section id="header-section">
     <header-directive></header-directive>
     <!-- Interactive map display -->
@@ -30,7 +32,7 @@
     <!--google Map Testing Input Field-->
     <div id="googleMapField">
       <div id="locationField">
-        <input id="autocomplete" placeholder="Enter your address" type="text">
+        <input id="autocomplete" placeholder="Enter your address" type="text" onchange="clearData()">
       </div>
 
       <table id="address">
