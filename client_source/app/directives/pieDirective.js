@@ -26,13 +26,12 @@ AA
               legend: {
                 display: false,
                 labels: {
-
                   display: false
                 }
               },
               title: {
 
-                display: false,
+                display: true,
                 text: 'Predicted world population (millions) in 2050'
 
               }
