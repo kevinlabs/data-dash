@@ -4,16 +4,17 @@ const baseUrl = "/api/zipConversion";
 
 
 this.getData = (obj) => {
-  console.log(obj);
   return $http({
     method: "POST",
     url: baseUrl,
     data: obj
   }).then( (response) => {
-    console.log(response.data);
-    return response.data;
+    this.data = response.data.response.result.package.item;
+    return response.data.response.result.package.item;
   })
 }
-
+this.findData = () => {
+  return this.data;
+}
 //end of service
 });

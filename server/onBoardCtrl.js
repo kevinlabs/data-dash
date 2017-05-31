@@ -12,8 +12,9 @@ let config = {
 
 module.exports = {
   getOnBoard: (req, res) => {
-    return axios('https://search.onboard-apis.com/communityapi/v2.0.0/Area/Full/?AreaId=ZI22902', config).then((response) => {
-        res.status(200).send(jsonParser.toJson(response.data));
+    console.log(req);
+    return axios('https://search.onboard-apis.com/communityapi/v2.0.0/Area/Full/?AreaId=ZI' + req, config).then((response) => {
+        return(jsonParser.toJson(response.data));
     });
   }
 }

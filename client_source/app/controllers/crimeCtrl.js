@@ -10,25 +10,27 @@ AA.controller("crimeCtrl", function ($scope, crimeService) {
     $scope.rape;
     $scope.robbery;
 
-    $scope.getInfo = () => {
-      crimeService
-        .getData()
-        .then((response) => {
-          console.log(response);
-          $scope.assault = response.crmcyasst;
-          $scope.burglary = response.crmcyburg;
-          $scope.larceny = response.crmcylarc;
-          $scope.murder = response.crmcymurd;
-          $scope.motorVehicleTheft = response.crmcymveh;
-          $scope.personalCrime = response.crmcyperc;
-          $scope.property = response.crmcyproc;
-          $scope.rape = response.crmcyrape;
-          $scope.robbery = response.crmcyrobb;
-          $scope.assignData();
-        })
-    }
+    // $scope.getInfo = () => {
+    //   crimeService
+    //     .getData()
+    //     .then((response) => {
+    //       console.log(response);
+    //       $scope.assault = response.crmcyasst;
+    //       $scope.burglary = response.crmcyburg;
+    //       $scope.larceny = response.crmcylarc;
+    //       $scope.murder = response.crmcymurd;
+    //       $scope.motorVehicleTheft = response.crmcymveh;
+    //       $scope.personalCrime = response.crmcyperc;
+    //       $scope.property = response.crmcyproc;
+    //       $scope.rape = response.crmcyrape;
+    //       $scope.robbery = response.crmcyrobb;
+    //       $scope.assignData();
+    //
+    //     })
+    // }
+    //
+    // $scope.getInfo();
 
-    $scope.getInfo();
     $scope.assignData = function() {
 
       $scope.crimeData = {

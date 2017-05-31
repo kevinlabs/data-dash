@@ -7,6 +7,7 @@ AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
     $scope.city = '';
     $scope.zipcode = '';
     $scope.state = '';
+    console.log("it works!");
   }
 
   $scope.testing = "it works";
@@ -237,8 +238,6 @@ AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
   }
 
   const inputValidation = () => {
-    console.log('Bob');
-
     for (var index = 0; index < $scope.tempPlace.address_components.length; index++) {
       if ($scope.tempPlace.address_components[index].types[0] === 'locality') {
         $scope.city = $scope.tempPlace.address_components[index].long_name;
@@ -257,9 +256,11 @@ AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
       }
     }
 
-    if (!$scope.zipcode && $scope.city && $scope.state) {
-      zipConversionService.getData({city: $scope.city, state: $scope.state});
-      console.log("calling zipConversionService")
+    if ($scope.city && $scope.state) {
+      zipConversionService.getData({city: $scope.city, state: $scope.state}).then(response => {
+        $scope.foundData = zipConversionService.findData();
+        console.log($scope.foundData);
+      });
     }
 
     console.info('Showing City info: ', $scope.city);
