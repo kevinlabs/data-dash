@@ -104,6 +104,18 @@ AA.controller("mainCtrl", function ($scope, $interval) {
   $scope.chart5Type = 'polarArea';
   $scope.chart6Type = 'radar';
 
+  // $interval(() => {
+  //   $scope.$applyAsync(() => {
+  //     $scope.chart1Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
+  //     $scope.chart2Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
+  //     console.log($scope.chart1Type, $scope.chart2Type);
+  //     $scope.chart3Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
+  //     $scope.chart4Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
+  //     $scope.chart5Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
+  //     $scope.chart6Type = $scope.chart6Type === 'polarArea' ? 'radar' : 'polarArea';
+  //     // $scope.baseball.labels = ["Rojo", "Azul", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"];
+  //   });
+  // }, 8000);
 
   //Google Scripts for Google Map. =====================================
   // var map;
@@ -247,18 +259,7 @@ AA.controller("mainCtrl", function ($scope, $interval) {
 
 
 
-  // $interval(() => {
-  //   $scope.$applyAsync(() => {
-  //     $scope.chart1Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
-  //     $scope.chart2Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
-  //     console.log($scope.chart1Type, $scope.chart2Type);
-  //     $scope.chart3Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
-  //     $scope.chart4Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
-  //     $scope.chart5Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
-  //     $scope.chart6Type = $scope.chart6Type === 'polarArea' ? 'radar' : 'polarArea';
-  //     // $scope.baseball.labels = ["Rojo", "Azul", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"];
-  //   });
-  // }, 8000);
+
 
 
 });

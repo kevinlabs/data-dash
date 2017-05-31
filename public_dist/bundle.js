@@ -12,10 +12,10 @@ var AA = angular.module("data-dash", []);
 /* ============================================================================= */
 /* ======================== Start: Main Controller ============================= */
 /* ============================================================================= */
+
 AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
 
   $scope.testing = "it works";
-  console.log("/'Sup");
 
   $scope.baseball = {
     labels: ["Pre", "Kinder", "Elemen", "Middle", "High", "Degree", "Masters", "PHD"],
@@ -376,6 +376,7 @@ AA.directive('doughnutDirective', function () {
         getChartGivenData(ctxDir, scope.chartData, newValue);
       });
     }
+
   };
 });
 
@@ -445,6 +446,7 @@ AA.directive('pieDirective', function () {
               }
             },
             title: {
+
               display: false,
               text: 'Predicted world population (millions) in 2050'
 
