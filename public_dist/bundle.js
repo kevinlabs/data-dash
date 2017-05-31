@@ -73,136 +73,140 @@ AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
   $scope.chart6Type = 'radar';
 
   //Google Scripts for Google Map. =====================================
-  // var map;
+  //var map;
 
-  // function initMap() {
-  //   map = new google.maps.Map(document.getElementById('map'), {
-  //     center: {
-  //       lat: -34.397,
-  //       lng: 150.644
-  //     },
-  //     zoom: 8
-  //   });
-  // }
+  function initMap() {
+    $scope.map = new google.maps.Map(document.getElementById('googleMap'), {
+      center: {
+        lat: -34.397,
+        lng: 150.644
+      },
+      zoom: 8
+    });
+  }
 
-  // //Initializing the map.
-  // initMap();
+  //Initializing the map.
+  initMap();
 
   //Google Scripts for Google Map. =====================================
 
 
-  // Google Scripts for Auto Complete.=====================================
-  //variables
-  $scope.city;
-  $scope.zipcode;
-  $scope.tempPlace;
+  // // Google Scripts for Auto Complete.=====================================
+  // //variables
+  // $scope.city;
+  // $scope.zipcode;
+  // $scope.tempPlace;
 
-  // This example displays an address form, using the autocomplete feature
-  // of the Google Places API to help users fill in the information.
+  // // This example displays an address form, using the autocomplete feature
+  // // of the Google Places API to help users fill in the information.
 
-  // This example requires the Places library. Include the libraries=places
-  // parameter when you first load the API. For example:
-  // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+  // // This example requires the Places library. Include the libraries=places
+  // // parameter when you first load the API. For example:
+  // // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-  var placeSearch, autocomplete;
-  var componentForm = {
-    street_number: 'short_name',
-    route: 'long_name',
-    locality: 'long_name',
-    administrative_area_level_1: 'short_name',
-    country: 'long_name',
-    postal_code: 'short_name'
-  };
+  // var placeSearch, autocomplete;
+  // var componentForm = {
+  //   street_number: 'short_name',
+  //   route: 'long_name',
+  //   locality: 'long_name',
+  //   administrative_area_level_1: 'short_name',
+  //   country: 'long_name',
+  //   postal_code: 'short_name'
+  // };
 
-  function initAutocomplete() {
+  // function initAutocomplete() {
 
-    //Clearing out previous variable.
-    $scope.city = '';
-    $scope.zipcode = '';
+  //   //Clearing out previous variable.
+  //   $scope.city = '';
+  //   $scope.zipcode = '';
 
-    // Create the autocomplete object, restricting the search to geographical
-    // location types.
-    autocomplete = new google.maps.places.Autocomplete(
-    /** @type {!HTMLInputElement} */
-    document.getElementById('autocomplete'), {
-      types: ['geocode']
-    });
 
-    // When the user selects an address from the dropdown, populate the address
-    // fields in the form.
-    autocomplete.addListener('place_changed', fillInAddress);
-  }
+  //   // Create the autocomplete object, restricting the search to geographical
+  //   // location types.
+  //   autocomplete = new google.maps.places.Autocomplete(
+  //     /** @type {!HTMLInputElement} */
+  //     (document.getElementById('autocomplete')), {
+  //       types: ['geocode']
+  //     });
 
-  function fillInAddress() {
-    // Get the place details from the autocomplete object.
-    var place = autocomplete.getPlace();
+  //   // When the user selects an address from the dropdown, populate the address
+  //   // fields in the form.
+  //   autocomplete.addListener('place_changed', fillInAddress);
+  // }
 
-    for (var component in componentForm) {
-      document.getElementById(component).value = '';
-      document.getElementById(component).disabled = false;
-    }
+  // function fillInAddress() {
+  //   // Get the place details from the autocomplete object.
+  //   var place = autocomplete.getPlace();
 
-    console.log('showing google object: ', place);
-    $scope.tempPlace = place;
-    console.log('Testing the live change object: ', $scope.tempPlace.address_components[0].long_name);
+  //   for (var component in componentForm) {
+  //     document.getElementById(component).value = '';
+  //     document.getElementById(component).disabled = false;
+  //   }
 
-    // Get each component of the address from the place details
-    // and fill the corresponding field on the form.
-    for (var i = 0; i < place.address_components.length; i++) {
-      var addressType = place.address_components[i].types[0];
-      if (componentForm[addressType]) {
-        var val = place.address_components[i][componentForm[addressType]];
-        document.getElementById(addressType).value = val;
-      }
-    }
+  //   console.log('showing google object: ', place);
+  //   $scope.tempPlace = place;
+  //   console.log('Testing the live change object: ', $scope.tempPlace.address_components[0].long_name);
 
-    //Initiatin Input validation.
-    inputValidation();
-  }
 
-  // Bias the autocomplete object to the user's geographical location,
-  // as supplied by the browser's 'navigator.geolocation' object.
-  function geolocate() {
+  //   // Get each component of the address from the place details
+  //   // and fill the corresponding field on the form.
+  //   for (var i = 0; i < place.address_components.length; i++) {
+  //     var addressType = place.address_components[i].types[0];
+  //     if (componentForm[addressType]) {
+  //       var val = place.address_components[i][componentForm[addressType]];
+  //       document.getElementById(addressType).value = val;
+  //     }
+  //   }
 
-    console.log('Functiong initiated');
+  //   //Initiatin Input validation.
+  //   inputValidation();
+  // }
 
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        var geolocation = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-        var circle = new google.maps.Circle({
-          center: geolocation,
-          radius: position.coords.accuracy
-        });
-        autocomplete.setBounds(circle.getBounds());
-      });
-    }
-  }
+  // // Bias the autocomplete object to the user's geographical location,
+  // // as supplied by the browser's 'navigator.geolocation' object.
+  // function geolocate() {
 
-  var inputValidation = function inputValidation() {
-    for (var index = 0; index < $scope.tempPlace.address_components.length; index++) {
-      if ($scope.tempPlace.address_components[index].types[0] === 'locality') {
-        $scope.city = $scope.tempPlace.address_components[index].long_name;
-      }
+  //   console.log('Functiong initiated');
 
-      if ($scope.tempPlace.address_components[index].types[0] === 'postal_code') {
-        $scope.zipcode = $scope.tempPlace.address_components[index].long_name;
-      }
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(function (position) {
+  //       var geolocation = {
+  //         lat: position.coords.latitude,
+  //         lng: position.coords.longitude
+  //       };
+  //       var circle = new google.maps.Circle({
+  //         center: geolocation,
+  //         radius: position.coords.accuracy
+  //       });
+  //       autocomplete.setBounds(circle.getBounds());
+  //     });
+  //   }
+  // }
 
-      if ($scope.city === undefined && $scope.zipcode === undefined) {
-        alert('City or Zipcode is needed. Plase try again.');
-      }
-    }
+  // const inputValidation = () => {
+  //   for (var index = 0; index < $scope.tempPlace.address_components.length; index++) {
+  //     if ($scope.tempPlace.address_components[index].types[0] === 'locality') {
+  //       $scope.city = $scope.tempPlace.address_components[index].long_name;
+  //     }
 
-    console.info('Showing City info: ', $scope.city);
-    console.info('Showing Zipcode info: ', $scope.zipcode);
-  };
+  //     if ($scope.tempPlace.address_components[index].types[0] === 'postal_code') {
+  //       $scope.zipcode = $scope.tempPlace.address_components[index].long_name;
+  //     }
 
-  //Initiating Pre Render
-  geolocate();
-  initAutocomplete();
+  //     if ($scope.city === undefined && $scope.zipcode === undefined) {
+  //       alert('City or Zipcode is needed. Plase try again.');
+  //     }
+  //   }
+
+  //   console.info('Showing City info: ', $scope.city);
+  //   console.info('Showing Zipcode info: ', $scope.zipcode);
+  // };
+
+
+  // //Initiating Pre Render
+  // geolocate();
+  // initAutocomplete();
+
 
   // // Google Scripts=====================================
 
