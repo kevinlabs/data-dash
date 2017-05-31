@@ -15,8 +15,11 @@ var AA = angular.module("data-dash", []);
 
 AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
 
+<<<<<<< HEAD
   $scope.testing = "it works";
 
+=======
+>>>>>>> e8d3ec8e73265f267185ff9b2774f2e50a984752
   $scope.baseball = {
     labels: ["Pre", "Kinder", "Elemen", "Middle", "High", "Degree", "Masters", "PHD"],
     datasets: [{
@@ -66,12 +69,67 @@ AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
     }]
   };
 
+  //  $scope.stackedBarData = {
+  //     labels: [
+  //       'S', '1BR', '2BR', '3BR', '4BR'
+  //     ],
+  //     datasets: [
+  //       {
+  //         label: 'apartments',
+  //         data: [
+  //           // $scope.onBoardDataStudio, $scope.onBoardDataOne, $scope.onBoardDataTwo, $scope.onBoardDataThree, $scope.onBoardDataFour
+  //          5, 10, -3, 7, -6
+  //         ],
+  //         backgroundColor: "rgba(153,255,51,0.4)"
+  //       }
+  //     ]
+  //   };
+
+  //   $scope.optionsObj = {
+  //     legend: {
+  //       display: false,
+  //       labels: {
+  //         display: false
+  //       }
+  //     },
+  //     scales: {
+  //       yAxes: [
+  //         {
+  //           ticks: {
+  //             // beginAtZero: true,
+  //             stepSize: 50
+  //           },
+  //           stacked: false
+  //         }
+  //       ],
+  //       xAxes: [{
+  //         stacked: false
+  //       }]
+  //     }
+  //   };
+
+
   $scope.chart1Type = 'line';
   $scope.chart2Type = 'bar';
   $scope.chart3Type = 'pie';
   $scope.chart4Type = 'doughnut';
   $scope.chart5Type = 'polarArea';
   $scope.chart6Type = 'radar';
+
+  $interval(function () {
+    $scope.$applyAsync(function () {
+      //  $scope.chart1Type = $scope.chart1Type;
+      // $scope.chart2Type = $scope.chart2Type;
+      $scope.chart1Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
+      $scope.chart2Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
+      console.log($scope.chart1Type, $scope.chart2Type);
+      $scope.chart3Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
+      $scope.chart4Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
+      $scope.chart5Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
+      $scope.chart6Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
+      // $scope.baseball.labels = ["Rojo", "Azul", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"];
+    });
+  }, 10000);
 
   //Google Scripts for Google Map. =====================================
   // var map;
@@ -206,21 +264,6 @@ AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
   initAutocomplete();
 
   // // Google Scripts=====================================
-
-
-  // $interval(() => {
-  //   $scope.$applyAsync(() => {
-  //     $scope.chart1Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
-  //     $scope.chart2Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
-  //     console.log($scope.chart1Type, $scope.chart2Type);
-  //     $scope.chart3Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
-  //     $scope.chart4Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
-  //     $scope.chart5Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
-  //     $scope.chart6Type = $scope.chart6Type === 'polarArea' ? 'radar' : 'polarArea';
-  //     // $scope.baseball.labels = ["Rojo", "Azul", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"];
-  //   });
-  // }, 8000);
-
 }]);
 /* ============================================================================= */
 /* ======================== End: Main Controller =============================== */
@@ -229,18 +272,64 @@ AA.controller("mainCtrl", ["$scope", "$interval", function ($scope, $interval) {
 
 AA.controller("crimeCtrl", ["$scope", "crimeService", function ($scope, crimeService) {
 
-  $scope.data;
+  $scope.assault;
+  $scope.burglary;
+  $scope.larceny;
+  $scope.murder;
+  $scope.motorVehicleTheft;
+  $scope.personalCrime;
+  $scope.property;
+  $scope.rape;
+  $scope.robbery;
 
   $scope.getInfo = function () {
     crimeService.getData().then(function (response) {
       console.log(response);
-      $scope.data = response;
+      $scope.assault = response.crmcyasst;
+      $scope.burglary = response.crmcyburg;
+      $scope.larceny = response.crmcylarc;
+      $scope.murder = response.crmcymurd;
+      $scope.motorVehicleTheft = response.crmcymveh;
+      $scope.personalCrime = response.crmcyperc;
+      $scope.property = response.crmcyproc;
+      $scope.rape = response.crmcyrape;
+      $scope.robbery = response.crmcyrobb;
+      $scope.assignData();
     });
   };
 
   $scope.getInfo();
 
-  //end of controller
+  $scope.assignData = function () {
+    $scope.crimeData = {
+      labels: ["assault", "burglary", "larceny", "murder", "auto theft", "personal", "property", "rape", "robbery"],
+      datasets: [{
+        backgroundColor: ["#2ecc71", "#3498db", "#95a5a6", "#9b59b6", "#f1c40f", "#e74c3c", "#34495e"],
+        data: [$scope.assault, $scope.burglary, $scope.larceny, $scope.murder, $scope.motorVehicleTheft, $scope.personalCrime, $scope.property, $scope.rape, $scope.robbery]
+        // ["10", "90", "23", "42", "67", "49", "14", "39", "70"]
+      }]
+    };
+    console.log($scope.crimeData);
+    console.log($scope.assault, $scope.burglary, $scope.larceny, $scope.murder, $scope.motorVehicleTheft, $scope.personalCrime, $scope.property, $scope.rape, $scope.robbery);
+  };
+
+  $scope.doughnutOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    legend: {
+      display: false,
+      labels: {
+        display: false
+      }
+    },
+    title: {
+      display: true,
+      text: 'Crime Rates'
+    }
+    // scales: {   yAxes: [     {       ticks: {         beginAtZero: true       }
+    // }   ] }
+  };
+  // end of controller
 }]);
 "use strict";
 
@@ -291,7 +380,7 @@ AA.controller("pollutionCtrl", ["$scope", "pollutionService", function ($scope, 
 
   //end of controller
 }]);
-"use strict";
+'use strict';
 
 AA.controller("rentCtrl", ["$scope", "rentService", function ($scope, rentService) {
 
@@ -304,15 +393,51 @@ AA.controller("rentCtrl", ["$scope", "rentService", function ($scope, rentServic
   $scope.getInfo = function () {
     rentService.getData().then(function (response) {
       console.log(response);
-      $scope.onBoardDataStudio = response.STUDIOINDEX;
-      $scope.onBoardDataOne = response.ONE_BEDINDEX;
-      $scope.onBoardDataTwo = response.TWO_BEDINDEX;
-      $scope.onBoardDataThree = response.THREE_BEDINDEX;
-      $scope.onBoardDataFour = respone.FOUR_BEDINDEX;
+      $scope.onBoardDataStudio = response.studio_county;
+      $scope.onBoardDataOne = response.one_bed_county;
+      $scope.onBoardDataTwo = response.two_bed_county;
+      $scope.onBoardDataThree = response.three_bed_county;
+      $scope.onBoardDataFour = response.four_bed_county;
+      $scope.assignData();
     });
   };
 
   $scope.getInfo();
+
+  $scope.assignData = function () {
+    $scope.medianRentData = {
+      labels: ['S', '1BR', '2BR', '3BR', '4BR'],
+      datasets: [{
+        label: 'apartments',
+        data: [$scope.onBoardDataStudio, $scope.onBoardDataOne, $scope.onBoardDataTwo, $scope.onBoardDataThree, $scope.onBoardDataFour
+        // 5, 10, -3, 7, -6
+        ],
+        backgroundColor: "rgba(153,255,51,0.4)"
+      }]
+    };
+    console.log($scope.medianRentData);
+  };
+
+  $scope.optionsObj = {
+    legend: {
+      display: false,
+      labels: {
+        display: false
+      }
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          // beginAtZero: true,
+          stepSize: 50
+        },
+        stacked: false
+      }],
+      xAxes: [{
+        stacked: false
+      }]
+    }
+  };
 
   //end of controller
 }]);
@@ -333,10 +458,32 @@ AA.controller("restaurantCtrl", ["$scope", "restaurantService", function ($scope
 }]);
 'use strict';
 
-// Start: This is the doughnut chart directive =================================
-AA.directive('doughnutDirective', function () {
+// Start: This is the header directive =========================================
+AA.directive('footerDirective', function () {
+
   return {
-    restrict: 'E', templateUrl: "./../views/doughnut.html",
+    restrict: 'E',
+    templateUrl: './views/footer.html'
+  };
+});
+// End: This is the header directive ===========================================
+'use strict';
+
+// Start: This is the header directive =========================================
+AA.directive('headerDirective', function () {
+
+  return {
+    restrict: 'E',
+    templateUrl: './views/header.html'
+  };
+});
+// End: This is the header directive ===========================================
+'use strict';
+
+// Start: This is the doughnut chart directive =================================
+AA.directive('lineDirective', function () {
+  return {
+    restrict: 'E', templateUrl: "./../views/lineChart.html",
     // controller: 'dirCtrl',
     scope: {
       chartData: '=',
@@ -347,9 +494,9 @@ AA.directive('doughnutDirective', function () {
 
       var ctxDir = elem[0].children[0].children[0];
 
-      var myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type);
+      var myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type, scope.options);
 
-      function getChartGivenData(chartElement, dataForChart, type) {
+      function getChartGivenData(chartElement, dataForChart, type, options) {
         return new Chart(chartElement, {
           type: type,
           data: dataForChart,
@@ -376,33 +523,20 @@ AA.directive('doughnutDirective', function () {
         getChartGivenData(ctxDir, scope.chartData, newValue);
       });
     }
+<<<<<<< HEAD
 
   };
 });
 
 // End: This is the doughnut chart directive ===================================
 'use strict';
+=======
+>>>>>>> e8d3ec8e73265f267185ff9b2774f2e50a984752
 
-// Start: This is the header directive =========================================
-AA.directive('footerDirective', function () {
-
-  return {
-    restrict: 'E',
-    templateUrl: './views/footer.html'
   };
 });
-// End: This is the header directive ===========================================
-'use strict';
 
-// Start: This is the header directive =========================================
-AA.directive('headerDirective', function () {
-
-  return {
-    restrict: 'E',
-    templateUrl: './views/header.html'
-  };
-});
-// End: This is the header directive ===========================================
+// End: This is the doughnut chart directive ===================================
 'use strict';
 
 // Start: This is the header directive =========================================
@@ -429,9 +563,9 @@ AA.directive('pieDirective', function () {
 
       var ctxDir = elem[0].children[0].children[0];
 
-      var myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type);
+      var myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type, scope.options);
 
-      function getChartGivenData(chartElement, dataForChart, type) {
+      function getChartGivenData(chartElement, dataForChart, type, options) {
         return new Chart(chartElement, {
           type: type,
           data: dataForChart,
@@ -467,15 +601,15 @@ AA.directive('pieDirective', function () {
 
 AA.service("crimeService", ["$http", function ($http) {
 
-  var baseUrl = "http://swapi.co/api/species";
+  var baseUrl = "/api/onBoard";
 
   this.getData = function () {
     return $http({
       method: "GET",
       url: baseUrl
     }).then(function (response) {
-      console.log(response.data.results);
-      return response.data.results;
+      console.log(response);
+      return response.data.response.result.package.item;
     });
   };
 
@@ -547,8 +681,8 @@ AA.service("rentService", ["$http", function ($http) {
       method: "GET",
       url: baseUrl
     }).then(function (response) {
-      console.log(response);
-      return response;
+      console.log(response.data.response.result.package.item);
+      return response.data.response.result.package.item;
     });
   };
 
