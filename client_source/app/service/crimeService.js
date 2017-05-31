@@ -1,15 +1,16 @@
 AA.service("crimeService", function($http){
 
-const baseUrl = "http://swapi.co/api/species";
+const baseUrl = "/api/onBoard";
 
 
-this.getData = () => {
+this.getData = (obj) => {
   return $http({
-    method: "GET",
-    url: baseUrl
+    method: "POST",
+    url: baseUrl,
+    data: obj
   }).then( (response) => {
-    console.log(response.data.results);
-    return response.data.results
+    console.log(response.data.response.result.package.item);
+    return response.data.response.result.package.item;
   })
 }
 
