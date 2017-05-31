@@ -78,6 +78,7 @@ AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", functi
   $scope.chart5Type = 'polarArea';
   $scope.chart6Type = 'radar';
 
+
   // START: THIS NEEDS RIPPING OUT !! -- !! ------------------------------------
   $interval(function () {
     $scope.$applyAsync(function () {
@@ -239,6 +240,21 @@ AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", functi
   initAutocomplete();
 
   // // Google Scripts=====================================
+
+
+  // $interval(() => {
+  //   $scope.$applyAsync(() => {
+  //     $scope.chart1Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
+  //     $scope.chart2Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
+  //     console.log($scope.chart1Type, $scope.chart2Type);
+  //     $scope.chart3Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
+  //     $scope.chart4Type = $scope.chart3Type === 'pie' ? 'doughnut' : 'pie';
+  //     $scope.chart5Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
+  //     $scope.chart6Type = $scope.chart6Type === 'polarArea' ? 'radar' : 'polarArea';
+  //     // $scope.baseball.labels = ["Rojo", "Azul", "Yellow", "Green", "Purple", "Orange", "Test1", "Test2"];
+  //   });
+  // }, 8000);
+
 }]);
 /* ============================================================================= */
 /* ======================== End: Main Controller =============================== */
@@ -426,6 +442,7 @@ AA.controller("restaurantCtrl", ["$scope", "restaurantService", function ($scope
 
   $scope.getInfo();
 }]);
+
 "use strict";
 
 AA.service("crimeService", ["$http", function ($http) {
@@ -727,4 +744,135 @@ AA.directive('pieDirective', function () {
     }
   };
 });
+"use strict";
+
+AA.service("crimeService", ["$http", function ($http) {
+
+  var baseUrl = "/api/onBoard";
+
+  this.getData = function (obj) {
+    return $http({
+      method: "POST",
+      url: baseUrl,
+      data: obj
+    }).then(function (response) {
+      console.log(response.data.response.result.package.item);
+
+      return response.data.response.result.package.item;
+    });
+  };
+
+  //end of service
+}]);
+"use strict";
+
+AA.service("homeValueService", ["$http", function ($http) {
+
+  var baseUrl = "http://swapi.co/api/people";
+  //hitting Starwars Api for testing. Can delete when back end point is ready.
+
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      console.log(response);
+      return response.data.results;
+    });
+  };
+
+  //end of service
+}]);
+"use strict";
+
+AA.service("hospitalService", ["$http", function ($http) {
+
+  var baseUrl = "http://swapi.co/api/vehicles";
+
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      console.log(response.data.results);
+      return response.data.results;
+    });
+  };
+
+  //end of service
+}]);
+"use strict";
+
+AA.service("pollutionService", ["$http", function ($http) {
+
+  var baseUrl = "http://swapi.co/api/films";
+
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      console.log(response.data.results);
+      return response.data.results;
+    });
+  };
+
+  //end of service
+}]);
+"use strict";
+
+AA.service("rentService", ["$http", function ($http) {
+
+  var baseUrl = "/api/onBoard";
+
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      console.log(response.data.response.result.package.item);
+      return response.data.response.result.package.item;
+    });
+  };
+
+  // end of service
+}]);
+"use strict";
+
+AA.service("restaurantService", ["$http", function ($http) {
+
+  var baseUrl = "http://swapi.co/api/starships";
+
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      console.log(response.data.results);
+      return response.data.results;
+    });
+  };
+
+  //end of service
+}]);
+"use strict";
+
+AA.service("zipConversionService", ["$http", function ($http) {
+
+  var baseUrl = "/api/zipConversion";
+
+  this.getData = function (obj) {
+    console.log(obj);
+    return $http({
+      method: "POST",
+      url: baseUrl,
+      data: obj
+    }).then(function (response) {
+      console.log(response.data);
+      return response.data;
+    });
+  };
+
+  //end of service
+}]);
 //# sourceMappingURL=bundle.js.map

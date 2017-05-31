@@ -1,28 +1,35 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="data-dash">
-  <head>
-    <meta charset="UTF-8">
-    <!-- Viewport declaration to control rendering for mobile devices and retina screens -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DATA DASH | Destination Due Diligence Made Easy</title>
-    <!-- Styles CSS is CSS concatinatd  -->
-    <link href="./css/styles.css" rel="stylesheet" />
-    <!-- Bundle CSS is SCSS concatinatd  -->
-    <link href="./css/bundle.css" rel="stylesheet" />
-    <!-- Materialize CSS - used to style modals -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald:400,600" rel="stylesheet" />
-  </head>
-  <body ng-controller="mainCtrl">
-    <!-- Start: Header -->
-    <section id="header-section">
-      <header-directive></header-directive>
-      <!-- Interactive map display -->
-      <div id="map"></div>
-      <!--<map-directive></map-directive>-->
-    </section>
-    <!-- End: Header -->
-    <main id="main-container">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- Viewport declaration to control rendering for mobile devices and retina screens -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DATA DASH | Destination Due Diligence Made Easy</title>
+  <!-- Styles CSS is CSS concatinatd  -->
+  <link href="./css/styles.css" rel="stylesheet" />
+  <!-- Bundle CSS is SCSS concatinatd  -->
+  <link href="./css/bundle.css" rel="stylesheet" />
+  <!-- Materialize CSS - used to style modals -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald:400,600" rel="stylesheet" />
+
+</head>
+
+
+<body ng-controller="mainCtrl">
+  <!-- Start: Header -->
+
+  <section id="header-section">
+    <header-directive></header-directive>
+    <!-- Interactive map display -->
+    <div id="map"></div>
+    <!--<map-directive></map-directive>-->
+  </section>
+  <!-- End: Header -->
+  <main id="main-container">
+
+
     <!--google Map Testing Input Field-->
       <div id="googleMapField">
         <div id="locationField">
