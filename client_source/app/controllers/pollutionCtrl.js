@@ -1,15 +1,14 @@
 AA.controller("pollutionCtrl", function($scope, pollutionService){
 
+$scope.airPollutionIndex;
+
 $scope.data;
 
 $scope.getInfo = () => {
  pollutionService.getData().then( (response) => {
-   console.log(response);
-   $scope.data = response
+   $scope.airPollutionIndex = response.aqi;
  })
 }
 
 $scope.getInfo();
-
-//end of controller
-})
+});

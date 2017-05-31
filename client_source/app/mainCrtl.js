@@ -110,6 +110,21 @@ AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
   $scope.chart6Type = 'radar';
 
   
+  // START: THIS NEEDS RIPPING OUT !! -- !! ------------------------------------
+  $interval(() => {
+    $scope.$applyAsync(() => {
+      //  $scope.chart1Type = $scope.chart1Type;
+      // $scope.chart2Type = $scope.chart2Type;
+      $scope.chart1Type = $scope.chart1Type === 'bar' ? 'bar' : 'bar';
+      $scope.chart2Type = $scope.chart1Type === 'bar' ? 'bar' : 'bar';
+      console.log($scope.chart1Type, $scope.chart2Type);
+      $scope.chart3Type = $scope.chart3Type === 'doughnut' ? 'doughnut' : 'doughnut';
+      $scope.chart4Type = $scope.chart3Type === 'doughnut' ? 'doughnut' : 'doughnut';
+      $scope.chart5Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
+      $scope.chart6Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
+    });
+  }, 10000);
+  // END: THIS NEEDS RIPPING OUT !! -- !! --------------------------------------
 
   //Google Scripts for Google Map. =====================================
   // var map;
@@ -128,7 +143,6 @@ AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
   // initMap();
 
   //Google Scripts for Google Map. =====================================
-
 
   // Google Scripts for Auto Complete.=====================================
   //variables
@@ -186,7 +200,6 @@ AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
     console.log('showing google object: ', place);
     $scope.tempPlace = place;
     console.log('Testing the live change object: ', $scope.tempPlace.address_components[0].long_name);
-
 
     // Get each component of the address from the place details
     // and fill the corresponding field on the form.
@@ -255,12 +268,9 @@ AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
 
   };
 
-
-
   //Initiating Pre Render
   geolocate();
   initAutocomplete();
-
 
   // // Google Scripts=====================================
 
