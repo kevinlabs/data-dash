@@ -1,6 +1,5 @@
 AA
   .controller("crimeCtrl", function ($scope, crimeService) {
-
     $scope.assault;
     $scope.burglary;
     $scope.larceny;
@@ -45,7 +44,7 @@ AA
         "#e74c3c",
         "#34495e"
       ],
-      data: 
+      data:
       [$scope.assault, $scope.burglary, $scope.larceny, $scope.murder, $scope.motorVehicleTheft, $scope.personalCrime, $scope.property, $scope.rape, $scope.robbery]
       // ["10", "90", "23", "42", "67", "49", "14", "39", "70"]
     }]

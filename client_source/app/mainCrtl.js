@@ -1,7 +1,15 @@
 /* ============================================================================= */
 /* ======================== Start: Main Controller ============================= */
 /* ============================================================================= */
-AA.controller("mainCtrl", function($scope, $interval){
+
+AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
+  $scope.clearData = function() {
+    $scope.city = '';
+    $scope.zipcode = '';
+    $scope.state = '';
+  }
+
+  $scope.testing = "it works";
 
   $scope.baseball = {
     labels: ["Pre", "Kinder", "Elemen", "Middle", "High", "Degree", "Masters", "PHD"],
@@ -205,6 +213,7 @@ AA.controller("mainCtrl", function($scope, $interval){
     //Clearing out previous variable.
     $scope.city = '';
     $scope.zipcode = '';
+    $scope.state = '';
 
 
     // Create the autocomplete object, restricting the search to geographical
@@ -270,6 +279,8 @@ AA.controller("mainCtrl", function($scope, $interval){
   }
 
   const inputValidation = () => {
+    console.log('Bob');
+
     for (var index = 0; index < $scope.tempPlace.address_components.length; index++) {
       if ($scope.tempPlace.address_components[index].types[0] === 'locality') {
         $scope.city = $scope.tempPlace.address_components[index].long_name;
@@ -279,13 +290,24 @@ AA.controller("mainCtrl", function($scope, $interval){
         $scope.zipcode = $scope.tempPlace.address_components[index].long_name;
       }
 
-      if ($scope.city === undefined && $scope.zipcode === undefined) {
-        alert('City or Zipcode is needed. Plase try again.');
+      if ($scope.tempPlace.address_components[index].types[0] === 'administrative_area_level_1') {
+        $scope.state = $scope.tempPlace.address_components[index].short_name;
       }
+
+      if ($scope.city === undefined && $scope.zipcode === undefined) {
+        alert('City or Zipcode is needed. Please try again.');
+      }
+    }
+
+    if (!$scope.zipcode && $scope.city && $scope.state) {
+      zipConversionService.getData({city: $scope.city, state: $scope.state});
+      console.log("calling zipConversionService")
     }
 
     console.info('Showing City info: ', $scope.city);
     console.info('Showing Zipcode info: ', $scope.zipcode);
+    console.info('Showing State info: ', $scope.state);
+
   };
 
 

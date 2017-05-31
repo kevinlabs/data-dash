@@ -3,12 +3,14 @@ AA.service("crimeService", function($http){
 const baseUrl = "/api/onBoard";
 
 
-this.getData = () => {
+this.getData = (obj) => {
   return $http({
-    method: "GET",
-    url: baseUrl
+    method: "POST",
+    url: baseUrl,
+    data: obj
   }).then( (response) => {
-    console.log(response);
+    console.log(response.data.response.result.package.item);
+
     return response.data.response.result.package.item;
   })
 }
