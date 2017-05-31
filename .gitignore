@@ -1,3 +1,5 @@
 node_modules
 config.js
 config
+client_source/app/service/zipConversionService.js
+server/zipConversionCtrl.js

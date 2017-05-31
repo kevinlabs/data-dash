@@ -40,7 +40,6 @@ const outputPaths = {
     fontSource: './public_dist/fonts'
 };
 
-// //jsPlugin
 // gulp.task('copy:jsPlugin', function () {
 //     return gulp.src([inputPaths.jsPluginSource])
 //         .pipe(gulp.dest(outputPaths.jsPluginSource));
@@ -129,6 +128,7 @@ gulp.task('watch', function () {
 
 //when you type gulp and run it in the command like this is the default task that runs.
 //this will run all the tasks listed in the array in order. when its done it watches for changes and will recompile if anything changes.
+
 gulp.task('default', ['js', 'sass', 'index', 'views', 'img', 'copy:fonts', 'build-css', 'copy:cssPlugin',
     'watch'
 ]);

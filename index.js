@@ -8,30 +8,40 @@ const cors = require('cors');
 //For session.
 const session = require('express-session');
 
+const restaurants = require('./server/restaurantsCtrl.js');
+const hospitals = require('./server/hospitalsCtrl.js');
+const pollution = require('./server/pollutionCtrl.js');
+const onBoard = require('./server/onBoardCtrl.js');
+const weather = require('./server/weatherCtrl.js');
+const zip = require('./server/zipConversionCtrl.js')
+
 //secrete session code file.
-// const config = require('./config.js');
+//const config = require('./config.js');
 
 //Sql Database connection tool
-// const massive = require('massive');
+//const massive = require('massive');
 
 //===INITIALIZE EXPRESS APP===================
 const app = module.exports = express();
 
+
 const port = 8080;
+
 
 // =========Public root web Middleware======== //
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public_dist'));
 // =========Public root web Middleware======== //
 
-// =========Cross Scripting======== //
-//Cross Scripting allowed site.
-var corsOptions = {
-	origin: 'http://localhost:8080'
-};
 
-//This allows the cross scripting to other site.
-app.use(cors(corsOptions));
+// =========Cross Scripting======== //
+// //Cross Scripting allowed site.
+// var corsOptions = {
+// 	origin: 'http://localhost:8080'
+// };
+
+// //This allows the cross scripting to other site.
+// app.use(cors(corsOptions));
 
 // =========Cross Scripting======== //
 
@@ -62,8 +72,8 @@ app.use(cors(corsOptions));
 // const userCtrl = require('./server/userCtrl.js');
 // const memberCtrl = require('./server/memberCtrl.js');
 // const groupCtrl = require('./server/groupCtrl.js');
-
-//===========PASSPORT IMPORT ==================
+//
+// //===========PASSPORT IMPORT ==================
 // var passport = require('./server/passport.js');
 
 
@@ -73,8 +83,8 @@ app.use(cors(corsOptions));
 //   if (!req.isAuthenticated()) return res.status(401).send();
 //   return next();
 // };
-
-// =========Session configuration ========= //
+//
+// // =========Session configuration ========= //
 // app.use(session({
 //   secret: config.password,
 //   resave: false,
@@ -85,13 +95,13 @@ app.use(cors(corsOptions));
 //     // expires: false
 //   }
 // }));
-// =========Session configuration ========= //
-
+// // =========Session configuration ========= //
+//
 // app.use(passport.initialize());
 // app.use(passport.session());
-
-
-//===PASSPORT ENDPOINTS===================
+//
+//
+// //===PASSPORT ENDPOINTS===================
 // app.post('/login', passport.authenticate('local', {
 //   successRedirect: '/login2'
 // }));
@@ -100,24 +110,34 @@ app.use(cors(corsOptions));
 //   req.logout();
 //   return res.status(200).send('logged out');
 // });
-//===PASSPORT ENDPOINTS===================
-
-
-//===USER ENDPOINTS=========================
+// //===PASSPORT ENDPOINTS===================
+//
+//
+// //===USER ENDPOINTS=========================
 // app.post('/register/account/create', userCtrl.register);
 // app.get('/login2', isAuthed, userCtrl.login2);
 // app.get('/api/sessionCheck', userCtrl.sessionCheck);
-
-//===Member Endpoints=========================
+//
+// //===Member Endpoints=========================
 // app.post('/register/member/create', memberCtrl.createMember);
 // app.get('/member/browse', memberCtrl.browseMember);
-
-//===Group Endpoints=========================
+//
+// //===Group Endpoints=========================
 // app.post('/register/group/create', groupCtrl.createGroup);
 // app.get('/group/browse', groupCtrl.browseGroup);
 // app.post('/register/group/addmember', groupCtrl.addMember);
 
+app.get('/api/hospitals', hospitals.getHospitals);
 
+app.get('/api/restaurants', restaurants.getRestaurants);
+
+app.get('/api/pollution', pollution.getPollution);
+
+//app.post('/api/onBoard', onBoard.getOnBoard);
+
+app.get('/api/weather', weather.getWeather);
+
+app.post('/api/zipConversion', zip.getZip);
 
 //===PORT====================================
 app.listen(port, () => {
