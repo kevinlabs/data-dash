@@ -110,21 +110,9 @@ AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
   $scope.chart5Type = 'polarArea';
   $scope.chart6Type = 'radar';
 
-  
+
   // START: THIS NEEDS RIPPING OUT !! -- !! ------------------------------------
-  $interval(() => {
-    $scope.$applyAsync(() => {
-      //  $scope.chart1Type = $scope.chart1Type;
-      // $scope.chart2Type = $scope.chart2Type;
-      $scope.chart1Type = $scope.chart1Type === 'bar' ? 'bar' : 'bar';
-      $scope.chart2Type = $scope.chart1Type === 'bar' ? 'bar' : 'bar';
-      console.log($scope.chart1Type, $scope.chart2Type);
-      $scope.chart3Type = $scope.chart3Type === 'doughnut' ? 'doughnut' : 'doughnut';
-      $scope.chart4Type = $scope.chart3Type === 'doughnut' ? 'doughnut' : 'doughnut';
-      $scope.chart5Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
-      $scope.chart6Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
-    });
-  }, 10000);
+
   // END: THIS NEEDS RIPPING OUT !! -- !! --------------------------------------
 
   //Google Scripts for Google Map. =====================================
@@ -193,24 +181,9 @@ AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
     // Get the place details from the autocomplete object.
     var place = autocomplete.getPlace();
 
-    for (var component in componentForm) {
-      document.getElementById(component).value = '';
-      document.getElementById(component).disabled = false;
-    }
-
     console.log('showing google object: ', place);
     $scope.tempPlace = place;
     console.log('Testing the live change object: ', $scope.tempPlace.address_components[0].long_name);
-
-    // Get each component of the address from the place details
-    // and fill the corresponding field on the form.
-    for (var i = 0; i < place.address_components.length; i++) {
-      var addressType = place.address_components[i].types[0];
-      if (componentForm[addressType]) {
-        var val = place.address_components[i][componentForm[addressType]];
-        document.getElementById(addressType).value = val;
-      }
-    }
 
     //Initiatin Input validation.
     inputValidation();
@@ -259,15 +232,10 @@ AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
     if ($scope.city && $scope.state) {
       zipConversionService.getData({city: $scope.city, state: $scope.state}).then(response => {
         $scope.foundData = zipConversionService.findData();
-        console.log($scope.foundData);
       });
     }
-
-    console.info('Showing City info: ', $scope.city);
-    console.info('Showing Zipcode info: ', $scope.zipcode);
-    console.info('Showing State info: ', $scope.state);
-
   };
+
 
   //Initiating Pre Render
   geolocate();

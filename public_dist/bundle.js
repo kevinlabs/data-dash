@@ -80,19 +80,7 @@ AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", functi
   $scope.chart6Type = 'radar';
 
   // START: THIS NEEDS RIPPING OUT !! -- !! ------------------------------------
-  $interval(function () {
-    $scope.$applyAsync(function () {
-      //  $scope.chart1Type = $scope.chart1Type;
-      // $scope.chart2Type = $scope.chart2Type;
-      $scope.chart1Type = $scope.chart1Type === 'bar' ? 'bar' : 'bar';
-      $scope.chart2Type = $scope.chart1Type === 'bar' ? 'bar' : 'bar';
-      console.log($scope.chart1Type, $scope.chart2Type);
-      $scope.chart3Type = $scope.chart3Type === 'doughnut' ? 'doughnut' : 'doughnut';
-      $scope.chart4Type = $scope.chart3Type === 'doughnut' ? 'doughnut' : 'doughnut';
-      $scope.chart5Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
-      $scope.chart6Type = $scope.chart5Type === 'polarArea' ? 'radar' : 'polarArea';
-    });
-  }, 10000);
+
   // END: THIS NEEDS RIPPING OUT !! -- !! --------------------------------------
 
   //Google Scripts for Google Map. =====================================
@@ -160,24 +148,9 @@ AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", functi
     // Get the place details from the autocomplete object.
     var place = autocomplete.getPlace();
 
-    for (var component in componentForm) {
-      document.getElementById(component).value = '';
-      document.getElementById(component).disabled = false;
-    }
-
     console.log('showing google object: ', place);
     $scope.tempPlace = place;
     console.log('Testing the live change object: ', $scope.tempPlace.address_components[0].long_name);
-
-    // Get each component of the address from the place details
-    // and fill the corresponding field on the form.
-    for (var i = 0; i < place.address_components.length; i++) {
-      var addressType = place.address_components[i].types[0];
-      if (componentForm[addressType]) {
-        var val = place.address_components[i][componentForm[addressType]];
-        document.getElementById(addressType).value = val;
-      }
-    }
 
     //Initiatin Input validation.
     inputValidation();
@@ -226,13 +199,8 @@ AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", functi
     if ($scope.city && $scope.state) {
       zipConversionService.getData({ city: $scope.city, state: $scope.state }).then(function (response) {
         $scope.foundData = zipConversionService.findData();
-        console.log($scope.foundData);
       });
     }
-
-    console.info('Showing City info: ', $scope.city);
-    console.info('Showing Zipcode info: ', $scope.zipcode);
-    console.info('Showing State info: ', $scope.state);
   };
 
   //Initiating Pre Render
@@ -261,38 +229,21 @@ AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", functi
 /* ============================================================================= */
 "use strict";
 
-AA.controller("crimeCtrl", ["$scope", "crimeService", function ($scope, crimeService) {
+AA.controller("crimeCtrl", ["$scope", "zipConversionService", function ($scope, zipConversionService) {
 
-  $scope.assault;
-  $scope.burglary;
-  $scope.larceny;
-  $scope.murder;
-  $scope.motorVehicleTheft;
-  $scope.personalCrime;
-  $scope.property;
-  $scope.rape;
-  $scope.robbery;
-
-  // $scope.getInfo = () => {
-  //   crimeService
-  //     .getData()
-  //     .then((response) => {
-  //       console.log(response);
-  //       $scope.assault = response.crmcyasst;
-  //       $scope.burglary = response.crmcyburg;
-  //       $scope.larceny = response.crmcylarc;
-  //       $scope.murder = response.crmcymurd;
-  //       $scope.motorVehicleTheft = response.crmcymveh;
-  //       $scope.personalCrime = response.crmcyperc;
-  //       $scope.property = response.crmcyproc;
-  //       $scope.rape = response.crmcyrape;
-  //       $scope.robbery = response.crmcyrobb;
-  //       $scope.assignData();
-  //
-  //     })
-  // }
-  //
-  // $scope.getInfo();
+  $scope.$on('eventFired', function (event, data) {
+    console.log(data);
+    $scope.assault = data.crmcyasst;
+    $scope.burglary = data.crmcyburg;
+    $scope.larceny = data.crmcylarc;
+    $scope.murder = data.crmcymurd;
+    $scope.motorVehicleTheft = data.crmcymveh;
+    $scope.personalCrime = data.crmcyperc;
+    $scope.property = data.crmcyproc;
+    $scope.rape = data.crmcyrape;
+    $scope.robbery = data.crmcyrobb;
+    $scope.assignData();
+  });
 
   $scope.assignData = function () {
 
@@ -317,23 +268,16 @@ AA.controller("crimeCtrl", ["$scope", "crimeService", function ($scope, crimeSer
   };
   // end of controller
 }]);
-"use strict";
+'use strict';
 
-AA.controller("homeValueCtrl", ["$scope", "homeValueService", function ($scope, homeValueService) {
+AA.controller("homeValueCtrl", ["$scope", "zipConversionService", function ($scope, zipConversionService) {
+  console.log('see me');
 
-  $scope.avgsaleprice;
-
-  $scope.data;
-
-  $scope.getInfo = function () {
-    homeValueService.getData().then(function (response) {
-      console.log(response);
-      $scope.avgsaleprice = response.avgsaleprice;
-      $scope.assignData();
-    });
-  };
-
-  $scope.getInfo();
+  $scope.$on('eventFired', function (event, data) {
+    console.log(data);
+    $scope.avgsaleprice = data.avgsaleprice;
+    $scope.assignData();
+  });
 
   $scope.assignData = function () {
     $scope.propertySalePrice = $scope.avgsaleprice;
@@ -374,30 +318,17 @@ AA.controller("pollutionCtrl", ["$scope", "pollutionService", function ($scope, 
 }]);
 'use strict';
 
-AA.controller("rentCtrl", ["$scope", "rentService", "zipConversionService", function ($scope, rentService, zipConversionService) {
-  $scope.data = zipConversionService.findData();
+AA.controller("rentCtrl", ["$timeout", "$scope", "rentService", "zipConversionService", function ($timeout, $scope, rentService, zipConversionService) {
 
-  $scope.onBoardDataStudio;
-  $scope.onBoardDataOne;
-  $scope.onBoardDataTwo;
-  $scope.onBoardDataThree;
-  $scope.onBoardDataFour;
-
-  // $scope.getInfo = () => {
-  //   rentService
-  //     .getData()
-  //     .then((response) => {
-  //       console.log(response);
-  //       $scope.onBoardDataStudio = response.studio_county;
-  //       $scope.onBoardDataOne = response.one_bed_county;
-  //       $scope.onBoardDataTwo = response.two_bed_county;
-  //       $scope.onBoardDataThree = response.three_bed_county;
-  //       $scope.onBoardDataFour = response.four_bed_county;
-  //       $scope.assignData();
-  //     })
-  // };
-  //
-  // $scope.getInfo();
+  $scope.$on('eventFired', function (event, data) {
+    console.log(data);
+    $scope.onBoardDataStudio = data.studio_county;
+    $scope.onBoardDataOne = data.one_bed_county;
+    $scope.onBoardDataTwo = data.two_bed_county;
+    $scope.onBoardDataThree = data.three_bed_county;
+    $scope.onBoardDataFour = data.four_bed_county;
+    $scope.assignData();
+  });
 
   $scope.assignData = function () {
     $scope.medianRentData = {
@@ -422,7 +353,7 @@ AA.controller("rentCtrl", ["$scope", "rentService", "zipConversionService", func
     scales: {
       yAxes: [{
         ticks: {
-          stepSize: 50
+          stepSize: 250
         },
         stacked: false
       }],
@@ -451,48 +382,53 @@ AA.controller("restaurantCtrl", ["$scope", "restaurantService", function ($scope
 'use strict';
 
 // Start: This is the doughnut chart directive =================================
-AA.directive('doughnutDirective', function () {
+AA.directive('chartDirective', function () {
   return {
-    restrict: 'E',
-    templateUrl: "./../views/doughnut.html",
+    restrict: 'E', templateUrl: "./../views/chartDirective.html",
     // controller: 'dirCtrl',
     scope: {
       chartData: '=',
-      type: "="
+      type: "=",
+      options: "="
     },
     link: function link(scope, elem, attrs, ctrl) {
       console.log('this is my element\'s second child:', elem[0].children[0].children[0]);
 
       var ctxDir = elem[0].children[0].children[0];
 
-      var myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type);
+      var myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type, scope.options);
 
-      function getChartGivenData(chartElement, dataForChart, type) {
+      function getChartGivenData(chartElement, dataForChart, type, options) {
         return new Chart(chartElement, {
           type: type,
           data: dataForChart,
-          options: {
-            legend: {
-              display: false,
-              lables: {
-                display: false
-              }
-            },
-            scales: {
-              yAxes: [{
-                ticks: {
-                  beginAtZero: true
-                }
-              }]
-            }
-          }
+          options: options
+          // {
+          //   legend: {
+          //     display: false,
+          //     labels: {
+          //
+          //       display: false
+          //     }
+          //   },
+          //   scales: {
+          //     yAxes: [
+          //       {
+          //         ticks: {
+          //           beginAtZero: true
+          //         }
+          //       }
+          //     ]
+          //   }
+          // }
         });
       }
 
-      scope.$watch('type', function (newValue, oldValue, scope) {
-        getChartGivenData(ctxDir, scope.chartData, newValue);
+      scope.$watch('chartData', function (newValue, oldValue, scope) {
+        getChartGivenData(ctxDir, newValue, scope.type, scope.options);
       });
     }
+
   };
 });
 
@@ -519,56 +455,6 @@ AA.directive('headerDirective', function () {
   };
 });
 // End: This is the header directive ===========================================
-'use strict';
-
-// Start: This is the doughnut chart directive =================================
-AA.directive('lineDirective', function () {
-  return {
-    restrict: 'E', templateUrl: "./../views/lineChart.html",
-    // controller: 'dirCtrl',
-    scope: {
-      chartData: '=',
-      type: "="
-    },
-    link: function link(scope, elem, attrs, ctrl) {
-      console.log('this is my element\'s second child:', elem[0].children[0].children[0]);
-
-      var ctxDir = elem[0].children[0].children[0];
-
-      var myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type, scope.options);
-
-      function getChartGivenData(chartElement, dataForChart, type, options) {
-        return new Chart(chartElement, {
-          type: type,
-          data: dataForChart,
-          options: {
-            legend: {
-              display: false,
-              labels: {
-
-                display: false
-              }
-            },
-            scales: {
-              yAxes: [{
-                ticks: {
-                  beginAtZero: true
-                }
-              }]
-            }
-          }
-        });
-      }
-
-      scope.$watch('type', function (newValue, oldValue, scope) {
-        getChartGivenData(ctxDir, scope.chartData, newValue);
-      });
-    }
-
-  };
-});
-
-// End: This is the doughnut chart directive ===================================
 'use strict';
 
 // Start: This is the header directive =========================================
@@ -615,36 +501,23 @@ AA.directive('pieDirective', function () {
 
 AA.service("crimeService", ["$http", function ($http) {
 
-  var baseUrl = "/api/onBoard";
-
-  this.getData = function (obj) {
-    return $http({
-      method: "POST",
-      url: baseUrl,
-      data: obj
-    }).then(function (response) {
-      // console.log(response.data.response.result.package.item);
-      return response.data.response.result.package.item;
-    });
-  };
-
   //end of service
 }]);
 "use strict";
 
 AA.service("homeValueService", ["$http", function ($http) {
 
-  var baseUrl = "/api/onBoard";
-
-  this.getData = function () {
-    return $http({
-      method: "POST",
-      url: baseUrl
-    }).then(function (response) {
-      console.log(response);
-      return response.data.response.result.package.item;
-    });
-  };
+  // const baseUrl = "/api/onBoard";
+  //
+  // this.getData = () => {
+  //   return $http({
+  //     method: "POST",
+  //     url: baseUrl
+  //   }).then( (response) => {
+  //     console.log('hvservice', response);
+  //     return response.data.response.result.package.item;
+  //   })
+  // }
 
   //end of service
 }]);
@@ -731,7 +604,7 @@ AA.service("restaurantService", ["$http", function ($http) {
 }]);
 "use strict";
 
-AA.service("zipConversionService", ["$http", function ($http) {
+AA.service("zipConversionService", ["$http", "$rootScope", function ($http, $rootScope) {
   var _this = this;
 
   var baseUrl = "/api/zipConversion";
@@ -747,7 +620,7 @@ AA.service("zipConversionService", ["$http", function ($http) {
     });
   };
   this.findData = function () {
-    return _this.data;
+    $rootScope.$broadcast('eventFired', _this.data);
   };
   //end of service
 }]);

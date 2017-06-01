@@ -51,14 +51,14 @@
       <div class="data-card dc-bg-property">
         <p>Median Home Values</p>
         <div class="data-chart-box" ng-controller="homeValueCtrl">
-          <h2>{{propertySalePrice}}</h2>
+          <h2>${{propertySalePrice}}</h2>
         </div>
       </div>
       <!-- 4: Rent prices -->
       <div class="data-card dc-bg-property">
         <p>Median Rental Price</p>
         <div class="data-chart-box"  ng-controller="rentCtrl">
-          <line-directive chart-data="medianRentData" type="chart1Type" options="optionsObj"></line-directive>
+          <chart-directive chart-data="medianRentData" type="chart2Type" options="optionsObj"></chart-directive>
         </div>
       </div>
       <!-- 5: Gas Price -->
@@ -86,7 +86,7 @@
       <div class="data-card dc-bg-gas-crime">
         <p>Crime Statististics</p>
         <div class="data-chart-box"  ng-controller="crimeCtrl">
-          <pie-directive chart-data="crimeData" type="chart4Type" options="crimeOptions"></pie-directive>
+          <chart-directive chart-data="crimeData" type="chart4Type" options="crimeOptions"></chart-directive>
         </div>
       </div>
       <!-- 8: Air quality -->

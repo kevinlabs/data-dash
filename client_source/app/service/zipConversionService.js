@@ -1,4 +1,4 @@
-AA.service("zipConversionService", function($http){
+AA.service("zipConversionService", function($http, $rootScope){
 
 const baseUrl = "/api/zipConversion";
 
@@ -14,7 +14,7 @@ this.getData = (obj) => {
   })
 }
 this.findData = () => {
-  return this.data;
+  $rootScope.$broadcast('eventFired', this.data);
 }
 //end of service
 });

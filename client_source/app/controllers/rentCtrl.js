@@ -1,28 +1,14 @@
-AA
-  .controller("rentCtrl", function ($scope, rentService, zipConversionService) {
-    $scope.data = zipConversionService.findData();
+AA.controller("rentCtrl", function ($timeout, $scope, rentService, zipConversionService) {
 
-    $scope.onBoardDataStudio;
-    $scope.onBoardDataOne;
-    $scope.onBoardDataTwo;
-    $scope.onBoardDataThree;
-    $scope.onBoardDataFour;
-
-    // $scope.getInfo = () => {
-    //   rentService
-    //     .getData()
-    //     .then((response) => {
-    //       console.log(response);
-    //       $scope.onBoardDataStudio = response.studio_county;
-    //       $scope.onBoardDataOne = response.one_bed_county;
-    //       $scope.onBoardDataTwo = response.two_bed_county;
-    //       $scope.onBoardDataThree = response.three_bed_county;
-    //       $scope.onBoardDataFour = response.four_bed_county;
-    //       $scope.assignData();
-    //     })
-    // };
-    //
-    // $scope.getInfo();
+    $scope.$on('eventFired', function (event, data) {
+      console.log(data);
+        $scope.onBoardDataStudio = data.studio_county;
+        $scope.onBoardDataOne = data.one_bed_county;
+        $scope.onBoardDataTwo = data.two_bed_county;
+        $scope.onBoardDataThree = data.three_bed_county;
+        $scope.onBoardDataFour = data.four_bed_county;
+        $scope.assignData();
+    });
 
     $scope.assignData = function () {
       $scope.medianRentData = {
@@ -72,7 +58,7 @@ AA
         yAxes: [
           {
             ticks: {
-              stepSize: 50
+              stepSize: 250
             },
             stacked: false
           }
