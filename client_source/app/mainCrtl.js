@@ -3,7 +3,7 @@
 /* ============================================================================= */
 
 AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
-  $scope.clearData = function() {
+  $scope.clearData = function () {
     $scope.city = '';
     $scope.zipcode = '';
     $scope.state = '';
@@ -136,78 +136,69 @@ AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
   // Google Scripts for Auto Complete.=====================================
   //variables
   $scope.city;
-  $scope.zipcode;
   $scope.tempPlace;
 
-  // This example displays an address form, using the autocomplete feature
-  // of the Google Places API to help users fill in the information.
+  //Use this if we only need zipcode from google
+  //$scope.zipcode;
 
-  // This example requires the Places library. Include the libraries=places
-  // parameter when you first load the API. For example:
-  // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+  function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+      center: {
+        lat: 40.2338438,
+        lng: -111.65853370000002
+      },
+      zoom: 10
+    });
+    var input = document.getElementById('autocomplete');
+    //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-  var placeSearch, autocomplete;
-  var componentForm = {
-    street_number: 'short_name',
-    route: 'long_name',
-    locality: 'long_name',
-    administrative_area_level_1: 'short_name',
-    country: 'long_name',
-    postal_code: 'short_name'
-  };
+    //This is restriction for the country code.
+    var options = {
+      componentRestrictions: {
+        country: 'us'
+      }
+    };
 
-  function initAutocomplete() {
+    var autocomplete = new google.maps.places.Autocomplete(input, options);
+    autocomplete.bindTo('bounds', map);
 
-    //Clearing out previous variable.
-    $scope.city = '';
-    $scope.zipcode = '';
-    $scope.state = '';
+    var infowindow = new google.maps.InfoWindow();
+    var marker = new google.maps.Marker({
+      map: map,
+      anchorPoint: new google.maps.Point(0, -29)
+    });
 
+    autocomplete.addListener('place_changed', function () {
+      infowindow.close();
+      marker.setVisible(false);
+      var place = autocomplete.getPlace();
 
-    // Create the autocomplete object, restricting the search to geographical
-    // location types.
-    autocomplete = new google.maps.places.Autocomplete(
-      /** @type {!HTMLInputElement} */
-      (document.getElementById('autocomplete')), {
-        types: ['geocode']
-      });
+      // if (!place.geometry) {
+      //   window.alert("Autocomplete's returned place contains no geometry");
+      //   return;
+      // }
 
-    // When the user selects an address from the dropdown, populate the address
-    // fields in the form.
-    autocomplete.addListener('place_changed', fillInAddress);
-  }
+      // If the place has a geometry, then present it on a map.
+      if (place.geometry.viewport) {
+        map.fitBounds(place.geometry.viewport);
+      } else {
+        map.setCenter(place.geometry.location);
+        map.setZoom(17);
+      }
+      marker.setIcon(({
+        url: place.icon,
+        size: new google.maps.Size(71, 71),
+        origin: new google.maps.Point(0, 0),
+        anchor: new google.maps.Point(17, 34),
+        scaledSize: new google.maps.Size(35, 35)
+      }));
+      marker.setPosition(place.geometry.location);
+      marker.setVisible(true);
 
-  function fillInAddress() {
-    // Get the place details from the autocomplete object.
-    var place = autocomplete.getPlace();
+      $scope.tempPlace = place;
+      inputValidation();
 
-    console.log('showing google object: ', place);
-    $scope.tempPlace = place;
-    console.log('Testing the live change object: ', $scope.tempPlace.address_components[0].long_name);
-
-    //Initiatin Input validation.
-    inputValidation();
-  }
-
-  // Bias the autocomplete object to the user's geographical location,
-  // as supplied by the browser's 'navigator.geolocation' object.
-  function geolocate() {
-
-    console.log('Functiong initiated');
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        var geolocation = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-        var circle = new google.maps.Circle({
-          center: geolocation,
-          radius: position.coords.accuracy
-        });
-        autocomplete.setBounds(circle.getBounds());
-      });
-    }
+    });
   }
 
   const inputValidation = () => {
@@ -216,21 +207,22 @@ AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
         $scope.city = $scope.tempPlace.address_components[index].long_name;
       }
 
-      if ($scope.tempPlace.address_components[index].types[0] === 'postal_code') {
-        $scope.zipcode = $scope.tempPlace.address_components[index].long_name;
-      }
+      //Only need this if we need zipcode from the Google.
+      // if ($scope.tempPlace.address_components[index].types[0] === 'postal_code') {
+      //   $scope.zipcode = $scope.tempPlace.address_components[index].long_name;
+      // }
 
       if ($scope.tempPlace.address_components[index].types[0] === 'administrative_area_level_1') {
         $scope.state = $scope.tempPlace.address_components[index].short_name;
       }
 
-      if ($scope.city === undefined && $scope.zipcode === undefined) {
-        alert('City or Zipcode is needed. Please try again.');
-      }
     }
 
     if ($scope.city && $scope.state) {
-      zipConversionService.getData({city: $scope.city, state: $scope.state}).then(response => {
+      zipConversionService.getData({
+        city: $scope.city,
+        state: $scope.state
+      }).then(response => {
         $scope.foundData = zipConversionService.findData();
       });
     }
@@ -238,14 +230,13 @@ AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
 
 
   //Initiating Pre Render
-  geolocate();
-  initAutocomplete();
+  initMap();
 
   // // Google Scripts=====================================
 
 
 
-// $interval(() => {
+  // $interval(() => {
   //   $scope.$applyAsync(() => {
   //     $scope.chart1Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
   //     $scope.chart2Type = $scope.chart1Type === 'bar' ? 'line' : 'bar';
