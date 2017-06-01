@@ -110,7 +110,6 @@
   width: 200px;
   height: 170px;
   margin: 65px auto 15px auto;
-
 }
 
 .doughnut-directive-wrap {
@@ -128,7 +127,8 @@
 
 // Google Map
 #map {
-  height: 100%;
+  width: 100%;
+  height: 400px;
 }
 
 

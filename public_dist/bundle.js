@@ -133,7 +133,7 @@ AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", functi
     });
   }, 10000);
 
-  // // Google Scripts for Google Map and AutoComplete.=====================================
+  // Google Scripts for Google Map and AutoComplete.=====================================
   //variables
   $scope.city;
   $scope.zipcode;
@@ -148,7 +148,7 @@ AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", functi
       zoom: 10
     });
     var input = document.getElementById('autocomplete');
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
     var options = {
       componentRestrictions: {
@@ -170,12 +170,10 @@ AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", functi
       marker.setVisible(false);
       var place = autocomplete.getPlace();
 
-      $scope.tempPlace = place;
-
-      if (!place.geometry) {
-        window.alert("Autocomplete's returned place contains no geometry");
-        return;
-      }
+      // if (!place.geometry) {
+      //   window.alert("Autocomplete's returned place contains no geometry");
+      //   return;
+      // }
 
       // If the place has a geometry, then present it on a map.
       if (place.geometry.viewport) {
@@ -194,69 +192,44 @@ AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", functi
       marker.setPosition(place.geometry.location);
       marker.setVisible(true);
 
-      var address = '';
-      if (place.address_components) {
-        address = [place.address_components[0] && place.address_components[0].short_name || '', place.address_components[1] && place.address_components[1].short_name || '', place.address_components[2] && place.address_components[2].short_name || ''].join(' ');
-      }
-
-      infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-      infowindow.open(map, marker);
-
-      //Location details
-      for (var i = 0; i < place.address_components.length; i++) {
-        if (place.address_components[i].types[0] == 'postal_code') {
-          document.getElementById('postal_code').innerHTML = place.address_components[i].long_name;
-        }
-        if (place.address_components[i].types[0] == 'country') {
-          document.getElementById('country').innerHTML = place.address_components[i].long_name;
-        }
-      }
-
-      document.getElementById('location').innerHTML = place.formatted_address;
-      document.getElementById('lat').innerHTML = place.geometry.location.lat();
-      document.getElementById('lon').innerHTML = place.geometry.location.lng();
+      $scope.tempPlace = place;
+      inputValidation();
     });
   }
 
   var inputValidation = function inputValidation() {
-    console.log('Bob');
+    console.log('Main control Input Validation initatied');
 
     for (var index = 0; index < $scope.tempPlace.address_components.length; index++) {
       if ($scope.tempPlace.address_components[index].types[0] === 'locality') {
         $scope.city = $scope.tempPlace.address_components[index].long_name;
       }
 
-      //     if ($scope.tempPlace.address_components[index].types[0] === 'postal_code') {
-      //       $scope.zipcode = $scope.tempPlace.address_components[index].long_name;
-      //     }
-
       if ($scope.tempPlace.address_components[index].types[0] === 'administrative_area_level_1') {
         $scope.state = $scope.tempPlace.address_components[index].short_name;
       }
-
-      if ($scope.city === undefined && $scope.zipcode === undefined) {
-        alert('City or Zipcode is needed. Please try again.');
-      }
     }
 
-    if (!$scope.zipcode && $scope.city && $scope.state) {
-      zipConversionService.getData({
-        city: $scope.city,
-        state: $scope.state
-      });
-      console.log("calling zipConversionService");
-    }
+    // if (!$scope.zipcode && $scope.city && $scope.state) {
+    //   zipConversionService.getData({
+    //     city: $scope.city,
+    //     state: $scope.state
+    //   });
+    //   console.log("calling zipConversionService");
+    // }
 
     console.info('Showing City info: ', $scope.city);
     console.info('Showing Zipcode info: ', $scope.zipcode);
     console.info('Showing State info: ', $scope.state);
-  };
+  }; // ============= END inputValidation ============
 
   //Initiating Pre Render
   initMap();
 
   // // Google Scripts=====================================
+
 }]);
+
 /* ============================================================================= */
 /* ======================== End: Main Controller =============================== */
 /* ============================================================================= */
