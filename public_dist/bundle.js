@@ -160,24 +160,9 @@ AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", functi
     // Get the place details from the autocomplete object.
     var place = autocomplete.getPlace();
 
-    for (var component in componentForm) {
-      document.getElementById(component).value = '';
-      document.getElementById(component).disabled = false;
-    }
-
     console.log('showing google object: ', place);
     $scope.tempPlace = place;
     console.log('Testing the live change object: ', $scope.tempPlace.address_components[0].long_name);
-
-    // Get each component of the address from the place details
-    // and fill the corresponding field on the form.
-    for (var i = 0; i < place.address_components.length; i++) {
-      var addressType = place.address_components[i].types[0];
-      if (componentForm[addressType]) {
-        var val = place.address_components[i][componentForm[addressType]];
-        document.getElementById(addressType).value = val;
-      }
-    }
 
     //Initiatin Input validation.
     inputValidation();
@@ -377,11 +362,20 @@ AA.controller("pollutionCtrl", ["$scope", "pollutionService", function ($scope, 
 AA.controller("rentCtrl", ["$scope", "rentService", "zipConversionService", function ($scope, rentService, zipConversionService) {
   $scope.data = zipConversionService.findData();
 
-  $scope.onBoardDataStudio;
-  $scope.onBoardDataOne;
-  $scope.onBoardDataTwo;
-  $scope.onBoardDataThree;
-  $scope.onBoardDataFour;
+  $scope.someFunction = function () {
+    // Some Code Here
+    console.log('We got zipcode data');
+  };
+
+  $scope.$on('eventFired', function (event, data) {
+    console.log('We got zipcode data: ', data);
+  });
+
+  // $scope.onBoardDataStudio;
+  // $scope.onBoardDataOne;
+  // $scope.onBoardDataTwo;
+  // $scope.onBoardDataThree;
+  // $scope.onBoardDataFour;
 
   // $scope.getInfo = () => {
   //   rentService
@@ -731,7 +725,7 @@ AA.service("restaurantService", ["$http", function ($http) {
 }]);
 "use strict";
 
-AA.service("zipConversionService", ["$http", function ($http) {
+AA.service("zipConversionService", ["$http", "$rootScope", function ($http, $rootScope) {
   var _this = this;
 
   var baseUrl = "/api/zipConversion";
@@ -746,8 +740,11 @@ AA.service("zipConversionService", ["$http", function ($http) {
       return response.data.response.result.package.item;
     });
   };
+
   this.findData = function () {
-    return _this.data;
+    $rootScope.$broadcast('eventFired', {
+      data: _this.data
+    });
   };
   //end of service
 }]);

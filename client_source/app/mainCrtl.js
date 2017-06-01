@@ -193,24 +193,9 @@ AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
     // Get the place details from the autocomplete object.
     var place = autocomplete.getPlace();
 
-    for (var component in componentForm) {
-      document.getElementById(component).value = '';
-      document.getElementById(component).disabled = false;
-    }
-
     console.log('showing google object: ', place);
     $scope.tempPlace = place;
     console.log('Testing the live change object: ', $scope.tempPlace.address_components[0].long_name);
-
-    // Get each component of the address from the place details
-    // and fill the corresponding field on the form.
-    for (var i = 0; i < place.address_components.length; i++) {
-      var addressType = place.address_components[i].types[0];
-      if (componentForm[addressType]) {
-        var val = place.address_components[i][componentForm[addressType]];
-        document.getElementById(addressType).value = val;
-      }
-    }
 
     //Initiatin Input validation.
     inputValidation();
