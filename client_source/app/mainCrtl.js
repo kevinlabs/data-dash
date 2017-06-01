@@ -110,7 +110,7 @@ AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
   $scope.chart5Type = 'polarArea';
   $scope.chart6Type = 'radar';
 
-  
+
   // START: THIS NEEDS RIPPING OUT !! -- !! ------------------------------------
   $interval(() => {
     $scope.$applyAsync(() => {

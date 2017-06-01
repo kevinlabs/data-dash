@@ -161,8 +161,8 @@ AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", functi
     var place = autocomplete.getPlace();
 
     for (var component in componentForm) {
-      document.getElementById(component).value = '';
-      document.getElementById(component).disabled = false;
+      //document.getElementById(component).value = '';
+      //document.getElementById(component).disabled = false;
     }
 
     console.log('showing google object: ', place);
@@ -175,7 +175,7 @@ AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", functi
       var addressType = place.address_components[i].types[0];
       if (componentForm[addressType]) {
         var val = place.address_components[i][componentForm[addressType]];
-        document.getElementById(addressType).value = val;
+        //document.getElementById(addressType).value = val;
       }
     }
 
