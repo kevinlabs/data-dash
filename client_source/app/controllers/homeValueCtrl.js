@@ -1,20 +1,12 @@
-AA.controller("homeValueCtrl", function($scope, homeValueService){
+AA.controller("homeValueCtrl", function($scope, zipConversionService){
+  console.log('see me');
 
-  $scope.avgsaleprice;
+  $scope.$on('eventFired', function (event, data) {
+    console.log(data);
+      $scope.avgsaleprice = data.avgsaleprice;
+      $scope.assignData();
+  });
 
-  $scope.data;
-
-  $scope.getInfo = () => {
-    homeValueService
-      .getData()
-      .then((response) => {
-        console.log(response);
-        $scope.avgsaleprice = response.avgsaleprice;
-        $scope.assignData();
-      })
-  }
-
-  $scope.getInfo();
 
   $scope.assignData = function() {
     $scope.propertySalePrice = $scope.avgsaleprice;

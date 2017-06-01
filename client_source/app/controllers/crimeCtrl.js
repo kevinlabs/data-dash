@@ -1,35 +1,18 @@
-AA.controller("crimeCtrl", function ($scope, crimeService) {
+AA.controller("crimeCtrl", function ($scope, zipConversionService) {
 
-    $scope.assault;
-    $scope.burglary;
-    $scope.larceny;
-    $scope.murder;
-    $scope.motorVehicleTheft;
-    $scope.personalCrime;
-    $scope.property;
-    $scope.rape;
-    $scope.robbery;
-
-    // $scope.getInfo = () => {
-    //   crimeService
-    //     .getData()
-    //     .then((response) => {
-    //       console.log(response);
-    //       $scope.assault = response.crmcyasst;
-    //       $scope.burglary = response.crmcyburg;
-    //       $scope.larceny = response.crmcylarc;
-    //       $scope.murder = response.crmcymurd;
-    //       $scope.motorVehicleTheft = response.crmcymveh;
-    //       $scope.personalCrime = response.crmcyperc;
-    //       $scope.property = response.crmcyproc;
-    //       $scope.rape = response.crmcyrape;
-    //       $scope.robbery = response.crmcyrobb;
-    //       $scope.assignData();
-    //
-    //     })
-    // }
-    //
-    // $scope.getInfo();
+  $scope.$on('eventFired', function (event, data) {
+    console.log(data);
+    $scope.assault = data.crmcyasst;
+    $scope.burglary = data.crmcyburg;
+    $scope.larceny = data.crmcylarc;
+    $scope.murder = data.crmcymurd;
+    $scope.motorVehicleTheft = data.crmcymveh;
+    $scope.personalCrime = data.crmcyperc;
+    $scope.property = data.crmcyproc;
+    $scope.rape = data.crmcyrape;
+    $scope.robbery = data.crmcyrobb;
+    $scope.assignData();
+  });
 
     $scope.assignData = function() {
 
