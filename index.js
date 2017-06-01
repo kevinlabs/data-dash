@@ -127,7 +127,7 @@ app.use(express.static(__dirname + '/public_dist'));
 // app.get('/group/browse', groupCtrl.browseGroup);
 // app.post('/register/group/addmember', groupCtrl.addMember);
 
-app.get('/api/hospitals', hospitals.getHospitals);
+app.post('/api/hospitals', hospitals.getHospitals);
 
 app.get('/api/restaurants', restaurants.getRestaurants);
 

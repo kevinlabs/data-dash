@@ -185,6 +185,8 @@ AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", functi
     }
 
     if ($scope.city && $scope.state) {
+      zipConversionService.city = $scope.city;
+
       zipConversionService.getData({
         city: $scope.city,
         state: $scope.state
@@ -277,18 +279,29 @@ AA.controller("homeValueCtrl", ["$scope", "zipConversionService", function ($sco
 }]);
 "use strict";
 
-AA.controller("hospitalCtrl", ["$scope", "hospitalService", function ($scope, hospitalService) {
+AA.controller("hospitalCtrl", ["$scope", "hospitalService", "zipConversionService", function ($scope, hospitalService, zipConversionService) {
 
-  $scope.data;
+  $scope.city;
 
-  $scope.getInfo = function () {
+  $scope.$on('eventFired', function (event, data) {
+    $scope.city = zipConversionService.city;
+
+    console.log("this is hospital controller", $scope.city);
+
+    var city = $scope.city;
+
+    var splitCity = city.split(" ").join("+");
+    console.log("hey this is splitCity", splitCity);
+
+    $scope.getInfo();
+  });
+
+  $scope.getInfo = function (city) {
     hospitalService.getData().then(function (response) {
       console.log(response);
       $scope.data = response;
     });
   };
-
-  $scope.getInfo();
 }]);
 "use strict";
 
@@ -369,6 +382,137 @@ AA.controller("restaurantCtrl", ["$scope", "restaurantService", function ($scope
 
   $scope.getInfo();
 }]);
+"use strict";
+
+AA.service("crimeService", ["$http", function ($http) {
+
+  //end of service
+}]);
+"use strict";
+
+AA.service("homeValueService", ["$http", function ($http) {
+
+  // const baseUrl = "/api/onBoard";
+  //
+  // this.getData = () => {
+  //   return $http({
+  //     method: "POST",
+  //     url: baseUrl
+  //   }).then( (response) => {
+  //     console.log('hvservice', response);
+  //     return response.data.response.result.package.item;
+  //   })
+  // }
+
+  //end of service
+}]);
+"use strict";
+
+AA.service("hospitalService", ["$http", function ($http) {
+
+  var baseUrl = "/api/hospitals";
+
+  this.getData = function (city) {
+    return $http({
+      method: "POST",
+      url: baseUrl,
+      data: city
+    }).then(function (response) {
+      console.log(response.data.PlaceSearchResponse.result.length);
+      return response.data.PlaceSearchResponse.result.length;
+    });
+  };
+
+  //end of service
+}]);
+"use strict";
+
+AA.service("pollutionService", ["$http", function ($http) {
+
+  var baseUrl = "/api/pollution";
+
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      return response.data.data[0];
+    });
+  };
+  //end of service
+}]);
+
+/* 
+NOTES FOR A SWITCH:
+
+0 - 49 GOOD
+50 - 150 MODERATE
+151 - 350 UNHEALTHY
+351 - 420 VERY UNHEALTHY
+421 up HAZARDOUS
+
+*/
+"use strict";
+
+AA.service("rentService", ["$http", function ($http) {
+
+  var baseUrl = "/api/onBoard";
+
+  this.getData = function () {
+    return $http({
+      method: "POST",
+      url: baseUrl
+    }).then(function (response) {
+      console.log(response.data.response.result.package.item);
+      return response.data.response.result.package.item;
+    });
+  };
+
+  // end of service
+}]);
+"use strict";
+
+AA.service("restaurantService", ["$http", function ($http) {
+
+  var baseUrl = "http://swapi.co/api/starships";
+
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      console.log(response.data.results);
+      return response.data.results;
+    });
+  };
+
+  //end of service
+}]);
+"use strict";
+
+AA.service("zipConversionService", ["$http", "$rootScope", function ($http, $rootScope) {
+  var _this = this;
+
+  var baseUrl = "/api/zipConversion";
+
+  var city;
+  this.city = city;
+
+  this.getData = function (obj) {
+    return $http({
+      method: "POST",
+      url: baseUrl,
+      data: obj
+    }).then(function (response) {
+      _this.data = response.data.response.result.package.item;
+      return response.data.response.result.package.item;
+    });
+  };
+  this.findData = function () {
+    $rootScope.$broadcast('eventFired', _this.data);
+  };
+  //end of service
+}]);
 'use strict';
 
 // Start: This is the doughnut chart directive =================================
@@ -447,6 +591,56 @@ AA.directive('headerDirective', function () {
 // End: This is the header directive ===========================================
 'use strict';
 
+// Start: This is the doughnut chart directive =================================
+AA.directive('lineDirective', function () {
+  return {
+    restrict: 'E', templateUrl: "./../views/lineChart.html",
+    // controller: 'dirCtrl',
+    scope: {
+      chartData: '=',
+      type: "="
+    },
+    link: function link(scope, elem, attrs, ctrl) {
+      console.log('this is my element\'s second child:', elem[0].children[0].children[0]);
+
+      var ctxDir = elem[0].children[0].children[0];
+
+      var myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type, scope.options);
+
+      function getChartGivenData(chartElement, dataForChart, type, options) {
+        return new Chart(chartElement, {
+          type: type,
+          data: dataForChart,
+          options: {
+            legend: {
+              display: false,
+              labels: {
+
+                display: false
+              }
+            },
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            }
+          }
+        });
+      }
+
+      scope.$watch('type', function (newValue, oldValue, scope) {
+        getChartGivenData(ctxDir, scope.chartData, newValue);
+      });
+    }
+
+  };
+});
+
+// End: This is the doughnut chart directive ===================================
+'use strict';
+
 // Start: This is the header directive =========================================
 AA.directive('mapDirective', function () {
 
@@ -487,131 +681,4 @@ AA.directive('pieDirective', function () {
     }
   };
 });
-"use strict";
-
-AA.service("crimeService", ["$http", function ($http) {
-
-  //end of service
-}]);
-"use strict";
-
-AA.service("homeValueService", ["$http", function ($http) {
-
-  // const baseUrl = "/api/onBoard";
-  //
-  // this.getData = () => {
-  //   return $http({
-  //     method: "POST",
-  //     url: baseUrl
-  //   }).then( (response) => {
-  //     console.log('hvservice', response);
-  //     return response.data.response.result.package.item;
-  //   })
-  // }
-
-  //end of service
-}]);
-"use strict";
-
-AA.service("hospitalService", ["$http", function ($http) {
-
-  var baseUrl = "http://swapi.co/api/vehicles";
-
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
-      console.log(response.data.results);
-      return response.data.results;
-    });
-  };
-
-  //end of service
-}]);
-"use strict";
-
-AA.service("pollutionService", ["$http", function ($http) {
-
-  var baseUrl = "/api/pollution";
-
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
-      return response.data.data[0];
-    });
-  };
-  //end of service
-}]);
-
-/* 
-NOTES FOR A SWITCH:
-
-0 - 49 GOOD
-50 - 150 MODERATE
-151 - 350 UNHEALTHY
-351 - 420 VERY UNHEALTHY
-421 up HAZARDOUS
-
-*/
-"use strict";
-
-AA.service("rentService", ["$http", function ($http) {
-
-  var baseUrl = "/api/onBoard";
-
-  this.getData = function () {
-    return $http({
-      method: "POST",
-      url: baseUrl
-    }).then(function (response) {
-      console.log(response.data.response.result.package.item);
-      return response.data.response.result.package.item;
-    });
-  };
-
-  // end of service
-}]);
-"use strict";
-
-AA.service("restaurantService", ["$http", function ($http) {
-
-  var baseUrl = "http://swapi.co/api/starships";
-
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
-      console.log(response.data.results);
-      return response.data.results;
-    });
-  };
-
-  //end of service
-}]);
-"use strict";
-
-AA.service("zipConversionService", ["$http", "$rootScope", function ($http, $rootScope) {
-  var _this = this;
-
-  var baseUrl = "/api/zipConversion";
-
-  this.getData = function (obj) {
-    return $http({
-      method: "POST",
-      url: baseUrl,
-      data: obj
-    }).then(function (response) {
-      _this.data = response.data.response.result.package.item;
-      return response.data.response.result.package.item;
-    });
-  };
-  this.findData = function () {
-    $rootScope.$broadcast('eventFired', _this.data);
-  };
-  //end of service
-}]);
 //# sourceMappingURL=bundle.js.map

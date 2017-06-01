@@ -219,6 +219,8 @@ AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
     }
 
     if ($scope.city && $scope.state) {
+        zipConversionService.city = $scope.city
+
       zipConversionService.getData({
         city: $scope.city,
         state: $scope.state
