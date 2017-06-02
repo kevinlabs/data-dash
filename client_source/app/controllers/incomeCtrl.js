@@ -1,8 +1,5 @@
 AA.controller("incomeCtrl", function ($scope, zipConversionService) {
 
-
-console.log("income controller");
-
   $scope.$on('eventFired', function (event, data) {
     console.log(data);
     $scope.income15_20 = data.hincy15_20;

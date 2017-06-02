@@ -6,6 +6,7 @@ AA.service("zipConversionService", function($http, $rootScope){
   this.city = city;
 
   this.getData = (obj) => {
+    this.data = {};
     return $http({
       method: "POST",
       url: baseUrl,
@@ -16,7 +17,9 @@ AA.service("zipConversionService", function($http, $rootScope){
     })
   }
   this.findData = () => {
+    console.log('s1: ', this.data);
     $rootScope.$broadcast('eventFired', this.data);
+    console.log('s2: ', this.data);
   }
 //end of service
 });

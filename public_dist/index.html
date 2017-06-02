@@ -70,10 +70,10 @@
       </div>
       <!-- 6: Medical centers nearby -->
       <div class="data-card dc-bg-gas-medical">
-        <p>Medical Centers</p>
-        <div class="data-chart-box" ng-controller ="hospitalCtrl">
-          <!-- CHART HERE -->
-          <chart-directive chart-data="hospitalData" type="chart4Type" options="crimeOptions"></chart-directive>
+        <p>Closest Airport</p>
+        <div class="data-chart-box" ng-controller ="airportCtrl">
+          <h2 class="data-text">{{airport}}</h2>
+          <h5 class="data-text-sub">{{airportDist | distance}}</h5>
         </div>
       </div>
       <!-- 7: Crime stats -->

@@ -2,7 +2,6 @@ const keys = require('../config.js');
 const axios = require('axios');
 const jsonParser = require('xml2json');
 
-
 module.exports = {
   getHospitals: (req, res) => {
     console.log('From HospitalsCtrl in Node server: ', req.body);
