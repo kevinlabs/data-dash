@@ -173,17 +173,17 @@ AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
       marker.setVisible(false);
       var place = autocomplete.getPlace();
 
-      // if (!place.geometry) {
-      //   window.alert("Autocomplete's returned place contains no geometry");
-      //   return;
-      // }
+      // // if (!place.geometry) {
+      // //   window.alert("Autocomplete's returned place contains no geometry");
+      // //   return;
+      // // }
 
       // If the place has a geometry, then present it on a map.
       if (place.geometry.viewport) {
         map.fitBounds(place.geometry.viewport);
       } else {
         map.setCenter(place.geometry.location);
-        map.setZoom(17);
+        map.setZoom(25);
       }
       marker.setIcon(({
         url: place.icon,
