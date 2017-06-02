@@ -2,6 +2,8 @@ AA.service("zipConversionService", function($http, $rootScope){
 
 const baseUrl = "/api/zipConversion";
 
+var city;
+this.city = city; 
 
 this.getData = (obj) => {
   return $http({
