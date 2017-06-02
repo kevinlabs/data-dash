@@ -127,7 +127,14 @@ app.use(express.static(__dirname + '/public_dist'));
 // app.get('/group/browse', groupCtrl.browseGroup);
 // app.post('/register/group/addmember', groupCtrl.addMember);
 
-app.get('/api/hospitals', hospitals.getHospitals);
+app.post('/api/hospitals', hospitals.getHospitals);
+
+//For testing.
+// app.post('/api/hospitals', function (req, res, next) {
+//     console.log('it is activated', req.body);
+//     res.status(200).send('test');
+// });
+
 
 app.get('/api/restaurants', restaurants.getRestaurants);
 
