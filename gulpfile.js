@@ -2,55 +2,47 @@
 //this brings in all the needed functionality for the tasks to run.
 //if you have not run NPM install none of the tasks will work
 var gulp = require('gulp'),
-    concat = require('gulp-concat'),
-    sass = require('gulp-sass'),
-    annotate = require('gulp-ng-annotate'),
-    sourcemaps = require('gulp-sourcemaps'),
-    CacheBuster = require('gulp-cachebust'),
-    print = require('gulp-print'),
-    babel = require('gulp-babel'),
-    replace = require('gulp-replace'),
-
-    //uncomment line below if we are using bower packge manager files.
-    //mainBowerFiles = require('main-bower-files'),
-
-    rename = require('gulp-rename');
+  concat = require('gulp-concat'),
+  sass = require('gulp-sass'),
+  annotate = require('gulp-ng-annotate'),
+  sourcemaps = require('gulp-sourcemaps'),
+  CacheBuster = require('gulp-cachebust'),
+  print = require('gulp-print'),
+  babel = require('gulp-babel'),
+  replace = require('gulp-replace'),
+  //uncomment line below if we are using bower packge manager files.
+  //mainBowerFiles = require('main-bower-files'),
+  rename = require('gulp-rename');
 
 var cachebust = new CacheBuster();
 
 const inputPaths = {
-    jsSource: './client_source/app/**/*.js',
-    sassSource: './client_source/css/**/*.scss',
-    cssSource: './client_source/css/**/*.css',
-    cssPlugin: './client_source/css_plugin/**/*.css',
-    viewsSource: './client_source/views/**/*.html',
-    indexSource: './client_source/index.html',
-    picturesSource: './client_source/img/**/*',
-    fontSource: './client_source/fonts/**/*'
+  jsSource: './client_source/app/**/*.js',
+  sassSource: './client_source/css/**/*.scss',
+  cssSource: './client_source/css/**/*.css',
+  cssPlugin: './client_source/css_plugin/**/*.css',
+  viewsSource: './client_source/views/**/*.html',
+  indexSource: './client_source/index.html',
+  picturesSource: './client_source/img/**/*',
+  fontSource: './client_source/fonts/**/*'
 };
 
 const outputPaths = {
-    jsSource: './public_dist',
-    sassSource: './public_dist/css',
-    cssSource: './public_dist/css',
-    cssPlugin: './public_dist/css/css_plugin',
-    viewsSource: './public_dist/views',
-    indexSource: './public_dist',
-    picturesSource: './public_dist/img',
-    fontSource: './public_dist/fonts'
+  jsSource: './public_dist',
+  sassSource: './public_dist/css',
+  cssSource: './public_dist/css',
+  cssPlugin: './public_dist/css/css_plugin',
+  viewsSource: './public_dist/views',
+  indexSource: './public_dist',
+  picturesSource: './public_dist/img',
+  fontSource: './public_dist/fonts'
 };
-
-// gulp.task('copy:jsPlugin', function () {
-//     return gulp.src([inputPaths.jsPluginSource])
-//         .pipe(gulp.dest(outputPaths.jsPluginSource));
-// });
 
 //cssPlugin
 gulp.task('copy:cssPlugin', function () {
-    return gulp.src([inputPaths.cssPlugin])
-        .pipe(gulp.dest(outputPaths.cssPlugin));
+  return gulp.src([inputPaths.cssPlugin])
+    .pipe(gulp.dest(outputPaths.cssPlugin));
 });
-
 
 //CSS
 gulp.task('build-css', function () {

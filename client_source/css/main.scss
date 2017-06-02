@@ -3,14 +3,6 @@
 /* ============================================================================= */
 @import "mixins.scss";
 
-// #header-section {
-//   width: 100%;
-//   height: auto;
-//   background: #093056;
-//   padding: 20px 0;
-// }
-
-
 #main-container {
   max-width: 80%;
   margin: 0 auto;
@@ -47,6 +39,10 @@
     left: 80px;
     font-weight: 600;
   }
+}
+
+.data-text {
+  font-family: $headlineText;
 }
 
 // Start: Data card icons ......................................................

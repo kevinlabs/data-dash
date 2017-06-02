@@ -240,7 +240,7 @@ AA.controller("crimeCtrl", ["$scope", "zipConversionService", function ($scope, 
   $scope.assignData = function () {
 
     $scope.crimeData = {
-      labels: ["Assault", "Burglary", "Larceny", "Murder", "Auto Theft", "Personal Crime", "Property", "Rape", "robbery"],
+      labels: ["Assault", "Burglary", "Larceny", "Murder", "Auto Theft", "Personal Crime", "Property", "Rape", "Robbery"],
       datasets: [{
         backgroundColor: ['rgba(33, 125, 216, 0.8)', 'rgba(165, 171, 175, 0.8)', 'rgba(4, 82, 160, 0.8)', 'rgba(14, 58, 102, 0.8)', 'rgba(128, 172, 216, 0.8)', 'rgba(72, 72, 72, 0.8)', 'rgba(72, 72, 72, 0.8)'],
         data: [$scope.assault, $scope.burglary, $scope.larceny, $scope.murder, $scope.motorVehicleTheft, $scope.personalCrime, $scope.property, $scope.rape, $scope.robbery]
@@ -327,7 +327,7 @@ AA.controller("incomeCtrl", ["$scope", "zipConversionService", function ($scope,
   $scope.assignData = function () {
 
     $scope.incomeData = {
-      labels: ["15-20K", "20-25K", "30-35K", "40-45K", "50-60K ", "60-75K", "75-100k"],
+      labels: ["$15-20K", "$20-25K", "$30-35K", "$40-45K", "$50-60K ", "$60-75K", "$75-100k"],
       datasets: [{
         backgroundColor: ['rgba(33, 125, 216, 0.8)', 'rgba(165, 171, 175, 0.8)', 'rgba(4, 82, 160, 0.8)', 'rgba(14, 58, 102, 0.8)', 'rgba(128, 172, 216, 0.8)', 'rgba(72, 72, 72, 0.8)', 'rgba(72, 72, 72, 0.8)'],
         data: [$scope.income15_20, $scope.income20_25, $scope.income30_35, $scope.income40_45, $scope.income50_60, $scope.income60_75, $scope.income75_100]
@@ -537,6 +537,7 @@ AA.directive('footerDirective', function () {
   return {
     restrict: 'E',
     templateUrl: './views/footer.html'
+    // controller: 'mainCtrl'
   };
 });
 // End: This is the header directive ===========================================
@@ -548,6 +549,7 @@ AA.directive('headerDirective', function () {
   return {
     restrict: 'E',
     templateUrl: './views/header.html'
+    // controller: 'mainCtrl'
   };
 });
 // End: This is the header directive ===========================================
@@ -609,6 +611,7 @@ AA.directive('mapDirective', function () {
   return {
     restrict: 'E',
     templateUrl: './views/map.html'
+    // controller: 'mainCtrl'
   };
 });
 // End: This is the header directive ===========================================
@@ -670,20 +673,23 @@ AA.service("homeValueService", ["$http", function ($http) {
 "use strict";
 
 AA.service("hospitalService", ["$http", function ($http) {
-
-  var baseUrl = "/api/hospitals";
-
-  this.getData = function (city) {
-    console.log('Showing city data before sending API call: ', city);
-    return $http({
-      method: "POST",
-      url: baseUrl,
-      data: { city: city }
-    }).then(function (response) {
-      console.log('Here is reponse back hospital service (Angular): ', response.data.PlaceSearchResponse.result.length);
-      return response.data.PlaceSearchResponse.result.length;
-    });
-  };
+  // 
+  // const baseUrl = "/api/hospitals";
+  //
+  //
+  // this.getData = (city) => {
+  //   console.log('Showing city data before sending API call: ', city);
+  //   return $http({
+  //     method: "POST",
+  //     url: baseUrl,
+  //     data: {city}
+  //   }).then( (response) => {
+  //     console.log('Here is reponse back hospital service (Angular): ', response.data.PlaceSearchResponse.result.length);
+  //     return response.data.PlaceSearchResponse.result.length;
+  //
+  //   });
+  // };
+  //
 
   //end of service
 }]);
@@ -717,18 +723,23 @@ NOTES FOR A SWITCH:
 "use strict";
 
 AA.service("rentService", ["$http", function ($http) {
-
-  var baseUrl = "/api/onBoard";
-
-  this.getData = function () {
-    return $http({
-      method: "POST",
-      url: baseUrl
-    }).then(function (response) {
-      console.log(response.data.response.result.package.item);
-      return response.data.response.result.package.item;
-    });
-  };
+  // 
+  // const baseUrl = "/api/onBoard";
+  //
+  //
+  // this.getData = () => {
+  //   return $http({
+  //     method: "POST",
+  //     url: baseUrl
+  //   }).then( (response) => {
+  //     console.log(response.data.response.result.package.item);
+  //     return response.data.response.result.package.item
+  //
+  //   })
+  // }
+  //
+  //
+  //
 
   // end of service
 }]);
@@ -736,17 +747,20 @@ AA.service("rentService", ["$http", function ($http) {
 
 AA.service("restaurantService", ["$http", function ($http) {
 
-  var baseUrl = "http://swapi.co/api/starships";
-
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
-      console.log(response.data.results);
-      return response.data.results;
-    });
-  };
+  // const baseUrl = "http://swapi.co/api/starships"
+  //
+  //
+  // this.getData = () => {
+  //   return $http({
+  //     method: "GET",
+  //     url: baseUrl
+  //   }).then( (response) => {
+  //     console.log(response.data.results);
+  //     return response.data.results;
+  //   })
+  // }
+  //
+  //
 
   //end of service
 }]);

@@ -18,7 +18,7 @@ console.log("income controller");
     $scope.assignData = function() {
 
       $scope.incomeData = {
-        labels: ["15-20K", "20-25K", "30-35K", "40-45K", "50-60K ", "60-75K", "75-100k"],
+        labels: ["$15-20K", "$20-25K", "$30-35K", "$40-45K", "$50-60K ", "$60-75K", "$75-100k"],
         datasets: [{
           backgroundColor: [
             'rgba(33, 125, 216, 0.8)',

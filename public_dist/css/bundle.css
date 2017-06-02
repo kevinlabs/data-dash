@@ -114,6 +114,9 @@
     left: 80px;
     font-weight: 600; }
 
+.data-text {
+  font-family: "Oswald", sans-serif; }
+
 .dc-bg-time {
   background: #F7F7F7 url("../img/data-icon-time.svg") no-repeat;
   background-size: 50px;
