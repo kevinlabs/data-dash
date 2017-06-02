@@ -308,6 +308,96 @@ AA.controller("hospitalCtrl", ["$scope", "hospitalService", "zipConversionServic
 }]);
 "use strict";
 
+AA.controller("incomeCtrl", ["$scope", "zipConversionService", function ($scope, zipConversionService) {
+
+  console.log("income controller");
+
+  $scope.$on('eventFired', function (event, data) {
+    console.log(data);
+    $scope.income15_20 = data.hincy15_20;
+    $scope.income20_25 = data.hincy20_25;
+    $scope.income30_35 = data.hincy30_35;
+    $scope.income40_45 = data.hincy40_45;
+    $scope.income50_60 = data.hincy50_60;
+    $scope.income60_75 = data.hincy60_75;
+    $scope.income75_100 = data.hincy75_100;
+    $scope.assignData();
+  });
+
+  $scope.assignData = function () {
+
+    $scope.incomeData = {
+      labels: ["15-20K", "20-25K", "30-35K", "40-45K", "50-60K ", "60-75K", "75-100k"],
+      datasets: [{
+        backgroundColor: ['rgba(33, 125, 216, 0.8)', 'rgba(165, 171, 175, 0.8)', 'rgba(4, 82, 160, 0.8)', 'rgba(14, 58, 102, 0.8)', 'rgba(128, 172, 216, 0.8)', 'rgba(72, 72, 72, 0.8)', 'rgba(72, 72, 72, 0.8)'],
+        data: [$scope.income15_20, $scope.income20_25, $scope.income30_35, $scope.income40_45, $scope.income50_60, $scope.income60_75, $scope.income75_100]
+      }]
+    };
+  };
+
+  $scope.incomeOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    legend: {
+      display: false,
+      labels: {
+        display: false
+      }
+    }
+  };
+  // end of controller
+}]);
+"use strict";
+
+AA.controller("languagesCtrl", ["$timeout", "$scope", "zipConversionService", function ($timeout, $scope, zipConversionService) {
+
+  console.log("languages working");
+  $scope.$on('eventFired', function (event, data) {
+    console.log(data);
+    $scope.asian = data.langasian;
+    $scope.english = data.langeng;
+    $scope.european = data.langeuro;
+    $scope.other = data.langother;
+    $scope.spanish = data.langspan;
+    $scope.assignData();
+  });
+
+  $scope.assignData = function () {
+    $scope.langData = {
+      labels: ['Asian', 'English', 'european', 'Other', 'Spanish'],
+      datasets: [{
+        label: 'language',
+        data: [$scope.asian, $scope.english, $scope.european, $scope.other, $scope.spanish],
+        backgroundColor: ['rgba(33, 125, 216, 0.5)', 'rgba(165, 171, 175, 0.5)', 'rgba(4, 82, 160, 0.5)', 'rgba(14, 58, 102, 0.5)', 'rgba(128, 172, 216, 0.5)', 'rgba(72, 72, 72, 0.5)', 'rgba(72, 72, 72, 0.5)', 'rgba(72, 72, 72, 0.5)'],
+        borderColor: ['rgba(33, 125, 216, 1)', 'rgba(165, 171, 175, 1)', 'rgba(4, 82, 160, 1)', 'rgba(14, 58, 102, 1)', 'rgba(128, 172, 216, 1)', 'rgba(72, 72, 72, 1)', 'rgba(72, 72, 72, 1)', 'rgba(72, 72, 72, 1)'],
+        borderWidth: 1
+      }]
+    };
+    //  console.log($scope.medianRentData);
+  };
+  $scope.langOptions = {
+    legend: {
+      display: false,
+      labels: {
+        display: false
+      }
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          stepSize: 5000
+        },
+        stacked: false
+      }],
+      xAxes: [{
+        stacked: false
+      }]
+    }
+  };
+  //end of controller
+}]);
+"use strict";
+
 AA.controller("pollutionCtrl", ["$scope", "pollutionService", function ($scope, pollutionService) {
 
   $scope.airPollutionIndex;
@@ -359,7 +449,7 @@ AA.controller("rentCtrl", ["$timeout", "$scope", "rentService", "zipConversionSe
     scales: {
       yAxes: [{
         ticks: {
-          stepSize: 250
+          stepSize: 500
         },
         stacked: false
       }],
