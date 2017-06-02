@@ -14,8 +14,7 @@ this.getData = () => {
 //end of service
 });
 
-
-/* 
+/*
 NOTES FOR A SWITCH:
 
 0 - 49 GOOD

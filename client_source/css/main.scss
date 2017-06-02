@@ -3,14 +3,6 @@
 /* ============================================================================= */
 @import "mixins.scss";
 
-// #header-section {
-//   width: 100%;
-//   height: auto;
-//   background: #093056;
-//   padding: 20px 0;
-// }
-
-
 #main-container {
   max-width: 80%;
   margin: 0 auto;
@@ -37,7 +29,6 @@
   @include no-select;
   cursor: pointer;
   margin: 3px;
-
   position: relative;
 
   p {
@@ -47,6 +38,18 @@
     left: 80px;
     font-weight: 600;
   }
+}
+
+.data-text {
+  font-family: $headlineText;
+}
+
+.data-text-sub {
+  font-family: $bodyText;
+  position: relative;
+  top: -18px;
+  font-size: 14px;
+
 }
 
 // Start: Data card icons ......................................................
@@ -108,7 +111,6 @@
   width: 200px;
   height:170px;
   margin: 65px auto 15px auto;
-
 }
 
 .doughnut-directive-wrap {
@@ -117,12 +119,12 @@
   align-items: center;
 }
 
-
 // End: Data card chart box ....................................................
 
-.chart{
-  .lable { display: none; }
-}
+// THINK THIS CAN BE REMOVED!?!!?!
+// .chart{
+//   .lable { display: none; }
+// }
 
 // Google Map
 #map {

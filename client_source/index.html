@@ -42,9 +42,9 @@
       </div>
       <!-- 3: Home values -->
       <div class="data-card dc-bg-property">
-        <p>Median Home Values</p>
+        <p>Median Home Value</p>
         <div class="data-chart-box" ng-controller="homeValueCtrl">
-          <h2>${{propertySalePrice}}</h2>
+          <h2 class="data-text">{{propertySalePrice | currency : '$' : 0}}</h2>
         </div>
       </div>
       <!-- 4: Rent prices -->
@@ -61,15 +61,8 @@
           <chart-directive chart-data="langData" type="chart2Type" options="langOptions"></chart-directive>
         </div>
       </div>
-      <!-- 5: Gas Price -->
-      <div class="data-card dc-bg-gas-restaurants">
-        <p>Local Restaurants</p>
-        <div class="data-chart-box">
-          <!-- CHART HERE -->
-        </div>
-      </div>
       <!-- 6: School rankings  -->
-      <div class="data-card dc-bg-gas-education">
+      <div class="data-card dc-bg-gas-household-income">
         <p>Household Income</p>
         <div class="data-chart-box" ng-controller = "incomeCtrl">
           <chart-directive chart-data="incomeData" type="chart4Type" options="incomeOptions"></chart-directive>
@@ -77,10 +70,10 @@
       </div>
       <!-- 6: Medical centers nearby -->
       <div class="data-card dc-bg-gas-medical">
-        <p>Medical Centers</p>
-        <div class="data-chart-box" ng-controller ="hospitalCtrl">
-          <!-- CHART HERE -->
-          <chart-directive chart-data="hospitalData" type="chart4Type" options="crimeOptions"></chart-directive>
+        <p>Closest Airport</p>
+        <div class="data-chart-box" ng-controller ="airportCtrl">
+          <h2 class="data-text">{{airport}}</h2>
+          <h5 class="data-text-sub">{{airportDist | distance}}</h5>
         </div>
       </div>
       <!-- 7: Crime stats -->
@@ -94,7 +87,7 @@
       <div class="data-card dc-bg-property">
         <p>Air Pollution Index</p>
         <div class="data-chart-box" ng-controller="pollutionCtrl">
-          <h2>{{airPollutionIndex}}</h2>
+          <h2 class="data-text">{{airPollutionIndex}}</h2>
         </div>
       </div>
     </section>

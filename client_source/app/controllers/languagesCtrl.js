@@ -1,26 +1,24 @@
 AA.controller("languagesCtrl", function ($timeout, $scope, zipConversionService) {
 
-console.log("languages working");
     $scope.$on('eventFired', function (event, data) {
-      console.log(data);
         $scope.asian = data.langasian;
         $scope.english = data.langeng;
+        $scope.spanish = data.langspan;
         $scope.european = data.langeuro;
         $scope.other = data.langother;
-        $scope.spanish = data.langspan;
         $scope.assignData();
     });
 
     $scope.assignData = function () {
       $scope.langData = {
         labels: [
-          'Asian', 'English', 'european', 'Other', 'Spanish'
+          'Asian', 'English', 'Spanish', 'European', 'Other'
         ],
         datasets: [
           {
-            label: 'language',
+            label: 'Language',
             data: [
-              $scope.asian, $scope.english, $scope.european, $scope.other, $scope.spanish
+              $scope.asian, $scope.english, $scope.spanish, $scope.european, $scope.other
             ],
             backgroundColor: [
               'rgba(33, 125, 216, 0.5)',
@@ -46,7 +44,6 @@ console.log("languages working");
           }
         ]
       };
-      //  console.log($scope.medianRentData);
     }
     $scope.langOptions = {
       legend: {
@@ -71,5 +68,5 @@ console.log("languages working");
         ]
       }
     };
-    //end of controller
+  //end of controller
   });

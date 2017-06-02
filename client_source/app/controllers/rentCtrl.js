@@ -1,7 +1,6 @@
 AA.controller("rentCtrl", function ($timeout, $scope, rentService, zipConversionService) {
 
     $scope.$on('eventFired', function (event, data) {
-      console.log(data);
         $scope.onBoardDataStudio = data.studio_county;
         $scope.onBoardDataOne = data.one_bed_county;
         $scope.onBoardDataTwo = data.two_bed_county;
@@ -45,7 +44,6 @@ AA.controller("rentCtrl", function ($timeout, $scope, rentService, zipConversion
           }
         ]
       };
-      //  console.log($scope.medianRentData);
     }
     $scope.optionsObj = {
       legend: {

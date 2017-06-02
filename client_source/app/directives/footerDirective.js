@@ -3,8 +3,7 @@ AA.directive('footerDirective', function () {
 
   return {
     restrict: 'E',
-    templateUrl: './views/footer.html',
-    // controller: 'mainCtrl'
+    templateUrl: './views/footer.html'
   };
 });
 // End: This is the header directive ===========================================
