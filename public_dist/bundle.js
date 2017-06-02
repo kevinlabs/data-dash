@@ -217,124 +217,6 @@ AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", functi
 /* ============================================================================= */
 /* ======================== End: Main Controller =============================== */
 /* ============================================================================= */
-'use strict';
-
-// Start: This is the doughnut chart directive =================================
-AA.directive('chartDirective', function () {
-  return {
-    restrict: 'E', templateUrl: "./../views/chartDirective.html",
-    // controller: 'dirCtrl',
-    scope: {
-      chartData: '=',
-      type: "=",
-      options: "="
-    },
-    link: function link(scope, elem, attrs, ctrl) {
-      console.log('this is my element\'s second child:', elem[0].children[0].children[0]);
-
-      var ctxDir = elem[0].children[0].children[0];
-
-      var myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type, scope.options);
-
-      function getChartGivenData(chartElement, dataForChart, type, options) {
-        return new Chart(chartElement, {
-          type: type,
-          data: dataForChart,
-          options: options
-          // {
-          //   legend: {
-          //     display: false,
-          //     labels: {
-          //
-          //       display: false
-          //     }
-          //   },
-          //   scales: {
-          //     yAxes: [
-          //       {
-          //         ticks: {
-          //           beginAtZero: true
-          //         }
-          //       }
-          //     ]
-          //   }
-          // }
-        });
-      }
-
-      scope.$watch('chartData', function (newValue, oldValue, scope) {
-        getChartGivenData(ctxDir, newValue, scope.type, scope.options);
-      });
-    }
-
-  };
-});
-
-// End: This is the doughnut chart directive ===================================
-'use strict';
-
-// Start: This is the header directive =========================================
-AA.directive('footerDirective', function () {
-
-  return {
-    restrict: 'E',
-    templateUrl: './views/footer.html'
-  };
-});
-// End: This is the header directive ===========================================
-'use strict';
-
-// Start: This is the header directive =========================================
-AA.directive('headerDirective', function () {
-
-  return {
-    restrict: 'E',
-    templateUrl: './views/header.html'
-  };
-});
-// End: This is the header directive ===========================================
-'use strict';
-
-// Start: This is the header directive =========================================
-AA.directive('mapDirective', function () {
-
-  return {
-    restrict: 'E',
-    templateUrl: './views/map.html'
-  };
-});
-// End: This is the header directive ===========================================
-'use strict';
-
-AA.directive('pieDirective', function () {
-  return {
-    restrict: 'E', templateUrl: "./../views/pie.html",
-    // controller: 'dirCtrl',
-    scope: {
-      chartData: '=',
-      type: "=",
-      options: '='
-    },
-    link: function link(scope, elem, attrs, ctrl) {
-      // console.log('this is my element\'s second child:', elem[0].children[0].children[0]);
-
-      var ctxDir = elem[0].children[0].children[0];
-      var myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type, scope.options);
-
-      function getChartGivenData(chartElement, dataForChart, type, options) {
-        return new Chart(chartElement, {
-          type: type,
-          data: dataForChart,
-          options: options
-        });
-      }
-
-      scope.$watch('chartData', function (newValue, oldValue, scope) {
-        getChartGivenData(ctxDir, newValue, scope.type, scope.options);
-      });
-    }
-  };
-});
 "use strict";
 
 AA.controller("crimeCtrl", ["$scope", "zipConversionService", function ($scope, zipConversionService) {
@@ -577,6 +459,124 @@ AA.controller("restaurantCtrl", ["$scope", "restaurantService", function ($scope
 
   $scope.getInfo();
 }]);
+'use strict';
+
+// Start: This is the doughnut chart directive =================================
+AA.directive('chartDirective', function () {
+  return {
+    restrict: 'E', templateUrl: "./../views/chartDirective.html",
+    // controller: 'dirCtrl',
+    scope: {
+      chartData: '=',
+      type: "=",
+      options: "="
+    },
+    link: function link(scope, elem, attrs, ctrl) {
+      console.log('this is my element\'s second child:', elem[0].children[0].children[0]);
+
+      var ctxDir = elem[0].children[0].children[0];
+
+      var myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type, scope.options);
+
+      function getChartGivenData(chartElement, dataForChart, type, options) {
+        return new Chart(chartElement, {
+          type: type,
+          data: dataForChart,
+          options: options
+          // {
+          //   legend: {
+          //     display: false,
+          //     labels: {
+          //
+          //       display: false
+          //     }
+          //   },
+          //   scales: {
+          //     yAxes: [
+          //       {
+          //         ticks: {
+          //           beginAtZero: true
+          //         }
+          //       }
+          //     ]
+          //   }
+          // }
+        });
+      }
+
+      scope.$watch('chartData', function (newValue, oldValue, scope) {
+        getChartGivenData(ctxDir, newValue, scope.type, scope.options);
+      });
+    }
+
+  };
+});
+
+// End: This is the doughnut chart directive ===================================
+'use strict';
+
+// Start: This is the header directive =========================================
+AA.directive('footerDirective', function () {
+
+  return {
+    restrict: 'E',
+    templateUrl: './views/footer.html'
+  };
+});
+// End: This is the header directive ===========================================
+'use strict';
+
+// Start: This is the header directive =========================================
+AA.directive('headerDirective', function () {
+
+  return {
+    restrict: 'E',
+    templateUrl: './views/header.html'
+  };
+});
+// End: This is the header directive ===========================================
+'use strict';
+
+// Start: This is the header directive =========================================
+AA.directive('mapDirective', function () {
+
+  return {
+    restrict: 'E',
+    templateUrl: './views/map.html'
+  };
+});
+// End: This is the header directive ===========================================
+'use strict';
+
+AA.directive('pieDirective', function () {
+  return {
+    restrict: 'E', templateUrl: "./../views/pie.html",
+    // controller: 'dirCtrl',
+    scope: {
+      chartData: '=',
+      type: "=",
+      options: '='
+    },
+    link: function link(scope, elem, attrs, ctrl) {
+      // console.log('this is my element\'s second child:', elem[0].children[0].children[0]);
+
+      var ctxDir = elem[0].children[0].children[0];
+      var myChartDir = getChartGivenData(ctxDir, scope.chartData, scope.type, scope.options);
+
+      function getChartGivenData(chartElement, dataForChart, type, options) {
+        return new Chart(chartElement, {
+          type: type,
+          data: dataForChart,
+          options: options
+        });
+      }
+
+      scope.$watch('chartData', function (newValue, oldValue, scope) {
+        getChartGivenData(ctxDir, newValue, scope.type, scope.options);
+      });
+    }
+  };
+});
 "use strict";
 
 AA.service("crimeService", ["$http", function ($http) {
