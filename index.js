@@ -129,6 +129,13 @@ app.use(express.static(__dirname + '/public_dist'));
 
 app.post('/api/hospitals', hospitals.getHospitals);
 
+//For testing.
+// app.post('/api/hospitals', function (req, res, next) {
+//     console.log('it is activated', req.body);
+//     res.status(200).send('test');
+// });
+
+
 app.get('/api/restaurants', restaurants.getRestaurants);
 
 app.get('/api/pollution', pollution.getPollution);

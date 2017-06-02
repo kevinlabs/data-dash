@@ -279,6 +279,8 @@ AA.controller("homeValueCtrl", ["$scope", "zipConversionService", function ($sco
 }]);
 "use strict";
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 AA.controller("hospitalCtrl", ["$scope", "hospitalService", "zipConversionService", function ($scope, hospitalService, zipConversionService) {
 
   $scope.city;
@@ -292,13 +294,14 @@ AA.controller("hospitalCtrl", ["$scope", "hospitalService", "zipConversionServic
 
     var splitCity = city.split(" ").join("+");
     console.log("hey this is splitCity", splitCity);
+    console.log('Show me data type for splitcity: ', typeof splitCity === "undefined" ? "undefined" : _typeof(splitCity));
 
-    $scope.getInfo();
+    $scope.getInfo(splitCity);
   });
 
   $scope.getInfo = function (city) {
-    hospitalService.getData().then(function (response) {
-      console.log(response);
+    hospitalService.getData(city).then(function (response) {
+      console.log('Here is the response from Health Service: ', response);
       $scope.data = response;
     });
   };
@@ -381,137 +384,6 @@ AA.controller("restaurantCtrl", ["$scope", "restaurantService", function ($scope
   };
 
   $scope.getInfo();
-}]);
-"use strict";
-
-AA.service("crimeService", ["$http", function ($http) {
-
-  //end of service
-}]);
-"use strict";
-
-AA.service("homeValueService", ["$http", function ($http) {
-
-  // const baseUrl = "/api/onBoard";
-  //
-  // this.getData = () => {
-  //   return $http({
-  //     method: "POST",
-  //     url: baseUrl
-  //   }).then( (response) => {
-  //     console.log('hvservice', response);
-  //     return response.data.response.result.package.item;
-  //   })
-  // }
-
-  //end of service
-}]);
-"use strict";
-
-AA.service("hospitalService", ["$http", function ($http) {
-
-  var baseUrl = "/api/hospitals";
-
-  this.getData = function (city) {
-    return $http({
-      method: "POST",
-      url: baseUrl,
-      data: city
-    }).then(function (response) {
-      console.log(response.data.PlaceSearchResponse.result.length);
-      return response.data.PlaceSearchResponse.result.length;
-    });
-  };
-
-  //end of service
-}]);
-"use strict";
-
-AA.service("pollutionService", ["$http", function ($http) {
-
-  var baseUrl = "/api/pollution";
-
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
-      return response.data.data[0];
-    });
-  };
-  //end of service
-}]);
-
-/* 
-NOTES FOR A SWITCH:
-
-0 - 49 GOOD
-50 - 150 MODERATE
-151 - 350 UNHEALTHY
-351 - 420 VERY UNHEALTHY
-421 up HAZARDOUS
-
-*/
-"use strict";
-
-AA.service("rentService", ["$http", function ($http) {
-
-  var baseUrl = "/api/onBoard";
-
-  this.getData = function () {
-    return $http({
-      method: "POST",
-      url: baseUrl
-    }).then(function (response) {
-      console.log(response.data.response.result.package.item);
-      return response.data.response.result.package.item;
-    });
-  };
-
-  // end of service
-}]);
-"use strict";
-
-AA.service("restaurantService", ["$http", function ($http) {
-
-  var baseUrl = "http://swapi.co/api/starships";
-
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
-      console.log(response.data.results);
-      return response.data.results;
-    });
-  };
-
-  //end of service
-}]);
-"use strict";
-
-AA.service("zipConversionService", ["$http", "$rootScope", function ($http, $rootScope) {
-  var _this = this;
-
-  var baseUrl = "/api/zipConversion";
-
-  var city;
-  this.city = city;
-
-  this.getData = function (obj) {
-    return $http({
-      method: "POST",
-      url: baseUrl,
-      data: obj
-    }).then(function (response) {
-      _this.data = response.data.response.result.package.item;
-      return response.data.response.result.package.item;
-    });
-  };
-  this.findData = function () {
-    $rootScope.$broadcast('eventFired', _this.data);
-  };
-  //end of service
 }]);
 'use strict';
 
@@ -681,4 +553,136 @@ AA.directive('pieDirective', function () {
     }
   };
 });
+"use strict";
+
+AA.service("crimeService", ["$http", function ($http) {
+
+  //end of service
+}]);
+"use strict";
+
+AA.service("homeValueService", ["$http", function ($http) {
+
+  // const baseUrl = "/api/onBoard";
+  //
+  // this.getData = () => {
+  //   return $http({
+  //     method: "POST",
+  //     url: baseUrl
+  //   }).then( (response) => {
+  //     console.log('hvservice', response);
+  //     return response.data.response.result.package.item;
+  //   })
+  // }
+
+  //end of service
+}]);
+"use strict";
+
+AA.service("hospitalService", ["$http", function ($http) {
+
+  var baseUrl = "/api/hospitals";
+
+  this.getData = function (city) {
+    console.log('Showing city data before sending API call: ', city);
+    return $http({
+      method: "POST",
+      url: baseUrl,
+      data: { city: city }
+    }).then(function (response) {
+      console.log('Here is reponse back hospital service (Angular): ', response.data.PlaceSearchResponse.result.length);
+      return response.data.PlaceSearchResponse.result.length;
+    });
+  };
+
+  //end of service
+}]);
+"use strict";
+
+AA.service("pollutionService", ["$http", function ($http) {
+
+  var baseUrl = "/api/pollution";
+
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      return response.data.data[0];
+    });
+  };
+  //end of service
+}]);
+
+/* 
+NOTES FOR A SWITCH:
+
+0 - 49 GOOD
+50 - 150 MODERATE
+151 - 350 UNHEALTHY
+351 - 420 VERY UNHEALTHY
+421 up HAZARDOUS
+
+*/
+"use strict";
+
+AA.service("rentService", ["$http", function ($http) {
+
+  var baseUrl = "/api/onBoard";
+
+  this.getData = function () {
+    return $http({
+      method: "POST",
+      url: baseUrl
+    }).then(function (response) {
+      console.log(response.data.response.result.package.item);
+      return response.data.response.result.package.item;
+    });
+  };
+
+  // end of service
+}]);
+"use strict";
+
+AA.service("restaurantService", ["$http", function ($http) {
+
+  var baseUrl = "http://swapi.co/api/starships";
+
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      console.log(response.data.results);
+      return response.data.results;
+    });
+  };
+
+  //end of service
+}]);
+"use strict";
+
+AA.service("zipConversionService", ["$http", "$rootScope", function ($http, $rootScope) {
+  var _this = this;
+
+  var baseUrl = "/api/zipConversion";
+
+  var city;
+  this.city = city;
+
+  this.getData = function (obj) {
+    return $http({
+      method: "POST",
+      url: baseUrl,
+      data: obj
+    }).then(function (response) {
+      _this.data = response.data.response.result.package.item;
+      return response.data.response.result.package.item;
+    });
+  };
+  this.findData = function () {
+    $rootScope.$broadcast('eventFired', _this.data);
+  };
+  //end of service
+}]);
 //# sourceMappingURL=bundle.js.map
