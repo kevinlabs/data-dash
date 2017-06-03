@@ -1,7 +1,7 @@
 AA.controller("homeValueCtrl", function($scope, zipConversionService) {
 
   $scope.$on('eventFired', function (event, data) {
-    console.log(data);
+    // console.log(data);
       $scope.avgsaleprice = data.avgsaleprice;
       $scope.assignData();
   });

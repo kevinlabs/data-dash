@@ -1,13 +1,14 @@
 AA.controller("populationCtrl", function($scope, zipConversionService) {
 
   $scope.$on('eventFired', function (event, data) {
-    console.log(data);
-      $scope.population = data.popcy;
+    console.log('In pop ctrl', data);
+      $scope.popcy = data.popcy;
       $scope.assignData();
   });
 
   $scope.assignData = function() {
-    $scope.population = $scope.popocy;
+    console.log('In pop assign data');
+    $scope.populationNum = $scope.popcy;
   }
 
 //end of controller
