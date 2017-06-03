@@ -103,6 +103,9 @@ AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
       });
     }
   };
+
+  initMap();
+  
 });
 /* ============================================================================= */
 /* ======================== End: Main Controller =============================== */

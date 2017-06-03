@@ -122,6 +122,8 @@ AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", functi
       });
     }
   };
+
+  initMap();
 }]);
 /* ============================================================================= */
 /* ======================== End: Main Controller =============================== */
@@ -322,6 +324,22 @@ AA.controller("pollutionCtrl", ["$scope", "pollutionService", function ($scope, 
   };
 
   $scope.getInfo();
+}]);
+"use strict";
+
+AA.controller("populationCtrl", ["$scope", "zipConversionService", function ($scope, zipConversionService) {
+
+  $scope.$on('eventFired', function (event, data) {
+    console.log(data);
+    $scope.population = data.popcy;
+    $scope.assignData();
+  });
+
+  $scope.assignData = function () {
+    $scope.population = $scope.popocy;
+  };
+
+  //end of controller
 }]);
 'use strict';
 
