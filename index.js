@@ -8,12 +8,14 @@ const cors = require('cors');
 //For session.
 const session = require('express-session');
 
+//===REQUIRE CONTROLLERS===================================
 const restaurants = require('./server/restaurantsCtrl.js');
 const hospitals = require('./server/hospitalsCtrl.js');
 const pollution = require('./server/pollutionCtrl.js');
 const onBoard = require('./server/onBoardCtrl.js');
 const weather = require('./server/weatherCtrl.js');
 const zip = require('./server/zipConversionCtrl.js')
+//===REQUIRE CONTROLLERS( NEED TO BE BELOW APP.SET)========
 
 //secrete session code file.
 //const config = require('./config.js');
@@ -68,11 +70,7 @@ app.use(express.static(__dirname + '/public_dist'));
 
 // =========SQL database======== //
 
-//===REQUIRE CONTROLLERS( NEED TO BE BELOW APP.SET)========
-// const userCtrl = require('./server/userCtrl.js');
-// const memberCtrl = require('./server/memberCtrl.js');
-// const groupCtrl = require('./server/groupCtrl.js');
-//
+
 // //===========PASSPORT IMPORT ==================
 // var passport = require('./server/passport.js');
 
@@ -113,40 +111,29 @@ app.use(express.static(__dirname + '/public_dist'));
 // //===PASSPORT ENDPOINTS===================
 //
 //
-// //===USER ENDPOINTS=========================
-// app.post('/register/account/create', userCtrl.register);
-// app.get('/login2', isAuthed, userCtrl.login2);
-// app.get('/api/sessionCheck', userCtrl.sessionCheck);
-//
-// //===Member Endpoints=========================
-// app.post('/register/member/create', memberCtrl.createMember);
-// app.get('/member/browse', memberCtrl.browseMember);
-//
-// //===Group Endpoints=========================
-// app.post('/register/group/create', groupCtrl.createGroup);
-// app.get('/group/browse', groupCtrl.browseGroup);
-// app.post('/register/group/addmember', groupCtrl.addMember);
 
+
+//===API ENDPOINTS=========================
+//Hospital Info
 app.post('/api/hospitals', hospitals.getHospitals);
 
-//For testing.
-// app.post('/api/hospitals', function (req, res, next) {
-//     console.log('it is activated', req.body);
-//     res.status(200).send('test');
-// });
-
-
-app.get('/api/restaurants', restaurants.getRestaurants);
-
-app.get('/api/pollution', pollution.getPollution);
-
-// app.get('/api/onBoard', onBoard.getOnBoard);
-
+//Onboard Info API
 app.post('/api/onBoard', onBoard.getOnBoard);
 
-app.get('/api/weather', weather.getWeather);
-
+//Getting Zipcode API
 app.post('/api/zipConversion', zip.getZip);
+
+//Getting Weather information API
+app.post('/api/weather', weather.getWeather);
+
+//Restaurant
+app.get('/api/restaurants', restaurants.getRestaurants);
+//Pollution.
+app.get('/api/pollution', pollution.getPollution);
+//===API ENDPOINTS=========================
+
+
+
 
 //===PORT====================================
 app.listen(port, () => {

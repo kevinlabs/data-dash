@@ -124,10 +124,24 @@
   .lable { display: none; }
 }
 
-// Google Map
+
+
+// Google Map =====================================
 #map {
   width: 100%;
   height: 400px;
+}
+
+
+
+//Weather Box =====================================
+.current-main-container {
+  max-width: 80%;
+  height: auto;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 

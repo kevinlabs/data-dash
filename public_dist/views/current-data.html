@@ -1,0 +1,10 @@
+<div class="current-main-container">
+    <div class="current-five-icon">
+        <img ng-src="{{days.weather[0].icon}}" class="weather-icon">
+        <div class="current-five-data-box">
+            <h1>{{days.main.temp}} </h1>
+            <h1><span class="current-five-conditions">conditions:</span>{{days.weather[0].description}}</h1>
+            <h3 style="margin-top: 10px;">{{days.wind.speed}}</h3>
+        </div>
+    </div>
+</div>

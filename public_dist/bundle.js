@@ -387,6 +387,38 @@ AA.controller("restaurantCtrl", ["$scope", "restaurantService", function ($scope
 }]);
 'use strict';
 
+AA.controller("weatherCtrl", ["$scope", "weatherService", "zipConversionService", function ($scope, weatherService, zipConversionService) {
+
+    console.log('Weather controll activated');
+
+    //Variable Declaration.
+    $scope.zipcode;
+    $scope.weather;
+    $scope.temp;
+    $scope.speed;
+
+    $scope.$on('eventFired', function (event, data) {
+
+        //.data is the zipcode. Assigning to local controller variable.
+        $scope.zipcode = data.geo_code;
+
+        //Testing.
+        console.log("Weather Controller: Zipcode data: ", $scope.zipcode);
+
+        weatherService.getWeather($scope.zipcode).then(function (response) {
+            console.log('From Weather controll at Angular showing data back from service: ', response);
+            $scope.weather = response;
+            $scope.temp = (response.main.temp * (9 / 5) - 459.67).toFixed(1) + '°';
+            $scope.speed = 'wind: ' + response.wind.speed + ' mph';
+
+            console.log("Weather Controller: weather data: ", $scope.weather);
+            console.log("Weather Controller: temp data: ", $scope.temp);
+            console.log("Weather Controller: speed data: ", $scope.speed);
+        });
+    });
+}]);
+'use strict';
+
 // Start: This is the doughnut chart directive =================================
 AA.directive('chartDirective', function () {
   return {
@@ -439,6 +471,18 @@ AA.directive('chartDirective', function () {
 });
 
 // End: This is the doughnut chart directive ===================================
+'use strict';
+
+// Start: This is the current data directive ===================================
+AA.directive('currentDataDirective', function () {
+
+  return {
+    restrict: 'E',
+    templateUrl: './views/current-data.html',
+    controller: 'weatherCtrl'
+  };
+});
+// End: This is the current data directive =====================================
 'use strict';
 
 // Start: This is the header directive =========================================
@@ -662,6 +706,26 @@ AA.service("restaurantService", ["$http", function ($http) {
 }]);
 "use strict";
 
+AA.service("weatherService", ["$http", function ($http) {
+
+  var baseUrl = "/api/weather";
+
+  this.getWeather = function (zipcode) {
+    console.log('Showing city data before sending API call: ', zipcode);
+    return $http({
+      method: "POST",
+      url: baseUrl,
+      data: { zipcode: zipcode }
+    }).then(function (response) {
+      console.log('Here is reponse back weather serivce (Angular): ', response.data);
+      return response.data;
+    });
+  };
+
+  //end of service
+}]);
+"use strict";
+
 AA.service("zipConversionService", ["$http", "$rootScope", function ($http, $rootScope) {
   var _this = this;
 
@@ -676,13 +740,16 @@ AA.service("zipConversionService", ["$http", "$rootScope", function ($http, $roo
       url: baseUrl,
       data: obj
     }).then(function (response) {
+
+      //this.data = is the zipcode
       _this.data = response.data.response.result.package.item;
       return response.data.response.result.package.item;
     });
   };
+
   this.findData = function () {
+    //this.data is the zipcode.
     $rootScope.$broadcast('eventFired', _this.data);
   };
-  //end of service
-}]);
+}]); //end of service
 //# sourceMappingURL=bundle.js.map

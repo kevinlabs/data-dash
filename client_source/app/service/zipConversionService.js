@@ -11,12 +11,17 @@ this.getData = (obj) => {
     url: baseUrl,
     data: obj
   }).then( (response) => {
+
+    //this.data = is the zipcode
     this.data = response.data.response.result.package.item;
     return response.data.response.result.package.item;
-  })
-}
+  });
+};
+
 this.findData = () => {
+  //this.data is the zipcode.
   $rootScope.$broadcast('eventFired', this.data);
-}
-//end of service
-});
+};
+
+
+}); //end of service
