@@ -192,7 +192,7 @@ AA.controller("crimeCtrl", ["$scope", "zipConversionService", function ($scope, 
 AA.controller("homeValueCtrl", ["$scope", "zipConversionService", function ($scope, zipConversionService) {
 
   $scope.$on('eventFired', function (event, data) {
-    console.log(data);
+    // console.log(data);
     $scope.avgsaleprice = data.avgsaleprice;
     $scope.assignData();
   });
@@ -325,18 +325,19 @@ AA.controller("pollutionCtrl", ["$scope", "pollutionService", function ($scope, 
 
   $scope.getInfo();
 }]);
-"use strict";
+'use strict';
 
 AA.controller("populationCtrl", ["$scope", "zipConversionService", function ($scope, zipConversionService) {
 
   $scope.$on('eventFired', function (event, data) {
-    console.log(data);
-    $scope.population = data.popcy;
+    console.log('In pop ctrl', data);
+    $scope.popcy = data.popcy;
     $scope.assignData();
   });
 
   $scope.assignData = function () {
-    $scope.population = $scope.popocy;
+    console.log('In pop assign data');
+    $scope.populationNum = $scope.popcy;
   };
 
   //end of controller
@@ -402,6 +403,76 @@ AA.controller("restaurantCtrl", ["$scope", "restaurantService", function ($scope
   //
   // $scope.getInfo();
 
+}]);
+"use strict";
+
+AA.service("crimeService", ["$http", function ($http) {}]);
+"use strict";
+
+AA.service("homeValueService", ["$http", function ($http) {}]);
+"use strict";
+
+AA.service("hospitalService", ["$http", function ($http) {}]);
+"use strict";
+
+AA.service("pollutionService", ["$http", function ($http) {
+
+  var baseUrl = "/api/pollution";
+
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      return response.data.data[0];
+    });
+  };
+  //end of service
+}]);
+
+/*
+NOTES FOR A SWITCH:
+
+0 - 49 GOOD
+50 - 150 MODERATE
+151 - 350 UNHEALTHY
+351 - 420 VERY UNHEALTHY
+421 up HAZARDOUS
+
+*/
+"use strict";
+
+AA.service("rentService", ["$http", function ($http) {}]);
+"use strict";
+
+AA.service("restaurantService", ["$http", function ($http) {}]);
+"use strict";
+
+AA.service("zipConversionService", ["$http", "$rootScope", function ($http, $rootScope) {
+  var _this = this;
+
+  var baseUrl = "/api/zipConversion";
+
+  var city;
+  this.city = city;
+
+  this.getData = function (obj) {
+    _this.data = {};
+    return $http({
+      method: "POST",
+      url: baseUrl,
+      data: obj
+    }).then(function (response) {
+      _this.data = response.data.response.result.package.item;
+      return response.data.response.result.package.item;
+    });
+  };
+  this.findData = function () {
+    console.log('s1: ', _this.data);
+    $rootScope.$broadcast('eventFired', _this.data);
+    console.log('s2: ', _this.data);
+  };
+  //end of service
 }]);
 'use strict';
 
@@ -536,74 +607,4 @@ AA.directive('pieDirective', function () {
     }
   };
 });
-"use strict";
-
-AA.service("crimeService", ["$http", function ($http) {}]);
-"use strict";
-
-AA.service("homeValueService", ["$http", function ($http) {}]);
-"use strict";
-
-AA.service("hospitalService", ["$http", function ($http) {}]);
-"use strict";
-
-AA.service("pollutionService", ["$http", function ($http) {
-
-  var baseUrl = "/api/pollution";
-
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
-      return response.data.data[0];
-    });
-  };
-  //end of service
-}]);
-
-/*
-NOTES FOR A SWITCH:
-
-0 - 49 GOOD
-50 - 150 MODERATE
-151 - 350 UNHEALTHY
-351 - 420 VERY UNHEALTHY
-421 up HAZARDOUS
-
-*/
-"use strict";
-
-AA.service("rentService", ["$http", function ($http) {}]);
-"use strict";
-
-AA.service("restaurantService", ["$http", function ($http) {}]);
-"use strict";
-
-AA.service("zipConversionService", ["$http", "$rootScope", function ($http, $rootScope) {
-  var _this = this;
-
-  var baseUrl = "/api/zipConversion";
-
-  var city;
-  this.city = city;
-
-  this.getData = function (obj) {
-    _this.data = {};
-    return $http({
-      method: "POST",
-      url: baseUrl,
-      data: obj
-    }).then(function (response) {
-      _this.data = response.data.response.result.package.item;
-      return response.data.response.result.package.item;
-    });
-  };
-  this.findData = function () {
-    console.log('s1: ', _this.data);
-    $rootScope.$broadcast('eventFired', _this.data);
-    console.log('s2: ', _this.data);
-  };
-  //end of service
-}]);
 //# sourceMappingURL=bundle.js.map
