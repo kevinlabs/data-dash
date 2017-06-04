@@ -63,7 +63,7 @@ AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
         map.fitBounds(place.geometry.viewport);
       } else {
         map.setCenter(place.geometry.location);
-        map.setZoom(25);
+        map.setZoom(35);
       }
       marker.setIcon(({
         url: place.icon,
@@ -105,7 +105,7 @@ AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
   };
 
   initMap();
-  
+
 });
 /* ============================================================================= */
 /* ======================== End: Main Controller =============================== */

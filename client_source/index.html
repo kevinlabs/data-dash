@@ -23,21 +23,27 @@
     </section>
     <!-- End: Header -->
     <main id="main-container">
-    <!--google Map Testing Input Field-->
+    <!--Google Map Input Field-->
       <div id="googleMapField">
         <div id="locationField">
           <input id="autocomplete" placeholder="Enter your address" type="text" onchange="clearData()">
         </div>
       </div>
-      <!--google Map Testing Input Field-->
-      <!-- Start: Dashboard content -->
-      <!-- Start: Search results data set  -->
+      <!-- Google Map Input Field-->
+      <!-- Start: Search results data set -->
       <section class="data-set-cards">
-      <!-- 2: Local weather -->
+      <!-- 1: Local weather -->
       <div class="data-card dc-bg-weather">
         <p>Current Local Weather</p>
         <div class="data-chart-box">
          <!-- CHART HERE -->
+        </div>
+      </div>
+      <!-- 2: Rent prices -->
+      <div class="data-card dc-bg-property">
+        <p>Median Rental Price</p>
+        <div class="data-chart-box"  ng-controller="rentCtrl">
+          <chart-directive chart-data="medianRentData" type="chart2Type" options="optionsObj"></chart-directive>
         </div>
       </div>
       <!-- 3: Home values -->
@@ -47,11 +53,11 @@
           <h2 class="data-text">{{propertySalePrice | currency : '$' : 0}}</h2>
         </div>
       </div>
-      <!-- 4: Rent prices -->
-      <div class="data-card dc-bg-property">
-        <p>Median Rental Price</p>
-        <div class="data-chart-box"  ng-controller="rentCtrl">
-          <chart-directive chart-data="medianRentData" type="chart2Type" options="optionsObj"></chart-directive>
+      <!-- 4: Household Income -->
+      <div class="data-card dc-bg-gas-household-income">
+        <p>Household Income</p>
+        <div class="data-chart-box" ng-controller = "incomeCtrl">
+          <chart-directive chart-data="incomeData" type="chart4Type" options="incomeOptions"></chart-directive>
         </div>
       </div>
       <!-- 5: Spoken Language -->
@@ -61,19 +67,11 @@
           <chart-directive chart-data="langData" type="chart2Type" options="langOptions"></chart-directive>
         </div>
       </div>
-      <!-- 6: School rankings  -->
-      <div class="data-card dc-bg-gas-household-income">
-        <p>Household Income</p>
-        <div class="data-chart-box" ng-controller = "incomeCtrl">
-          <chart-directive chart-data="incomeData" type="chart4Type" options="incomeOptions"></chart-directive>
-        </div>
-      </div>
-      <!-- 6: Medical centers nearby -->
-      <div class="data-card dc-bg-gas-medical">
-        <p>Closest Airport</p>
-        <div class="data-chart-box" ng-controller ="airportCtrl">
-          <h2 class="data-text">{{airport}}</h2>
-          <h5 class="data-text-sub">{{airportDist | distance}}</h5>
+      <!-- 6: Airport -->
+      <div class="data-card dc-bg-gas-medical" ng-controller ="airportCtrl">
+        <p>Closest Airport {{airportDist | distance}}</p>
+        <div class="data-chart-box">
+          <h2 class="data-alt-text">{{airport}}</h2>
         </div>
       </div>
       <!-- 7: Crime stats -->
@@ -83,9 +81,9 @@
           <chart-directive chart-data="crimeData" type="chart4Type" options="crimeOptions"></chart-directive>
         </div>
       </div>
-      <!-- 8: Air quality -->
-      <div class="data-card">
-        <p>Population</p>
+      <!-- 8: Population -->
+      <div class="data-card dc-bg-population">
+        <p>Area Population</p>
         <div class="data-chart-box" ng-controller="populationCtrl">
           <h2 class="data-text">{{populationNum}}</h2>
         </div>

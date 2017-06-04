@@ -42,12 +42,18 @@
 
 .data-text {
   font-family: $headlineText;
+  margin-top: 115px;
+}
+
+.data-alt-text {
+  font-family: $headlineText;
+  font-size: 250%;
 }
 
 .data-text-sub {
   font-family: $bodyText;
   position: relative;
-  top: -18px;
+  top: -10px;
   font-size: 14px;
 
 }
@@ -83,8 +89,8 @@
   background-position: 14px 10px;
 }
 
-.dc-bg-gas-education {
-  background: #F7F7F7 url('../img/data-icon-education.svg') no-repeat;
+.dc-bg-population {
+  background: #F7F7F7 url('../img/data-icon-population.svg') no-repeat;
   background-size: 50px;
   background-position: 14px 10px;
 }

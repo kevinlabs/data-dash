@@ -84,7 +84,7 @@ AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", functi
         map.fitBounds(place.geometry.viewport);
       } else {
         map.setCenter(place.geometry.location);
-        map.setZoom(25);
+        map.setZoom(35);
       }
       marker.setIcon({
         url: place.icon,
@@ -404,76 +404,6 @@ AA.controller("restaurantCtrl", ["$scope", "restaurantService", function ($scope
   // $scope.getInfo();
 
 }]);
-"use strict";
-
-AA.service("crimeService", ["$http", function ($http) {}]);
-"use strict";
-
-AA.service("homeValueService", ["$http", function ($http) {}]);
-"use strict";
-
-AA.service("hospitalService", ["$http", function ($http) {}]);
-"use strict";
-
-AA.service("pollutionService", ["$http", function ($http) {
-
-  var baseUrl = "/api/pollution";
-
-  this.getData = function () {
-    return $http({
-      method: "GET",
-      url: baseUrl
-    }).then(function (response) {
-      return response.data.data[0];
-    });
-  };
-  //end of service
-}]);
-
-/*
-NOTES FOR A SWITCH:
-
-0 - 49 GOOD
-50 - 150 MODERATE
-151 - 350 UNHEALTHY
-351 - 420 VERY UNHEALTHY
-421 up HAZARDOUS
-
-*/
-"use strict";
-
-AA.service("rentService", ["$http", function ($http) {}]);
-"use strict";
-
-AA.service("restaurantService", ["$http", function ($http) {}]);
-"use strict";
-
-AA.service("zipConversionService", ["$http", "$rootScope", function ($http, $rootScope) {
-  var _this = this;
-
-  var baseUrl = "/api/zipConversion";
-
-  var city;
-  this.city = city;
-
-  this.getData = function (obj) {
-    _this.data = {};
-    return $http({
-      method: "POST",
-      url: baseUrl,
-      data: obj
-    }).then(function (response) {
-      _this.data = response.data.response.result.package.item;
-      return response.data.response.result.package.item;
-    });
-  };
-  this.findData = function () {
-    console.log('s1: ', _this.data);
-    $rootScope.$broadcast('eventFired', _this.data);
-    console.log('s2: ', _this.data);
-  };
-  //end of service
-}]);
 'use strict';
 
 // Start: This is the doughnut chart directive =================================
@@ -607,4 +537,74 @@ AA.directive('pieDirective', function () {
     }
   };
 });
+"use strict";
+
+AA.service("crimeService", ["$http", function ($http) {}]);
+"use strict";
+
+AA.service("homeValueService", ["$http", function ($http) {}]);
+"use strict";
+
+AA.service("hospitalService", ["$http", function ($http) {}]);
+"use strict";
+
+AA.service("pollutionService", ["$http", function ($http) {
+
+  var baseUrl = "/api/pollution";
+
+  this.getData = function () {
+    return $http({
+      method: "GET",
+      url: baseUrl
+    }).then(function (response) {
+      return response.data.data[0];
+    });
+  };
+  //end of service
+}]);
+
+/*
+NOTES FOR A SWITCH:
+
+0 - 49 GOOD
+50 - 150 MODERATE
+151 - 350 UNHEALTHY
+351 - 420 VERY UNHEALTHY
+421 up HAZARDOUS
+
+*/
+"use strict";
+
+AA.service("rentService", ["$http", function ($http) {}]);
+"use strict";
+
+AA.service("restaurantService", ["$http", function ($http) {}]);
+"use strict";
+
+AA.service("zipConversionService", ["$http", "$rootScope", function ($http, $rootScope) {
+  var _this = this;
+
+  var baseUrl = "/api/zipConversion";
+
+  var city;
+  this.city = city;
+
+  this.getData = function (obj) {
+    _this.data = {};
+    return $http({
+      method: "POST",
+      url: baseUrl,
+      data: obj
+    }).then(function (response) {
+      _this.data = response.data.response.result.package.item;
+      return response.data.response.result.package.item;
+    });
+  };
+  this.findData = function () {
+    console.log('s1: ', _this.data);
+    $rootScope.$broadcast('eventFired', _this.data);
+    console.log('s2: ', _this.data);
+  };
+  //end of service
+}]);
 //# sourceMappingURL=bundle.js.map
