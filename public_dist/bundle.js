@@ -84,7 +84,7 @@ AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", functi
         map.fitBounds(place.geometry.viewport);
       } else {
         map.setCenter(place.geometry.location);
-        map.setZoom(25);
+        map.setZoom(35);
       }
       marker.setIcon({
         url: place.icon,
@@ -192,7 +192,7 @@ AA.controller("crimeCtrl", ["$scope", "zipConversionService", function ($scope, 
 AA.controller("homeValueCtrl", ["$scope", "zipConversionService", function ($scope, zipConversionService) {
 
   $scope.$on('eventFired', function (event, data) {
-    console.log(data);
+    // console.log(data);
     $scope.avgsaleprice = data.avgsaleprice;
     $scope.assignData();
   });
@@ -325,18 +325,19 @@ AA.controller("pollutionCtrl", ["$scope", "pollutionService", function ($scope, 
 
   $scope.getInfo();
 }]);
-"use strict";
+'use strict';
 
 AA.controller("populationCtrl", ["$scope", "zipConversionService", function ($scope, zipConversionService) {
 
   $scope.$on('eventFired', function (event, data) {
-    console.log(data);
-    $scope.population = data.popcy;
+    console.log('In pop ctrl', data);
+    $scope.popcy = data.popcy;
     $scope.assignData();
   });
 
   $scope.assignData = function () {
-    $scope.population = $scope.popocy;
+    console.log('In pop assign data');
+    $scope.populationNum = $scope.popcy;
   };
 
   //end of controller
