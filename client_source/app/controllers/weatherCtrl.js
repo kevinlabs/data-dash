@@ -6,7 +6,8 @@ AA.controller("weatherCtrl", function ($scope, weatherService, zipConversionServ
     $scope.zipcode;
     $scope.weather;
     $scope.temp;
-    $scope.speed;
+    $scope.windSpeed;
+    $scope.description;
 
     $scope.$on('eventFired', function (event, data) {
 
@@ -20,12 +21,14 @@ AA.controller("weatherCtrl", function ($scope, weatherService, zipConversionServ
             console.log('From Weather controll at Angular showing data back from service: ', response);
             $scope.weather = response;
             $scope.temp = (response.main.temp * (9 / 5) - 459.67).toFixed(1) + '°';
-            $scope.speed = 'wind: ' + response.wind.speed + ' mph';
+            $scope.windSpeed = 'wind: ' + response.wind.speed + ' mph';
+            $scope.description = response.weather[0].description;
 
 
             console.log("Weather Controller: weather data: ", $scope.weather);
             console.log("Weather Controller: temp data: ", $scope.temp);
-            console.log("Weather Controller: speed data: ", $scope.speed);
+            console.log("Weather Controller: speed data: ", $scope.windSpeed);
+            console.log("Weather Controller: Weather Description.: ", $scope.description);
         });
     });
 

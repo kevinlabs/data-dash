@@ -176,13 +176,40 @@
   width: 100%;
   height: 400px; }
 
+.weather-box {
+  width: 300px;
+  height: 170px;
+  margin: 65px auto 0px auto; }
+
 .current-main-container {
   max-width: 80%;
   height: auto;
   margin: 0 auto;
   padding: 0;
   display: flex;
-  flex-wrap: wrap; }
+  flex-wrap: wrap;
+  background: #158BAE; }
+
+.current-main-flex-box {
+  display: flex;
+  flex-direction: column; }
+
+.five-day-flex {
+  width: 222px;
+  padding: 20px; }
+
+.current-five-icon {
+  width: 100%;
+  height: 200px;
+  text-align: center;
+  position: relative; }
+  .current-five-icon .weather-icon {
+    width: 70px; }
+
+.current-five-conditions {
+  font-size: 10px;
+  font-weight: 300;
+  display: block; }
 
 /* ============================================================================= */
 /* ======================== End: Main Styles =================================== */

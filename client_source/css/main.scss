@@ -1,16 +1,18 @@
 /* ============================================================================= */
-/* ======================== Start: Main Styles ================================= */
-/* ============================================================================= */
-@import "mixins.scss";
 
+
+/* ======================== Start: Main Styles ================================= */
+
+
+/* ============================================================================= */
+
+@import "mixins.scss";
 // #header-section {
 //   width: 100%;
 //   height: auto;
 //   background: #093056;
 //   padding: 20px 0;
 // }
-
-
 #main-container {
   max-width: 80%;
   margin: 0 auto;
@@ -20,16 +22,16 @@
 
 .data-set-cards {
   display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
-	align-items: stretch;
-	align-content: center;
+  align-items: stretch;
+  align-content: center;
 }
 
 .data-card {
   width: 280px;
-  height:280px;
+  height: 280px;
   text-align: center;
   background-color: #F7F7F7;
   border: #E5E5E5 1px solid;
@@ -37,9 +39,7 @@
   @include no-select;
   cursor: pointer;
   margin: 3px;
-
   position: relative;
-
   p {
     text-align: left;
     position: absolute;
@@ -97,18 +97,19 @@
   background-size: 50px;
   background-position: 14px 10px;
 }
+
 .dc-bg-gas-restaurants {
   background: #F7F7F7 url('../img/data-icon-restaurants.svg') no-repeat;
   background-size: 50px;
   background-position: 14px 10px;
 }
+
 // End: Data card icons ........................................................
 // Start: Data card chart box ..................................................
 .data-chart-box {
   width: 200px;
-  height:170px;
+  height: 170px;
   margin: 65px auto 15px auto;
-
 }
 
 .doughnut-directive-wrap {
@@ -117,14 +118,12 @@
   align-items: center;
 }
 
-
 // End: Data card chart box ....................................................
-
-.chart{
-  .lable { display: none; }
+.chart {
+  .lable {
+    display: none;
+  }
 }
-
-
 
 // Google Map =====================================
 #map {
@@ -132,19 +131,57 @@
   height: 400px;
 }
 
-
-
 //Weather Box =====================================
+
+.weather-box {
+  width: 300px;
+  height: 170px;
+  margin: 65px auto 0px auto;
+}
+
 .current-main-container {
   max-width: 80%;
+  // height 210px;
   height: auto;
   margin: 0 auto;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
+  background: #158BAE;
+}
+
+.current-main-flex-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.five-day-flex {
+  width: 222px;
+  padding: 20px;
+}
+
+.current-five-icon {
+  width: 100%;
+  height: 200px;
+  text-align: center;
+  position: relative;
+
+  .weather-icon {
+    width: 70px;
+  }
+}
+
+.current-five-conditions {
+  font-size:10px;
+  font-weight:300;
+  display:block;
 }
 
 
 /* ============================================================================= */
+
+
 /* ======================== End: Main Styles =================================== */
+
+
 /* ============================================================================= */

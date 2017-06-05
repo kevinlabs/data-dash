@@ -1,49 +1,53 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="data-dash">
-  <head>
-    <meta charset="UTF-8">
-    <!-- Viewport declaration to control rendering for mobile devices and retina screens -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DATA DASH | Destination Due Diligence Made Easy</title>
-    <!-- Styles CSS is CSS concatinatd  -->
-    <link href="./css/styles.css" rel="stylesheet" />
-    <!-- Bundle CSS is SCSS concatinatd  -->
-    <link href="./css/bundle.css" rel="stylesheet" />
-    <!-- Materialize CSS - used to style modals -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald:400,600" rel="stylesheet" />
-  </head>
-  <body ng-controller="mainCtrl">
-    <!-- Start: Header -->
-    <section id="header-section">
-      <header-directive></header-directive>
-      <!-- Interactive map display -->
-      <div id="map"></div>
-      <!--<map-directive></map-directive>-->
-    </section>
-    <!-- End: Header -->
-    <main id="main-container">
+
+<head>
+  <meta charset="UTF-8">
+  <!-- Viewport declaration to control rendering for mobile devices and retina screens -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DATA DASH | Destination Due Diligence Made Easy</title>
+  <!-- Styles CSS is CSS concatinatd  -->
+  <link href="./css/styles.css" rel="stylesheet" />
+  <!-- Bundle CSS is SCSS concatinatd  -->
+  <link href="./css/bundle.css" rel="stylesheet" />
+  <!-- Materialize CSS - used to style modals -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald:400,600" rel="stylesheet" />
+</head>
+
+<body ng-controller="mainCtrl">
+  <!-- Start: Header -->
+  <section id="header-section">
+    <header-directive></header-directive>
+    <!-- Interactive map display -->
+    <div id="map"></div>
+    <!--<map-directive></map-directive>-->
+  </section>
+  <!-- End: Header -->
+  <main id="main-container">
     <!--google Map Testing Input Field-->
-      <div id="googleMapField">
-        <div id="locationField">
-          <input id="autocomplete" placeholder="Enter your address" type="text" onchange="clearData()">
-        </div>
+    <div id="googleMapField">
+      <div id="locationField">
+        <input id="autocomplete" placeholder="Enter your address" type="text" onchange="clearData()">
       </div>
-      <!--google Map Testing Input Field-->
-      <!-- Start: Dashboard content -->
-      <!-- Start: Search results data set  -->
-      <section class="data-set-cards">
+    </div>
+    <!--google Map Testing Input Field-->
+    <!-- Start: Dashboard content -->
+    <!-- Start: Search results data set  -->
+    <section class="data-set-cards">
       <!-- 1: Local time -->
       <div class="data-card dc-bg-time">
         <p>Current Local Time</p>
         <div class="data-chart-box">
-         <!-- CHART HERE -->
+          <!-- CHART HERE -->
         </div>
       </div>
       <!-- 2: Local weather -->
       <div class="data-card dc-bg-weather">
         <p>Current Local Weather</p>
-        <current-data-directive></current-data-directive>
+        <div class="weather-box">
+          <current-data-directive></current-data-directive>
+        </div>
       </div>
       <!-- 3: Home values -->
       <div class="data-card dc-bg-property">
@@ -55,7 +59,7 @@
       <!-- 4: Rent prices -->
       <div class="data-card dc-bg-property">
         <p>Median Rental Price</p>
-        <div class="data-chart-box"  ng-controller="rentCtrl">
+        <div class="data-chart-box" ng-controller="rentCtrl">
           <chart-directive chart-data="medianRentData" type="chart2Type" options="optionsObj"></chart-directive>
         </div>
       </div>
@@ -76,7 +80,7 @@
       <!-- 6: Medical centers nearby -->
       <div class="data-card dc-bg-gas-medical">
         <p>Medical Centers</p>
-        <div class="data-chart-box" ng-controller ="hospitalCtrl">
+        <div class="data-chart-box" ng-controller="hospitalCtrl">
           <!-- CHART HERE -->
           <chart-directive chart-data="hospitalData" type="chart4Type" options="crimeOptions"></chart-directive>
         </div>
@@ -84,7 +88,7 @@
       <!-- 7: Crime stats -->
       <div class="data-card dc-bg-gas-crime">
         <p>Crime Statististics</p>
-        <div class="data-chart-box"  ng-controller="crimeCtrl">
+        <div class="data-chart-box" ng-controller="crimeCtrl">
           <chart-directive chart-data="crimeData" type="chart4Type" options="crimeOptions"></chart-directive>
         </div>
       </div>
@@ -98,19 +102,20 @@
     </section>
     <!-- End: Search results data set  -->
     <!-- End: Dashboard content -->
-    </main>
-    <!-- Footer -->
-    <footer-directive></footer-directive>
-    <!-- Start: JS CDNs -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
-    <!--Google Map AutoComplete-->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAScVx0giSjmYhutsH4_or4hlzl6B4lpdo&libraries=places"></script>
-    <!--Google Map-->
-    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAScVx0giSjmYhutsH4_or4hlzl6B4lpdo"></script>-->
-    <script src="bundle.js"></script>
-  </body>
+  </main>
+  <!-- Footer -->
+  <footer-directive></footer-directive>
+  <!-- Start: JS CDNs -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
+  <!--Google Map AutoComplete-->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAScVx0giSjmYhutsH4_or4hlzl6B4lpdo&libraries=places"></script>
+  <!--Google Map-->
+  <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAScVx0giSjmYhutsH4_or4hlzl6B4lpdo"></script>-->
+  <script src="bundle.js"></script>
+</body>
+
 </html>
