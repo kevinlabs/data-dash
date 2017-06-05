@@ -1,11 +1,10 @@
 const keys = require('../config.js');
 const axios = require('axios');
-const onBoard = require('./onBoardCtrl')
-//const jsonParser = require('xml2json');
+const onBoard = require('./onBoardCtrl');
 
 module.exports = {
   getZip: function(req, res) {
-    console.log('Zip Conversion is running');
+    console.log('Zip Conversion CTRL is running');
     return axios.get('https://www.zipcodeapi.com/rest/' + keys.zipKey + '/city-zips.json/' + req.body.city + '/' + req.body.state).then((response) => {
       let bigData = onBoard.getOnBoard(response.data.zip_codes[0]);
       bigData.then(response2 => {

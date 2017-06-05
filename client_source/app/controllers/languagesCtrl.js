@@ -1,24 +1,24 @@
-AA.controller("rentCtrl", function ($timeout, $scope, rentService, zipConversionService) {
+AA.controller("languagesCtrl", function ($timeout, $scope, zipConversionService) {
 
     $scope.$on('eventFired', function (event, data) {
-        $scope.onBoardDataStudio = data.studio_county;
-        $scope.onBoardDataOne = data.one_bed_county;
-        $scope.onBoardDataTwo = data.two_bed_county;
-        $scope.onBoardDataThree = data.three_bed_county;
-        $scope.onBoardDataFour = data.four_bed_county;
+        $scope.asian = data.langasian;
+        $scope.english = data.langeng;
+        $scope.spanish = data.langspan;
+        $scope.european = data.langeuro;
+        $scope.other = data.langother;
         $scope.assignData();
     });
 
     $scope.assignData = function () {
-      $scope.medianRentData = {
+      $scope.langData = {
         labels: [
-          'Stu', '1BR', '2BR', '3BR', '4BR'
+          'Asian', 'English', 'Spanish', 'European', 'Other'
         ],
         datasets: [
           {
-            label: 'Rent P/M $',
+            label: 'Language',
             data: [
-              $scope.onBoardDataStudio, $scope.onBoardDataOne, $scope.onBoardDataTwo, $scope.onBoardDataThree, $scope.onBoardDataFour
+              $scope.asian, $scope.english, $scope.spanish, $scope.european, $scope.other
             ],
             backgroundColor: [
               'rgba(33, 125, 216, 0.5)',
@@ -45,7 +45,7 @@ AA.controller("rentCtrl", function ($timeout, $scope, rentService, zipConversion
         ]
       };
     }
-    $scope.optionsObj = {
+    $scope.langOptions = {
       legend: {
         display: false,
         labels: {
@@ -56,7 +56,7 @@ AA.controller("rentCtrl", function ($timeout, $scope, rentService, zipConversion
         yAxes: [
           {
             ticks: {
-              stepSize: 500
+              stepSize: 5000
             },
             stacked: false
           }
@@ -68,5 +68,5 @@ AA.controller("rentCtrl", function ($timeout, $scope, rentService, zipConversion
         ]
       }
     };
-    //end of controller
+  //end of controller
   });

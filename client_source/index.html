@@ -1,88 +1,77 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="data-dash">
-
-<head>
-  <meta charset="UTF-8">
-  <!-- Viewport declaration to control rendering for mobile devices and retina screens -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DATA DASH | Destination Due Diligence Made Easy</title>
-  <!-- Styles CSS is CSS concatinatd  -->
-  <link href="./css/styles.css" rel="stylesheet" />
-  <!-- Bundle CSS is SCSS concatinatd  -->
-  <link href="./css/bundle.css" rel="stylesheet" />
-  <!-- Materialize CSS - used to style modals -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald:400,600" rel="stylesheet" />
-</head>
-
-<body ng-controller="mainCtrl">
-  <!-- Start: Header -->
-  <section id="header-section">
-    <header-directive></header-directive>
-    <!-- Interactive map display -->
-    <div id="map"></div>
-    <!--<map-directive></map-directive>-->
-  </section>
-  <!-- End: Header -->
-  <main id="main-container">
-    <!--google Map Testing Input Field-->
-    <div id="googleMapField">
-      <div id="locationField">
-        <input id="autocomplete" placeholder="Enter your address" type="text" onchange="clearData()">
-      </div>
-    </div>
-    <!--google Map Testing Input Field-->
-    <!-- Start: Dashboard content -->
-    <!-- Start: Search results data set  -->
-    <section class="data-set-cards">
-      <!-- 1: Local time -->
-      <div class="data-card dc-bg-time">
-        <p>Current Local Time</p>
-        <div class="data-chart-box">
-          <!-- CHART HERE -->
+  <head>
+    <meta charset="UTF-8">
+    <!-- Viewport declaration to control rendering for mobile devices and retina screens -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DATA DASH | Destination Due Diligence Made Easy</title>
+    <!-- Styles CSS is CSS concatinatd  -->
+    <link href="./css/styles.css" rel="stylesheet" />
+    <!-- Bundle CSS is SCSS concatinatd  -->
+    <link href="./css/bundle.css" rel="stylesheet" />
+    <!-- Materialize CSS - used to style modals -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Oswald:400,600" rel="stylesheet" />
+  </head>
+  <body ng-controller="mainCtrl">
+    <!-- Start: Header -->
+    <section id="header-section">
+      <header-directive></header-directive>
+      <!-- Interactive map display -->
+      <div id="map"></div>
+      <!--<map-directive></map-directive>-->
+    </section>
+    <!-- End: Header -->
+    <main id="main-container">
+    <!--Google Map Input Field-->
+      <div id="googleMapField">
+        <div id="locationField">
+          <input id="autocomplete" placeholder="Enter your address" type="text" onchange="clearData()">
         </div>
       </div>
-      <!-- 2: Local weather -->
+      <!-- Google Map Input Field-->
+      <!-- Start: Search results data set -->
+      <section class="data-set-cards">
+      <!-- 1: Local weather -->
       <div class="data-card dc-bg-weather">
         <p>Current Local Weather</p>
         <div class="weather-box">
           <current-data-directive></current-data-directive>
         </div>
       </div>
-      <!-- 3: Home values -->
-      <div class="data-card dc-bg-property">
-        <p>Median Home Values</p>
-        <div class="data-chart-box" ng-controller="homeValueCtrl">
-          <h2>${{propertySalePrice}}</h2>
-        </div>
-      </div>
-      <!-- 4: Rent prices -->
+      <!-- 2: Rent prices -->
       <div class="data-card dc-bg-property">
         <p>Median Rental Price</p>
         <div class="data-chart-box" ng-controller="rentCtrl">
           <chart-directive chart-data="medianRentData" type="chart2Type" options="optionsObj"></chart-directive>
         </div>
       </div>
-      <!-- 5: Gas Price -->
-      <div class="data-card dc-bg-gas-restaurants">
-        <p>Local Restaurants</p>
-        <div class="data-chart-box">
-          <!-- CHART HERE -->
+      <!-- 3: Home values -->
+      <div class="data-card dc-bg-property">
+        <p>Median Home Value</p>
+        <div class="data-chart-box" ng-controller="homeValueCtrl">
+          <h2 class="data-text">{{propertySalePrice | currency : '$' : 0}}</h2>
         </div>
       </div>
-      <!-- 6: School rankings  -->
-      <div class="data-card dc-bg-gas-education">
-        <p>Educational Ranking</p>
-        <div class="data-chart-box">
-          <!-- CHART HERE -->
+      <!-- 4: Household Income -->
+      <div class="data-card dc-bg-gas-household-income">
+        <p>Household Income</p>
+        <div class="data-chart-box" ng-controller = "incomeCtrl">
+          <chart-directive chart-data="incomeData" type="chart4Type" options="incomeOptions"></chart-directive>
         </div>
       </div>
-      <!-- 6: Medical centers nearby -->
-      <div class="data-card dc-bg-gas-medical">
-        <p>Medical Centers</p>
-        <div class="data-chart-box" ng-controller="hospitalCtrl">
-          <!-- CHART HERE -->
-          <chart-directive chart-data="hospitalData" type="chart4Type" options="crimeOptions"></chart-directive>
+      <!-- 5: Spoken Language -->
+      <div class="data-card">
+        <p>Spoken Languages</p>
+        <div class="data-chart-box" ng-controller="languagesCtrl">
+          <chart-directive chart-data="langData" type="chart2Type" options="langOptions"></chart-directive>
+        </div>
+      </div>
+      <!-- 6: Airport -->
+      <div class="data-card dc-bg-gas-medical" ng-controller ="airportCtrl">
+        <p>Closest Airport {{airportDist | distance}}</p>
+        <div class="data-chart-box">
+          <h2 class="data-alt-text">{{airport}}</h2>
         </div>
       </div>
       <!-- 7: Crime stats -->
@@ -92,11 +81,11 @@
           <chart-directive chart-data="crimeData" type="chart4Type" options="crimeOptions"></chart-directive>
         </div>
       </div>
-      <!-- 8: Air quality -->
-      <div class="data-card dc-bg-property">
-        <p>Air Pollution Index</p>
-        <div class="data-chart-box" ng-controller="pollutionCtrl">
-          <h2>{{airPollutionIndex}}</h2>
+      <!-- 8: Population -->
+      <div class="data-card dc-bg-population">
+        <p>Area Population</p>
+        <div class="data-chart-box" ng-controller="populationCtrl">
+          <h2 class="data-text">{{populationNum}}</h2>
         </div>
       </div>
     </section>
