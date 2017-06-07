@@ -1,18 +1,9 @@
 /* ============================================================================= */
-
-
 /* ======================== Start: Main Styles ================================= */
-
-
 /* ============================================================================= */
 
 @import "mixins.scss";
-// #header-section {
-//   width: 100%;
-//   height: auto;
-//   background: #093056;
-//   padding: 20px 0;
-// }
+
 #main-container {
   max-width: 80%;
   margin: 0 auto;
@@ -49,6 +40,23 @@
   }
 }
 
+.data-text {
+  font-family: $headlineText;
+  margin-top: 115px;
+}
+
+.data-alt-text {
+  font-family: $headlineText;
+  font-size: 250%;
+}
+
+.data-text-sub {
+  font-family: $bodyText;
+  position: relative;
+  top: -10px;
+  font-size: 14px;
+}
+
 // Start: Data card icons ......................................................
 .dc-bg-time {
   background: #F7F7F7 url('../img/data-icon-time.svg') no-repeat;
@@ -80,8 +88,8 @@
   background-position: 14px 10px;
 }
 
-.dc-bg-gas-education {
-  background: #F7F7F7 url('../img/data-icon-education.svg') no-repeat;
+.dc-bg-population {
+  background: #F7F7F7 url('../img/data-icon-population.svg') no-repeat;
   background-size: 50px;
   background-position: 14px 10px;
 }
@@ -119,11 +127,6 @@
 }
 
 // End: Data card chart box ....................................................
-.chart {
-  .lable {
-    display: none;
-  }
-}
 
 // Google Map =====================================
 #map {
@@ -132,25 +135,6 @@
 }
 
 //Weather Box =====================================
-// .weather-box {
-//   width: 300px;
-//   height: 170px;
-//   margin: 65px auto 0px auto;
-// }
-
-// .current-main-container {
-//   width: 200px;
-//   height: 170px;
-//   margin: 65px auto 15px auto;
-//   background: #158BAE;
-//   position: relative;
-//   overflow: hidden;
-// }
-
-// .current-main-flex-box {
-//   display: flex;
-//   flex-direction: column;
-// }
 
 .five-day-flex {
   width: 222px;
@@ -175,9 +159,5 @@
 
 
 /* ============================================================================= */
-
-
 /* ======================== End: Main Styles =================================== */
-
-
 /* ============================================================================= */

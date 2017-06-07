@@ -56,13 +56,7 @@
 #map-container {
   width: 100%;
   height: 300px;
-  margin: 15px 0;
-  background: #DDD; }
-  #map-container h5 {
-    color: #E5E5E5;
-    text-align: center;
-    font-size: 16px;
-    padding-top: 50px; }
+  margin: 15px 0; }
 
 /* ============================================================================= */
 /* ======================== Start: Main Styles ================================= */
@@ -114,6 +108,20 @@
     left: 80px;
     font-weight: 600; }
 
+.data-text {
+  font-family: "Oswald", sans-serif;
+  margin-top: 115px; }
+
+.data-alt-text {
+  font-family: "Oswald", sans-serif;
+  font-size: 250%; }
+
+.data-text-sub {
+  font-family: "Open Sans", sans-serif;
+  position: relative;
+  top: -10px;
+  font-size: 14px; }
+
 .dc-bg-time {
   background: #F7F7F7 url("../img/data-icon-time.svg") no-repeat;
   background-size: 50px;
@@ -139,8 +147,8 @@
   background-size: 50px;
   background-position: 14px 10px; }
 
-.dc-bg-gas-education {
-  background: #F7F7F7 url("../img/data-icon-education.svg") no-repeat;
+.dc-bg-population {
+  background: #F7F7F7 url("../img/data-icon-population.svg") no-repeat;
   background-size: 50px;
   background-position: 14px 10px; }
 
@@ -168,9 +176,6 @@
   display: flex;
   justify-content: center;
   align-items: center; }
-
-.chart .lable {
-  display: none; }
 
 #map {
   width: 100%;

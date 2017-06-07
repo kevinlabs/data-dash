@@ -17,7 +17,7 @@ AA.controller("crimeCtrl", function ($scope, zipConversionService) {
     $scope.assignData = function() {
 
       $scope.crimeData = {
-        labels: ["Assault", "Burglary", "Larceny", "Murder", "Auto Theft", "Personal Crime", "Property", "Rape", "robbery"],
+        labels: ["Assault", "Burglary", "Larceny", "Murder", "Auto Theft", "Personal Crime", "Property", "Rape", "Robbery"],
         datasets: [{
           backgroundColor: [
             'rgba(33, 125, 216, 0.8)',

@@ -3,8 +3,7 @@ AA.directive('mapDirective', function () {
 
   return {
     restrict: 'E',
-    templateUrl: './views/map.html',
-    // controller: 'mainCtrl'
+    templateUrl: './views/map.html'
   };
 });
 // End: This is the header directive ===========================================

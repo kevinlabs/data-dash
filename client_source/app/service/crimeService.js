@@ -1,5 +1,1 @@
-AA.service("crimeService", function($http){
-
-
-//end of service
-});
+AA.service("crimeService", function($http){});

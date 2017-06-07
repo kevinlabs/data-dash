@@ -7,8 +7,11 @@ const cors = require('cors');
 
 //For session.
 const session = require('express-session');
+<<<<<<< HEAD
 
 //===REQUIRE CONTROLLERS===================================
+=======
+>>>>>>> master
 const restaurants = require('./server/restaurantsCtrl.js');
 const hospitals = require('./server/hospitalsCtrl.js');
 const pollution = require('./server/pollutionCtrl.js');
@@ -17,47 +20,15 @@ const weather = require('./server/weatherCtrl.js');
 const zip = require('./server/zipConversionCtrl.js')
 //===REQUIRE CONTROLLERS( NEED TO BE BELOW APP.SET)========
 
-//secrete session code file.
-//const config = require('./config.js');
-
-//Sql Database connection tool
-//const massive = require('massive');
-
 //===INITIALIZE EXPRESS APP===================
 const app = module.exports = express();
-
-
 const port = 8080;
-
 
 // =========Public root web Middleware======== //
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public_dist'));
-// =========Public root web Middleware======== //
 
-
-// =========Cross Scripting======== //
-// //Cross Scripting allowed site.
-// var corsOptions = {
-// 	origin: 'http://localhost:8080'
-// };
-
-// //This allows the cross scripting to other site.
-// app.use(cors(corsOptions));
-
-// =========Cross Scripting======== //
-
-
-// =========SQL database======== //
-// var conn = massive.connectSync({
-//   connectionString: config.connectionString
-// });
-
-//setting database connection.
-// app.set('db', conn);
-// const db = app.get('db');
-
-
+<<<<<<< HEAD
 // If database table is not found create.
 // db.table_check((err, response) => {
 //   if (response) {
@@ -111,11 +82,15 @@ app.use(express.static(__dirname + '/public_dist'));
 // //===PASSPORT ENDPOINTS===================
 //
 //
+=======
+// =========Public root web Middleware======== //
+>>>>>>> master
 
 
 //===API ENDPOINTS=========================
 //Hospital Info
 app.post('/api/hospitals', hospitals.getHospitals);
+<<<<<<< HEAD
 
 //Onboard Info API
 app.post('/api/onBoard', onBoard.getOnBoard);
@@ -134,6 +109,13 @@ app.get('/api/pollution', pollution.getPollution);
 
 
 
+=======
+app.get('/api/restaurants', restaurants.getRestaurants);
+app.get('/api/pollution', pollution.getPollution);
+app.post('/api/onBoard', onBoard.getOnBoard);
+app.get('/api/weather', weather.getWeather);
+app.post('/api/zipConversion', zip.getZip);
+>>>>>>> master
 
 //===PORT====================================
 app.listen(port, () => {
