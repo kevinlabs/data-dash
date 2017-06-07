@@ -7,11 +7,7 @@ const cors = require('cors');
 
 //For session.
 const session = require('express-session');
-<<<<<<< HEAD
-
 //===REQUIRE CONTROLLERS===================================
-=======
->>>>>>> master
 const restaurants = require('./server/restaurantsCtrl.js');
 const hospitals = require('./server/hospitalsCtrl.js');
 const pollution = require('./server/pollutionCtrl.js');
@@ -29,34 +25,11 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public_dist'));
 
 //===API ENDPOINTS=========================
-//Hospital Info
-app.post('/api/hospitals', hospitals.getHospitals);
-<<<<<<< HEAD
-
-//Onboard Info API
-app.post('/api/onBoard', onBoard.getOnBoard);
-
-//Getting Zipcode API
-app.post('/api/zipConversion', zip.getZip);
-
-//Getting Weather information API
-app.post('/api/weather', weather.getWeather);
-
-//Restaurant
-app.get('/api/restaurants', restaurants.getRestaurants);
-//Pollution.
-app.get('/api/pollution', pollution.getPollution);
-//===API ENDPOINTS=========================
-
-
-
-=======
 app.get('/api/restaurants', restaurants.getRestaurants);
 app.get('/api/pollution', pollution.getPollution);
 app.post('/api/onBoard', onBoard.getOnBoard);
 app.get('/api/weather', weather.getWeather);
 app.post('/api/zipConversion', zip.getZip);
->>>>>>> master
 
 //===PORT====================================
 app.listen(port, () => {
