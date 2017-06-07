@@ -28,65 +28,6 @@ const port = 8080;
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public_dist'));
 
-<<<<<<< HEAD
-// If database table is not found create.
-// db.table_check((err, response) => {
-//   if (response) {
-//     console.log('Table not exist. Creating new.')
-//   } else {
-//     console.log(err);
-//   }
-// });
-
-
-// =========SQL database======== //
-
-
-// //===========PASSPORT IMPORT ==================
-// var passport = require('./server/passport.js');
-
-
-
-//===POLICIES===========================
-// const isAuthed = (req,res,next) => {
-//   if (!req.isAuthenticated()) return res.status(401).send();
-//   return next();
-// };
-//
-// // =========Session configuration ========= //
-// app.use(session({
-//   secret: config.password,
-//   resave: false,
-//   saveUninitialized: true,
-//   cookie: {
-//     secure: false
-//     // maxAge: (365 * 24 * 60 * 60 * 1000),
-//     // expires: false
-//   }
-// }));
-// // =========Session configuration ========= //
-//
-// app.use(passport.initialize());
-// app.use(passport.session());
-//
-//
-// //===PASSPORT ENDPOINTS===================
-// app.post('/login', passport.authenticate('local', {
-//   successRedirect: '/login2'
-// }));
-//
-// app.get('/logout', (req,res, next) => {
-//   req.logout();
-//   return res.status(200).send('logged out');
-// });
-// //===PASSPORT ENDPOINTS===================
-//
-//
-=======
-// =========Public root web Middleware======== //
->>>>>>> master
-
-
 //===API ENDPOINTS=========================
 //Hospital Info
 app.post('/api/hospitals', hospitals.getHospitals);
