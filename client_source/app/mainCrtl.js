@@ -16,6 +16,14 @@ AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
   $scope.chart5Type = 'polarArea';
   $scope.chart6Type = 'radar';
 
+  $scope.chartShow = false;
+
+  // =============
+
+  $scope.$on('eventFired', function (event, data) {
+    $scope.chartShow = false;
+  });
+
   // Google Scripts for Google Map. ============================================
 
   // Google Scripts for Auto Complete.==========================================
