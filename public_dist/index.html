@@ -43,7 +43,7 @@
       <div class="data-card dc-bg-property">
         <p>Median Rental Price</p>
         <div class="data-chart-box" ng-controller="rentCtrl">
-          <chart-directive chart-data="medianRentData" type="chart2Type" options="optionsObj"></chart-directive>
+          <chart-directive chart-data="medianRentData" type="chart2Type" options="optionsObj" ng-if="medianRentData"></chart-directive>
         </div>
       </div>
       <!-- 3: Home values -->
@@ -64,7 +64,7 @@
       <div class="data-card">
         <p>Spoken Languages</p>
         <div class="data-chart-box" ng-controller="languagesCtrl">
-          <chart-directive chart-data="langData" type="chart2Type" options="langOptions"></chart-directive>
+          <chart-directive chart-data="langData" type="chart2Type" options="langOptions" ng-if="langData"></chart-directive>
         </div>
       </div>
       <!-- 6: Airport -->

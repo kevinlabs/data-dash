@@ -37,6 +37,14 @@ AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", functi
   $scope.chart5Type = 'polarArea';
   $scope.chart6Type = 'radar';
 
+  $scope.chartShow = false;
+
+  // =============
+
+  $scope.$on('eventFired', function (event, data) {
+    $scope.chartShow = false;
+  });
+
   // Google Scripts for Google Map. ============================================
 
   // Google Scripts for Auto Complete.==========================================
@@ -417,26 +425,19 @@ AA.controller("weatherCtrl", ["$scope", "weatherService", "zipConversionService"
     $scope.temp;
     $scope.windSpeed;
     $scope.description;
+    $scope.showConditions = false;
 
     $scope.$on('eventFired', function (event, data) {
 
         //.data is the zipcode. Assigning to local controller variable.
         $scope.zipcode = data.geo_code;
 
-        //Testing.
-        console.log("Weather Controller: Zipcode data: ", $scope.zipcode);
-
         weatherService.getWeather($scope.zipcode).then(function (response) {
-            console.log('From Weather controll at Angular showing data back from service: ', response);
             $scope.weather = response;
             $scope.temp = (response.main.temp * (9 / 5) - 459.67).toFixed(1) + '°';
             $scope.windSpeed = 'wind: ' + response.wind.speed + ' mph';
             $scope.description = response.weather[0].description;
-
-            console.log("Weather Controller: weather data: ", $scope.weather);
-            console.log("Weather Controller: temp data: ", $scope.temp);
-            console.log("Weather Controller: speed data: ", $scope.windSpeed);
-            console.log("Weather Controller: Weather Description.: ", $scope.description);
+            $scope.showConditions = true;
         });
     });
 }]);
@@ -634,13 +635,13 @@ AA.service("weatherService", ["$http", function ($http) {
   var baseUrl = "/api/weather";
 
   this.getWeather = function (zipcode) {
-    console.log('Showing city data before sending API call: ', zipcode);
+    // console.log('Showing city data before sending API call: ', zipcode);
     return $http({
       method: "POST",
       url: baseUrl,
       data: { zipcode: zipcode }
     }).then(function (response) {
-      console.log('Here is reponse back weather serivce (Angular): ', response.data);
+      // console.log('Here is reponse back weather serivce (Angular): ', response.data);
       return response.data;
     });
   };
