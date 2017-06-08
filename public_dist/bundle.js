@@ -114,6 +114,7 @@ AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", functi
 
     if ($scope.city && $scope.state) {
       zipConversionService.city = $scope.city;
+
       zipConversionService.getData({
         city: $scope.city,
         state: $scope.state
@@ -663,17 +664,15 @@ AA.service("zipConversionService", ["$http", "$rootScope", function ($http, $roo
       url: baseUrl,
       data: obj
     }).then(function (response) {
-
-      //this.data = is the zipcode
       _this.data = response.data.response.result.package.item;
       return response.data.response.result.package.item;
     });
   };
-
   this.findData = function () {
     console.log('s1: ', _this.data);
     $rootScope.$broadcast('eventFired', _this.data);
     console.log('s2: ', _this.data);
   };
-}]); //end of service
+  //end of service
+}]);
 //# sourceMappingURL=bundle.js.map
