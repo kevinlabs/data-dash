@@ -114,6 +114,7 @@ AA.controller("mainCtrl", ["$scope", "$interval", "zipConversionService", functi
 
     if ($scope.city && $scope.state) {
       zipConversionService.city = $scope.city;
+
       zipConversionService.getData({
         city: $scope.city,
         state: $scope.state
@@ -406,6 +407,41 @@ AA.controller("restaurantCtrl", ["$scope", "restaurantService", function ($scope
 }]);
 'use strict';
 
+AA.controller("weatherCtrl", ["$scope", "weatherService", "zipConversionService", function ($scope, weatherService, zipConversionService) {
+
+    console.log('Weather controll activated');
+
+    //Variable Declaration.
+    $scope.zipcode;
+    $scope.weather;
+    $scope.temp;
+    $scope.windSpeed;
+    $scope.description;
+
+    $scope.$on('eventFired', function (event, data) {
+
+        //.data is the zipcode. Assigning to local controller variable.
+        $scope.zipcode = data.geo_code;
+
+        //Testing.
+        console.log("Weather Controller: Zipcode data: ", $scope.zipcode);
+
+        weatherService.getWeather($scope.zipcode).then(function (response) {
+            console.log('From Weather controll at Angular showing data back from service: ', response);
+            $scope.weather = response;
+            $scope.temp = (response.main.temp * (9 / 5) - 459.67).toFixed(1) + '°';
+            $scope.windSpeed = 'wind: ' + response.wind.speed + ' mph';
+            $scope.description = response.weather[0].description;
+
+            console.log("Weather Controller: weather data: ", $scope.weather);
+            console.log("Weather Controller: temp data: ", $scope.temp);
+            console.log("Weather Controller: speed data: ", $scope.windSpeed);
+            console.log("Weather Controller: Weather Description.: ", $scope.description);
+        });
+    });
+}]);
+'use strict';
+
 // Start: This is the doughnut chart directive =================================
 AA.directive('chartDirective', function () {
   return {
@@ -434,6 +470,18 @@ AA.directive('chartDirective', function () {
 });
 
 // End: This is the doughnut chart directive ===================================
+'use strict';
+
+// Start: This is the current data directive ===================================
+AA.directive('currentDataDirective', function () {
+
+  return {
+    restrict: 'E',
+    templateUrl: './views/current-data.html',
+    controller: 'weatherCtrl'
+  };
+});
+// End: This is the current data directive =====================================
 'use strict';
 
 // Start: This is the header directive =========================================
@@ -579,6 +627,26 @@ AA.service("rentService", ["$http", function ($http) {}]);
 "use strict";
 
 AA.service("restaurantService", ["$http", function ($http) {}]);
+"use strict";
+
+AA.service("weatherService", ["$http", function ($http) {
+
+  var baseUrl = "/api/weather";
+
+  this.getWeather = function (zipcode) {
+    console.log('Showing city data before sending API call: ', zipcode);
+    return $http({
+      method: "POST",
+      url: baseUrl,
+      data: { zipcode: zipcode }
+    }).then(function (response) {
+      console.log('Here is reponse back weather serivce (Angular): ', response.data);
+      return response.data;
+    });
+  };
+
+  //end of service
+}]);
 "use strict";
 
 AA.service("zipConversionService", ["$http", "$rootScope", function ($http, $rootScope) {

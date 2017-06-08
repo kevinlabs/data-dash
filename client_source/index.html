@@ -35,14 +35,14 @@
       <!-- 1: Local weather -->
       <div class="data-card dc-bg-weather">
         <p>Current Local Weather</p>
-        <div class="data-chart-box">
-         <!-- CHART HERE -->
+        <div class="weather-box">
+          <current-data-directive></current-data-directive>
         </div>
       </div>
       <!-- 2: Rent prices -->
       <div class="data-card dc-bg-property">
         <p>Median Rental Price</p>
-        <div class="data-chart-box"  ng-controller="rentCtrl">
+        <div class="data-chart-box" ng-controller="rentCtrl">
           <chart-directive chart-data="medianRentData" type="chart2Type" options="optionsObj"></chart-directive>
         </div>
       </div>
@@ -102,8 +102,6 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
     <!--Google Map AutoComplete-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAScVx0giSjmYhutsH4_or4hlzl6B4lpdo&libraries=places"></script>
-    <!--Google Map-->
-    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAScVx0giSjmYhutsH4_or4hlzl6B4lpdo"></script>-->
     <script src="bundle.js"></script>
   </body>
 </html>

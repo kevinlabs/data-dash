@@ -12,16 +12,16 @@
 
 .data-set-cards {
   display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
-	align-items: stretch;
-	align-content: center;
+  align-items: stretch;
+  align-content: center;
 }
 
 .data-card {
   width: 280px;
-  height:280px;
+  height: 280px;
   text-align: center;
   background-color: #F7F7F7;
   border: #E5E5E5 1px solid;
@@ -30,7 +30,6 @@
   cursor: pointer;
   margin: 3px;
   position: relative;
-
   p {
     text-align: left;
     position: absolute;
@@ -55,7 +54,18 @@
   position: relative;
   top: -10px;
   font-size: 14px;
+}
 
+.data-text-weather {
+  font-family: $headlineText;
+  margin-bottom: 3px;
+}
+
+.data-alt-text-weather {
+  font-family: $headlineText;
+  font-size: 250%;
+  max-width: 90%;
+  margin: 0 auto;
 }
 
 // Start: Data card icons ......................................................
@@ -106,16 +116,18 @@
   background-size: 50px;
   background-position: 14px 10px;
 }
+
 .dc-bg-gas-restaurants {
   background: #F7F7F7 url('../img/data-icon-restaurants.svg') no-repeat;
   background-size: 50px;
   background-position: 14px 10px;
 }
+
 // End: Data card icons ........................................................
 // Start: Data card chart box ..................................................
 .data-chart-box {
   width: 200px;
-  height:170px;
+  height: 170px;
   margin: 65px auto 15px auto;
 }
 
@@ -127,17 +139,29 @@
 
 // End: Data card chart box ....................................................
 
-// THINK THIS CAN BE REMOVED!?!!?!
-// .chart{
-//   .lable { display: none; }
-// }
-
-// Google Map
+// Google Map =====================================
 #map {
   width: 100%;
   height: 400px;
 }
 
+//Weather Box =====================================
+
+.current-five-icon {
+  margin-top: 20px;
+
+  .weather-icon {
+    width: 70px;
+  }
+}
+
+.current-five-conditions {
+  font-family: $bodyText;
+  font-size: 14px;
+  font-weight: 300;
+  display: block;
+  line-height: 25px;
+}
 
 /* ============================================================================= */
 /* ======================== End: Main Styles =================================== */

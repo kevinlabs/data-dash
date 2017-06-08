@@ -14,12 +14,12 @@ AA.service("zipConversionService", function($http, $rootScope){
     }).then( (response) => {
       this.data = response.data.response.result.package.item;
       return response.data.response.result.package.item;
-    })
-  }
+    });
+  };
   this.findData = () => {
     console.log('s1: ', this.data);
     $rootScope.$broadcast('eventFired', this.data);
     console.log('s2: ', this.data);
-  }
+  };
 //end of service
 });
