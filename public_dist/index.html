@@ -54,28 +54,28 @@
         </div>
       </div>
       <!-- 4: Household Income -->
-      <div class="data-card dc-bg-gas-household-income">
+      <div class="data-card dc-bg-household-income">
         <p>Household Income</p>
         <div class="data-chart-box" ng-controller = "incomeCtrl">
           <chart-directive chart-data="incomeData" type="chart4Type" options="incomeOptions"></chart-directive>
         </div>
       </div>
       <!-- 5: Spoken Language -->
-      <div class="data-card">
+      <div class="data-card dc-bg-language">
         <p>Spoken Languages</p>
         <div class="data-chart-box" ng-controller="languagesCtrl">
           <chart-directive chart-data="langData" type="chart2Type" options="langOptions" ng-if="langData"></chart-directive>
         </div>
       </div>
       <!-- 6: Airport -->
-      <div class="data-card dc-bg-gas-medical" ng-controller ="airportCtrl">
+      <div class="data-card dc-bg-airport" ng-controller ="airportCtrl">
         <p>Closest Airport {{airportDist | distance}}</p>
         <div class="data-chart-box">
           <h2 class="data-alt-text">{{airport}}</h2>
         </div>
       </div>
       <!-- 7: Crime stats -->
-      <div class="data-card dc-bg-gas-crime">
+      <div class="data-card dc-bg-crime">
         <p>Crime Statististics</p>
         <div class="data-chart-box" ng-controller="crimeCtrl">
           <chart-directive chart-data="crimeData" type="chart4Type" options="crimeOptions"></chart-directive>
