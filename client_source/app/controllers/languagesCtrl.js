@@ -12,13 +12,13 @@ AA.controller("languagesCtrl", function ($timeout, $scope, zipConversionService)
     $scope.assignData = function () {
       $scope.langData = {
         labels: [
-          'Asian', 'English', 'Spanish', 'European', 'Other'
+          'English', 'Spanish', 'Asian', 'European', 'Other'
         ],
         datasets: [
           {
             label: 'Language',
             data: [
-              $scope.asian, $scope.english, $scope.spanish, $scope.european, $scope.other
+              $scope.english, $scope.spanish, $scope.asian, $scope.european, $scope.other
             ],
             backgroundColor: [
               'rgba(33, 125, 216, 0.5)',
