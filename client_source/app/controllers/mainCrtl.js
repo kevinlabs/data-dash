@@ -7,7 +7,8 @@ AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
     $scope.city = '';
     $scope.zipcode = '';
     $scope.state = '';
-  }
+    console.log('Clear data is executed');
+  };
 
   $scope.chart1Type = 'line';
   $scope.chart2Type = 'bar';
