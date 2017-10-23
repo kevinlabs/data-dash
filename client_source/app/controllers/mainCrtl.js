@@ -38,8 +38,8 @@ AA.controller("mainCtrl", function ($scope, $interval, zipConversionService) {
   function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
       center: {
-        lat: 40.2338438,
-        lng: -111.65853370000002
+        lat: 32.7833333,
+        lng: -96.8
       },
       zoom: 10
     });
